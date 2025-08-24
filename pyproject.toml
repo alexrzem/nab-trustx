@@ -1,0 +1,26 @@
+[project]
+name = "trustx"
+version = "0.0.1"
+description = "TrustX"
+readme = "README.md"
+authors = [{ name = "NAB", email = "trustx@nab.com.au" }]
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "pytest-randomly>=3.16.0",
+    "pytest-xdist>=3.8.0",
+]
+
+
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project.scripts]
+trustx = "trustx.__main__:main"
