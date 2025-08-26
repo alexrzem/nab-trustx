@@ -1,0 +1,35 @@
+Screen {
+    layout: horizontal;
+}
+
+#environment-box {
+    height: 100%;
+    width: 2fr;
+    border: solid #61afef;
+}
+
+#settings-box {
+    height: 100%;
+    width: 1fr;
+    border: solid #c678dd;
+}
+
+#logging-box {
+    height: 100%;
+    width: 2fr;
+    border: solid #abb2bf;
+}
+
+Select {
+
+}
+
+.environments {
+    outline: solid #61afef;
+}
+
+.environment-input {
+    border: solid #61afef;
+    color: #abb2bf;
+}
+
