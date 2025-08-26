@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Identity Steps</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/consents.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation" style="visibility: hidden;">
+        <md-text-button id="back-button" onclick="dispatchBack()">
+          <i class="material-icons">arrow_back</i>
+        </md-text-button>
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <div class="form-container">
+        <div class="container-body">
+
+          <div class="container-input-header" id="container-input-header">
+            <h1>Verify your identity</h1>
+            <p>
+              Follow steps shown below to verify your identity.
+            </p>
+          </div>
+
+          <div class="container-input-section privacy-slide-container" id="privacy-slide-container">
+            <div class="consent-card-slide-container" id="consent-card-slide-container">
+
+              <div class="idvsteps-card">
+                <div class="idvsteps-card-leading-icon">
+                  <i class="material-symbols-outlined">smartphone</i>
+                </div>
+                <div class="idvsteps-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Switch to your phone</h3>
+                  <h4 class="consents-disclaimer" style="margin-top: 0; margin-bottom: 8px;">Move to your mobile phone
+                  </h4>
+                </div>
+              </div>
+
+              <div class="idvsteps-card">
+                <div class="idvsteps-card-leading-icon">
+                  <i class="material-symbols-outlined">photo_camera</i>
+                </div>
+                <div class="idvsteps-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Selfie</h3>
+                  <h4 class="consents-disclaimer" style="margin-top: 0; margin-bottom: 8px;">Take a selfie</h4>
+                </div>
+              </div>
+
+              <div class="idvsteps-card">
+                <div class="idvsteps-card-leading-icon">
+                  <i class="material-symbols-outlined">badge</i>
+                </div>
+                <div class="idvsteps-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Document verification</h3>
+                  <h4 class="consents-disclaimer" style="margin-top: 0; margin-bottom: 8px;">Take a picture of your
+                    document</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-bottom">
+      <div>
+        <md-filled-button class="next-button" onClick="dispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    const currentPage = 'PageVerifyIdentitySteps'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script type="text/javascript" src="./assets/js/common.js"></script>
+
+  <script>
+    enableEnterKeyOnButtonId('next-button');
+  </script>
+  <script>
+    analyticsSectionName = 'verify-your-identity';
+  </script>
+</body>
+
+</html>

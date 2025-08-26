@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Verify in person</title>
+    <!-- Importing Material Components Web -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+            rel="stylesheet"
+    />
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import {styles as typescaleStyles} from "@material/web/typography/md-typescale-styles.js";
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css"/>
+    <link rel="stylesheet" href="./assets/css/consents.css"/>
+    <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css"/>
+</head>
+<body id="overlay" onload="subscribeToTrustX();">
+<div class="container" id="selfie-container">
+
+    <div id="selfie-main-content-slide-container">
+        <div class="container-top">
+            <div class="container-top-navigation" style="visibility: hidden;">
+                <md-text-button id="back-button" onclick="dispatchBack()">
+                    <i class="material-icons">arrow_back</i>
+                </md-text-button>
+                <div id="navigation-parent" style="position: relative; visibility: hidden;">
+                    <md-text-button id="progress-expand-anchor">
+                        <i class="material-icons right">checklist_rtl</i>
+                    </md-text-button>
+                </div>
+            </div>
+
+            <div>
+                <h1>Verify your identity at your nearest NAB branch</h1>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <p style="margin-top: 16px;">
+                We need ID to verify your identity. If you want to do this in person, here's
+                <a class="privacy-link" style="text-decoration: underline"
+                   href="https://www.nab.com.au/about-us/corporate-governance/identity-protection/how-to-verify-identity" target="_blank">what you'll need to take</a>.
+            </p>
+            <p>Or go back and take a selfie now to keep going.</p>
+
+            <!-- <div class="checkbox-container" style="gap: 0; margin-bottom: 48px; margin-top: 16px;">
+              <div>
+                <md-checkbox id="checkboxConsentBiometric" touch-target="wrapper" checked></md-checkbox>
+              </div>
+              <label for="checkboxConsentBiometric">
+                <small>
+                  You consent to us collecting and using your related biometric information for the purpose
+                  of verifying your identity
+                </small>
+              </label>
+            </div> -->
+
+            <img
+                    src="./assets/img/nab-verify-in-branch.png"
+                    alt="Verify in branch icon"
+                    class="selfie-img"
+            />
+
+        </div>
+
+    </div>
+
+    <div class="container-bottom">
+        <div style="display: flex;">
+            <md-outlined-button class="next-button" id="in-person-back-button" onClick="dispatchBack()">
+                Back
+            </md-outlined-button>
+            <md-filled-button class="next-button" id="in-person-find-branch-button" style="margin-left: 16px;" href="https://nab.com.au/locations" target="_blank">
+                Find a branch
+            </md-filled-button>
+        </div>
+    </div>
+</div>
+
+<!-- Importing Material Components Web JS -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="./assets/js/main.js"></script>
+<script type="text/javascript" src="./assets/js/trustx.js"></script>
+<script>
+    analyticsSectionName = 'verify-your-identity-at-your-nearest-nab-branch'
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 import argparse
 from typing import List, Optional
-from .logger import log
+from trustx.logger import log
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -57,7 +57,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         return args.func(args)
     except Exception as e:
         # Catch any exceptions raised by the subcommand handlers
-        print(f"Error executing command '{args.command}': {e}")
+        log(f"Error executing command '{args.command}': {e}")
         return 1  # Indicate an error
 
 

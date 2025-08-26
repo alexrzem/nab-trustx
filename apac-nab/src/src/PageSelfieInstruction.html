@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Selfie Capture</title>
+    <!-- Importing Material Components Web -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+            rel="stylesheet"
+    />
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import {styles as typescaleStyles} from "@material/web/typography/md-typescale-styles.js";
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <!-- <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    /> -->
+    <!-- <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/> -->
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css"/>
+    <link rel="stylesheet" href="./assets/css/consents.css"/>
+    <link rel="stylesheet" href="./assets/css/sheet.css"/>
+    <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css"/>
+</head>
+<body id="overlay" onload="subscribeToTrustX();">
+<div class="container" id="selfie-container">
+
+    <div id="selfie-main-content-slide-container">
+        <div class="container-top">
+            <div class="container-top-navigation" style="visibility: hidden;">
+                <md-text-button id="back-button" onclick="dispatchBack()">
+                    <i class="material-icons">arrow_back</i>
+                </md-text-button>
+                <div id="navigation-parent" style="position: relative; visibility: hidden;">
+                    <md-text-button id="progress-expand-anchor">
+                        <i class="material-icons right">checklist_rtl</i>
+                    </md-text-button>
+                </div>
+            </div>
+
+            <div>
+                <h1>Take a selfie</h1>
+            </div>
+        </div>
+
+        <div class="container-content">
+            <p style="margin-top: 16px;">
+                Your selfie will be used for biometric ID verification to make sure it matches your ID.
+            </p>
+
+            <!-- <div class="checkbox-container" style="gap: 0; margin-bottom: 48px; margin-top: 16px;">
+              <div>
+                <md-checkbox id="checkboxConsentBiometric" touch-target="wrapper" checked></md-checkbox>
+              </div>
+              <label for="checkboxConsentBiometric">
+                <small>
+                  You consent to us collecting and using your related biometric information for the purpose
+                  of verifying your identity
+                </small>
+              </label>
+            </div> -->
+
+            <div class="notification-panel notification-panel-info">
+                <div class="notification-icon">
+                    <i class="material-symbols-outlined">info</i>
+                </div>
+                <div class="notification-content">
+                    <p style="margin: 0;">Please remove any hats or sunglasses.</p>
+                </div>
+            </div>
+
+            <img
+                    src="./assets/img/nab-selfie.png"
+                    alt="Selfie icon"
+                    class="selfie-img"
+            />
+
+        </div>
+
+        <div class="fine-print branded brand-default">
+            <p>
+                <small>
+                    By clicking 'Next' you consent to NAB using your selfie for purposes related to identity
+                    verification
+                    and fraud prevention, as outlined in our
+                    <a class="privacy-link" onclick="toggleBiometricPrivacy()"
+                       style="text-decoration: underline; cursor: pointer">Biometric Consents</a>.
+                </small>
+            </p>
+            <p>
+                <small class="branded brand-default">
+                    If you prefer not to complete biometrics, you can choose to
+                    <a class="privacy-link" onclick="verifyInPerson()"
+                       style="text-decoration: underline; cursor: pointer">verify in person instead</a>.
+                </small>
+            </p>
+        </div>
+
+        <div class="fine-print branded brand-wlkogan" style="display: none">
+            <p>
+                <small>
+                    By clicking 'Next' you consent to us using your selfie for purposes related to identity verification
+                    and fraud prevention, as outlined in our
+                    <a class="privacy-link" onclick="toggleBiometricPrivacy()"
+                       style="text-decoration: underline; cursor: pointer">Biometric Consent</a>.
+                </small>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="consent-content" id="biometric-slide-in">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+            <!-- <md-text-button id="back-button" onclick="toggleBiometricPrivacy()">
+              <i class="material-icons">arrow_back</i>
+            </md-text-button> -->
+            <h1 style="margin-top: 0">Biometric Consents</h1>
+        </div>
+
+        <div slot="content" id="form-privacy">
+
+            <div class="branded brand-default">
+                <p>
+                    To verify identity documents and to help protect customers from identity takeover
+                    and related fraud, NAB may use biometric facial image data for identity verification.
+                    If you elect to proceed online, you will be ask to provide a photograph of your
+                    face so we can verify it matches your identity information. We may securely disclose
+                    this information to trusted organisations that assist NAB to verify customer identity
+                    and in the detection and prevention of fraud. If you do not wish to provide a biometric
+                    consent, you will need to verify in person to complete a manual identity verification
+                    process. If you do not wish to proceed with either verification process, we will be
+                    unable to verify your identity or provide you with any financial products or services.
+                    By continuing and providing your facial image, you consent to NAB using this biometric
+                    image for purposes related to identity verification and fraud prevention.
+                </p>
+            </div>
+            <div class="branded brand-wlkogan" style="display: none">
+                <p>
+                    To verify identity documents and to help protect customers from identity takeover
+                    and related fraud, we may use biometric facial image data for identity verification.
+                    If you elect to proceed online, you will be asked to provide a photograph of your
+                    face so we can verify it matches your identity information. We may securely disclose
+                    this information to trusted organisations that assist us to verify customer identity
+                    and in the detection and prevention of fraud. If you do not wish to proceed with the verification process, we will be unable to verify your identity or provide you with this financial product.
+                    By continuing and providing your facial image, you consent to us using this biometric
+                    image for purposes related to identity verification and fraud prevention.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--
+          <div class="container-top">
+            <div class="container-top-navigation" style="visibility: hidden;">
+              <md-text-button id="back-button" onclick="dispatchBack()">
+                <i class="material-icons">arrow_back</i>
+              </md-text-button>
+              <div id="navigation-parent" style="position: relative; visibility: hidden;">
+                <md-text-button id="progress-expand-anchor">
+                  <i class="material-icons right">checklist_rtl</i>
+                </md-text-button>
+              </div>
+            </div>
+
+            <div>
+              <h1>Take a selfie</h1>
+            </div>
+          </div> -->
+
+    <!-- <div class="container-content">
+      <p style="margin-top: 16px;">
+        If you consent to us using your photo, please take a 'selfie' (i.e. a photo of your face).
+      </p> -->
+
+    <!-- <div class="checkbox-container" style="gap: 0; margin-bottom: 48px; margin-top: 16px;">
+      <div>
+        <md-checkbox id="checkboxConsentBiometric" touch-target="wrapper" checked></md-checkbox>
+      </div>
+      <label for="checkboxConsentBiometric">
+        <small>
+          You consent to us collecting and using your related biometric information for the purpose
+          of verifying your identity
+        </small>
+      </label>
+    </div> -->
+
+    <!-- <div class="notification-panel notification-panel-info">
+      <div class="notification-icon">
+        <i class="material-symbols-outlined">info</i>
+      </div>
+      <div class="notification-content">
+        <p style="margin: 0;">Please remove any hats or sunglasses</p>
+      </div>
+    </div>
+
+    <img
+        src="./assets/img/nab-selfie.png"
+        alt="Selfie icon"
+        class="selfie-img"
+      />
+
+      <div class="consent-content" id="biometric-slide-in">
+        <h2 style="margin-top: 0">Biometric Consent Information</h2>
+        <div slot="content" id="form-privacy">
+          <p>
+            To verify identity documents and to help protect customers from identity takeover
+            and related fraud, NAB may use biometric facial image data for identity verification.
+            If you elect to proceed online, you will be ask to provide a photograph of your
+            face so we can verify it matches your identity information. We may securely disclose
+            this information to trusted organisations that assist NAB to verify customer identity
+            and in the detection and prevention of fraud. If you do not wish to provide a biometric
+            consent, you will need to visit a branch to complete a manual identity verification
+            process. If you do not wish to proceed with either verification process, we will be
+            unable to verify your identity or provide you with any financial products or services.
+            By continuing and providing your facial image, you consent to NAB using this biometric
+            image for purposes related to identity verification and fraud prevention.
+          </p>
+        </div>
+      </div>
+  </div> -->
+
+    <!-- <small>
+      By clicking 'Next' you consent to NAB using your selfie for purposes related to identity verification
+      and fraud prevention, as outlined in our <a class="privacy-link" onclick="toggleBiometricPrivacy()">Biometric Consent</a>.
+    </small>
+    <small style="margin-top: 16px;">
+      If you prefer not to complete biometrics, you can choose to <a class="privacy-link" href="#">verify in person instead</a>.
+    </small> -->
+
+    <!-- <div class="checkbox-container">
+      <md-switch class="input-switch" id="switchSelfieMinor" touch-target="wrapper"></md-switch>
+      <label for="switchSelfieMinor">
+        <small style="font-size: 0.85em;">
+          I confirm that the customer would like to have their selfie captured by a banker
+        </small>
+      </label>
+    </div> -->
+
+    <div class="container-bottom">
+        <div style="display: flex;">
+            <md-filled-button class="consent-back-button" id="biometric-back-button" onClick="toggleBiometricPrivacy()">
+                Back
+            </md-filled-button>
+            <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+    </div>
+    <md-outlined-text-field class="input-text" id="fpjsId" label="fpjsid" type="text" inputmode="text" style="display: none;">
+    </md-outlined-text-field>
+</div>
+
+<!-- Importing Material Components Web JS -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="./assets/js/main.js"></script>
+<script type="text/javascript" src="./assets/js/trustx.js"></script>
+<script type="text/javascript" src="./assets/js/common.js"></script>
+<script type="text/javascript" src="./assets/js/sheet.js"></script>
+<script>
+    analyticsSectionName = 'take-a-selfie'
+    pageIdType = 'Selfie'
+    
+    analyticsEventType = 'eidv-started'
+
+    // Fetch consent data
+    let capturedConsents = {}
+    fetchConsentData = () => {
+        capturedConsents['consent_BIOMETRIC'] = 'Yes'
+        return capturedConsents
+    }
+</script>
+<script>
+    enableEnterKeyOnButtonId('next-button');
+</script>
+<script>
+
+  processCallback = (sessionData, constants) => {
+
+    // Initialise FPJS
+    fpjsInit(sessionData)
+
+    const selfieFailed = sessionData.selfieFailed ?? false;
+    if( selfieFailed ) {
+        sendPageOpenAnalyticsEvent("selfie-capture-failed", "error-displayed" )
+        showSheet('Selfie capture failed', ['We are unable to process your selfie. Please try again.'], { label: 'Close', onclick: closeSheet }, undefined, { name: 'error', theme: 'danger' })
+    }
+  }
+
+
+  const triggerActiveState = () => {
+    // const $containerHeaders = $('.container-input-header')
+    const $container = $('#selfie-container')
+    // const $containers = $('.container-input-section')
+    const $selfieMainContentSlideDiv = $('#selfie-main-content-slide-container')
+    const $nextButton = $('.next-button')
+
+    // Toggle active class
+    // $containerHeaders.toggleClass('active');
+    $container.toggleClass('active');
+    $selfieMainContentSlideDiv.toggleClass('active');
+    $nextButton.toggleClass('active')
+  }
+
+  const toggleBiometricPrivacy = () => {
+    triggerActiveState()
+    $('#biometric-slide-in').toggleClass('active')
+    $('#biometric-back-button').toggleClass('active')
+
+    if($('#biometric-slide-in').hasClass('active')) {
+      sendPageOpenAnalyticsEvent("biometric-consent") 
+    }
+  }
+
+    function verifyInPerson() {
+        sendPageOpenAnalyticsEvent("verify-in-person")
+        dispatchData({ navigate: 'verify-in-person' })
+    }
+</script>
+</body>
+</html>

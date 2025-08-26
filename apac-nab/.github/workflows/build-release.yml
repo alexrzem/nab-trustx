@@ -1,0 +1,98 @@
+
+
+name: build/release (branch 'nab-custom-pages')
+
+env:
+  GH_ACTIONS_NEXUS_USERNAME: ${{ secrets.GH_ACTIONS_NEXUS_USERNAME }}
+  GH_ACTIONS_NEXUS_PASS: ${{ secrets.GH_ACTIONS_NEXUS_PASS }}
+  GH_ACTIONS_APAC_USERNAME: ${{ secrets.GH_ACTIONS_APAC_USERNAME }}
+  GH_ACTIONS_APAC_PASS: ${{ secrets.GH_ACTIONS_APAC_PASS }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  AWS_ROLE_TO_ASSUME: arn:aws:iam::055116872942:role/daon-git-actions-cdk-deploy-role
+  AWS_ROLE_TO_ASSUME_DEPLOY: arn:aws:iam::932089959589:role/daon-git-actions-cdk-deploy-role
+  AWS_ROLE_SESSION_NAME: apac-sbs-ghaction-deployment
+  AWS_REGION: ap-southeast-2
+  DEPLOYMENT_FILE: deployment/lambda_config.yml
+
+  SLACK_BOT_TOKEN: ${{ secrets.APAC_SLACK_TOKEN }}
+  SLACK_CHANNEL: apac-build-notifications1
+  SLACK_CHANNEL_ID: C05SK3PSNEQ
+#  TRUSTX_SECRET: ${{ secrets.NABSANDBOX_PREVIEW_TRUSTX_KEY }}
+#  TRUSTX_BASE_URL: https://nabsandbox.oak.trustx-preview.com
+  TRUSTX_SECRET: ${{ secrets.NAB_DEV_TRUSTX_KEY }}
+  TRUSTX_BASE_URL: https://nabsandbox.gum.trustx.com
+
+on:
+  push:
+    branches:
+       nab-custom-pages
+  workflow_dispatch:
+
+jobs:
+  deploy-to-trustx:
+    runs-on: apac-builder
+    container: rockylinux:8-minimal
+#    container: ubuntu:latest
+    env:
+      COMMIT_USER: "${{ github.event.commits[0].author.name }} (${{ github.event.commits[0].author.email }})"
+      COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
+      REPO: ${{ github.repository }}
+      BRANCH: ${{ github.ref_name }}
+    steps:
+
+    - name: Install Linux Components
+      run: |
+        microdnf -y install python3 python3-requests tzdata curl tar gzip findutils zip xmlstarlet
+
+    - name: Checkout Git Project
+      uses: actions/checkout@v3.5.3
+
+    - name: Get Timestamp
+      run: echo "CURRENT_TIMESTAMP=$(TZ='Australia/Sydney' date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+    - name: Display Env
+      run: |
+        env | sort
+
+    - name: Display Current Folder Content
+      run: |
+        ls -la
+
+    - name: Deploy To TrustX
+      run: |
+        ./bin/01.update-ui-only.sh    2>&1 | tee -a update.log
+        ./bin/02.update-pd-inplace.sh 2>&1 | tee -a update.log
+        echo "== ALL DONE =="         2>&1 | tee -a update.log
+
+    - name:  Extract Git Commit Id
+      run: | 
+        EXPECTED_COMMIT_ID=${GITHUB_SHA}
+        echo "EXPECTED_COMMIT_ID=${EXPECTED_COMMIT_ID}" >> $GITHUB_ENV
+
+    - name: Construct Slack Text Message
+      run: |
+        echo "${{ env.CURRENT_TIMESTAMP }}: (re)deployed changes to trustx" > slack_message.txt
+        echo "REPO=${{ github.repository }};"                              >> slack_message.txt
+        echo "BRANCH=${{ github.ref_name }};"                              >> slack_message.txt
+        echo "COMMIT_ID=${{ env.EXPECTED_COMMIT_ID }};"                    >> slack_message.txt
+        echo "COMMIT_USER=${{ env.COMMIT_USER }};"                         >> slack_message.txt
+        echo "COMMIT_MESSAGE=${{ env.COMMIT_MESSAGE }};"                   >> slack_message.txt
+        echo "COMMENT<<EOF"                                                >> $GITHUB_ENV
+        cat slack_message.txt                                              >> $GITHUB_ENV
+        echo "EOF"                                                         >> $GITHUB_ENV
+
+    - name: Display Slack Text Message
+      run: |
+        echo "==${{ env.COMMENT }}=="
+
+    - name: Post To A Slack Channel
+      uses: slackapi/slack-github-action@v2.0.0
+      with:
+        method: files.uploadV2
+        token: ${{ env.SLACK_BOT_TOKEN }}
+        payload: |
+          channel_id: ${{ env.SLACK_CHANNEL_ID }}
+          initial_comment: "${{ env.COMMENT }}"
+          file: "./update.log"
+          filename: "update.log"

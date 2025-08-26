@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --md-ref-typeface-brand: Figtree, sans-serif;
+    --md-ref-typeface-plain: Figtree, sans-serif;
+
+    --md-sys-color-primary: #E71333;
+    --md-sys-color-primary-container: #E71333;
+    --md-filled-button-container-color: #E71333;
+
+    --md-sys-color-error: #B12525;
+
+    --md-radio-selected-icon-color: #041521;
+    --md-radio-selected-hover-icon-color: #041521;
+    --md-radio-selected-focus-icon-color: #041521;
+    --md-radio-selected-pressed-icon-color: #041521;
+
+    --md-checkbox-selected-container-color: #041521;
+    --md-checkbox-selected-hover-container-color: #041521;
+    --md-checkbox-selected-focus-container-color: #041521;
+    --md-checkbox-selected-pressed-container-color: #041521;
+
+    --md-filled-text-field-label-text-font: "Figtree", sans-serif;
+}
+
+h1, p {
+    color: #041521;
+}
+
+body {
+    font-family: Figtree, sans-serif !important;
+}
+
+h1, h2 {
+    font-family: Figtree, sans-serif !important;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p, small, h3, h4, li, label {
+    font-family: Figtree, sans-serif !important;
+}
+
+.consents-disclaimer {
+    color: #4D4D4D;
+}
+
+small {
+    color: #4D4D4D;
+}
+
+.privacy-link {
+    color: #E71333;
+}
+
+.nab-link {
+    color: #E71333;
+}
+
+.notification-panel-info {
+    background-color: #E0E0E0;
+    color: #041521;
+}
+.notification-panel-info p {
+    color: #041521;
+}
+
+.notification-panel-error {
+    background-color: #FFD9D6; /*panel*/
+    color: #991E1E; /*icon*/
+}
+.notification-panel-error p {
+    color: #041521; /*text*/
+}
+
+.notification-panel-success {
+    background-color: #DFEDD9; /*panel*/
+    color: #376B2E; /*icon*/
+}
+.notification-panel-success p {
+    color: #041521; /*text*/
+}
+
+.input-text {
+    /* Error */
+    --md-outlined-text-field-error-outline-color: #B12525;
+    --md-outlined-text-field-error-label-text-color: #B12525;
+}
+
+.button-get-another-code {
+    --md-sys-color-primary: #041521;
+}
+
+@media only screen and (min-width: 1024px) {
+    h1 {
+        line-height: 48px;
+    }
+}

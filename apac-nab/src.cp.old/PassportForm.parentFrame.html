@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="assets/js/payloadManager.js"></script>
+    <script>
+
+        function sendSomeData(){
+            const emulateType = "PARSED";
+            const channel = document.getElementById("channel").value;
+            var message = emulate(channel, emulateType);
+            var targetFrame = window.frames[0];
+            targetFrame.postMessage(message,"*");
+        }
+
+        function waitForReady(){
+            window.addEventListener("message", subscribeToReady, false)
+        }
+
+        function subscribeToReady(event) {
+            console.log(event);
+            if(event.data.event == "READY"){
+                document.getElementById("channel").setAttribute("disabled", false);
+            }else if(event.data.event == "SEND"){
+                console.log(event);
+                var send = JSON.stringify(event.data);
+                var variabled = event.data.variables;
+                console.log(send);
+                document.getElementById('sendData').innerText = send;
+            }
+        }
+
+        waitForReady();
+    </script>
+</head>
+
+<body>
+
+    <iframe id="iframe" src="http://localhost:63342/PassportForm/index.html" width="100%" height="600px"></iframe>
+    <div id="sendData"></div>
+</body>

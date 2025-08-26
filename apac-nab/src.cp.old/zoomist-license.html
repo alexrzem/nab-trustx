@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zoomist Demo</title>
+    <meta charset="UTF-8" />
+    <!-- styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #app {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 1rem;
+      }
+
+      .doc-zoomist {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .doc-zoomist img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="zoomist-container doc-zoomist">
+        <div class="zoomist-wrapper">
+          <div class="zoomist-image">
+            <img
+              src="./assets/img/passport-au.jpeg"
+              alt="Victoria Driver's License"
+              class="license-img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+        <script>
+          const zoomist = new Zoomist(".doc-zoomist", {
+            maxScale: 5,
+            slider: false,
+            zoomer: false
+          });
+
+          console.log(`zoomist.transform: ${zoomist.transform}`)
+          console.log(`zoomist.transform: ${zoomist.transform}`)
+          console.log(`zoomist.data: ${zoomist.data}`)
+
+          // Scale
+          const zoomScale = 2;
+          // Container
+          const containerWidth = zoomist.data.containerData.width;
+          const containerHeight = zoomist.data.containerData.height;
+          console.log(`container: { width: ${containerWidth}, height: ${containerHeight} }`)
+          // Image
+          const imageWidth = zoomist.data.imageData.width;
+          const imageHeight = zoomist.data.imageData.height;
+          console.log(`image: { width: ${imageWidth}, height: ${imageHeight} }`)
+
+          zoomist.zoomTo(zoomScale)
+          
+          // scale = 2 | TOP LEFT COORDINATE x: 400, y: 263
+
+
+          // VIC DL - name fields 
+          // container width: 800px 
+          // scale 1 | x: 0
+          // scale 2 | x: 400
+          // scale 3 | x: 800 (container w)
+          // scale 4 | x: 1200
+          // ...
+          const leftMostX = (containerWidth / 2) * (zoomScale - 1)
+      
+          // scale 1 | y: 0
+          // scale 2 | x: 263
+          // scale 3 | x: 527 (container h)
+          // scale 4 | x: 791
+          // ...
+          const topMostY = (containerHeight / 2) * (zoomScale - 1)
+
+          // normalised (0,0)
+          let x = leftMostX
+          let y = topMostY
+
+          const moveRightByWidthPercent = (percent) => { // whole number, e.g. moveRightByWidthPercent(50) is 50% of the container width to the right
+            x = leftMostX - (percent * containerWidth / 100);
+            console.log(`x: ${x}`)
+            zoomist.moveTo({x: x, y: y})
+          };
+
+          const moveDownByHeightPercent = (percent) => { // whole number, e.g. moveDownByHighPercent(50) is 50% of the container height down
+            y = topMostY - (percent * containerHeight / 100);
+            console.log(`y: ${y}`)
+            zoomist.moveTo({x: x, y: y})
+          };
+
+          // moveRightByWidthPercent(100)
+          // moveDownByHighPercent(100)
+
+          const mapping = {
+            dl: {
+              vic: {
+                name: {
+                  width: 0,
+                  height: 0
+                },
+                address: {
+                  width: 0,
+                  height: 20
+                },
+                dob: {
+                  width: 50,
+                  height: 50
+                },
+                licno: {
+                  width: 100,
+                  height: 0
+                },
+                licexp: {
+                  width: 0,
+                  height: 60
+                },
+                licType:{
+                  width: 0,
+                  height: 90
+                },
+                licState:{
+                  width: 50,
+                  height: 0
+                }
+              }
+            },
+            pp: {
+              aus: {
+                name: {
+                  width: 40,
+                  height: 0
+              },
+              dob: {
+                width: 40,
+                height: 35
+              },
+              pob: {
+              width: 40,
+              height: 45
+              },
+              doi:{
+              width: 40,
+              height: 70
+              },
+              doe: {
+              width: 40,
+              height: 75
+              },
+              docno: {
+              width: 100,
+              height: 0
+              },
+              poi:{
+              width: 40,
+              height: 100
+              }
+          }
+          }
+        }
+
+          const translate = (coordinate) => {
+            moveRightByWidthPercent(coordinate.width)
+            moveDownByHeightPercent(coordinate.height)
+          }
+          
+          //Victoria Driver's License
+          const translateToName = () => translate(mapping.dl.vic.name)
+          const translateToAddress = () => translate(mapping.dl.vic.address)
+          const translateToDOB = () => translate(mapping.dl.vic.dob)
+          const translateToLicNo = () => translate(mapping.dl.vic.licno)
+          const translateToLicExp = () => translate(mapping.dl.vic.licexp)
+          const translateToLicType = () => translate(mapping.dl.vic.licType)
+          const translateToLicState = () => translate(mapping.dl.vic.licState)
+          
+          // translateToName()
+          // translateToAddress()
+          // translateToDOB()
+          //  translateToLicNo()
+          //  translateToLicExp()
+            // translateToLicType()
+            //translateToLicState()
+
+          //Australian Passport
+          const translateToPPName = () => translate(mapping.pp.aus.name)
+          const translateToPPAddress = () => translate(mapping.pp.aus.address)
+          const translateToPPDOB = () => translate(mapping.pp.aus.dob)
+          const translateToPPDocNo = () => translate(mapping.pp.aus.docno)
+          const translateToPPPlaceOfBirth = () => translate(mapping.pp.aus.pob)
+          const translateToPPDateOfIssue = () => translate(mapping.pp.aus.doi)
+          const translateToPPDateOfExp = () => translate(mapping.pp.aus.doe)
+          const translateToPPPlaceOfIssue = () => translate(mapping.pp.aus.poi)
+          
+          //translateToPPName()
+          // translateToPPAddress()
+          // translateToPPDOB()
+          // translateToPPDocNo()
+         //translateToPPPlaceOfBirth()
+          // translateToPPDateOfIssue() 
+           //translateToPPDateOfExp()
+          // translateToPPPlaceOfIssue()
+
+          zoomist.on('drag', (zoomist, transform, event) => {
+            console.log(`drag | transform: {x: ${transform.x}, y: ${transform.y}})`)
+          });
+          // zoomist.slideTo(4)
+        </script>
+  </body>
+</html>

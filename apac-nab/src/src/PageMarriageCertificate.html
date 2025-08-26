@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marriage Certificate Form</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/pikaday.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <md-text-button id="back-button" onclick="dispatchBack()">
+          <i class="material-icons">arrow_back</i>
+        </md-text-button>
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="navigation-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-container">
+      <div class="container-body">
+        <div class="container-input-header">
+          <div>
+            <h1>Enter your Marriage Certificate details</h1>
+            <p>
+              Please ensure details match your identity document exactly for verification.<br>
+              If you used your camera to take a picture of your identity document, please validate they match your
+              identity document.<br>
+              While we do our best to pre-populate information accurately from your identity document, you can edit
+              anything that we missed scanning correctly.
+            </p>
+          </div>
+        </div>
+        <div class="container-input-section">
+
+          <!-- Conditional - only shown when an error object is passed into the page -->
+          <div class="notification-panel notification-panel-warning" id="dvs-fail-panel" style="margin-top: 24px;">
+            <div class="notification-icon">
+              <i class="material-symbols-outlined">warning</i>
+            </div>
+            <div class="notification-content">
+              <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+                Did we get everything right? 
+              </p>
+              <p>
+                We were unable to verify the identity details provided. Please confirm the information entered/captured is accurate. If we are unable verify this information, we will ask you provide an alternate identity document.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="review-details-section-header">Full legal name</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+            </md-radio>
+            <label class="confirm-label" for="confirm-name">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentFirstName" class="input-text" label="First Name" type="text"
+            inputmode="text" style="margin-top: 20px;">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMiddleName" class="input-text" label="Middle Name" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentLastName" class="input-text" label="Last Name" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+
+
+          <div>
+            <h3 class="review-details-section-header">Date of birth</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+            </md-radio>
+            <label class="confirm-label" for="confirm-dob">Confirm</label>
+          </div>
+
+          <md-outlined-text-field class="input-text" id="documentDateOfBirth" label="Date of Birth" type="text"
+            inputmode="text" pattern="YYYY-MM-DD" style="margin-top: 20px;">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="btn-dob">event</md-icon>
+          </md-outlined-text-field>
+
+          <div>
+            <h3 class="review-details-section-header">ID document details</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+            </md-radio>
+            <label class="confirm-label" for="confirm-doc-details">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentMarriageFirstPartnerName" class="input-text" label="Partner's First Name" type="text"
+            inputmode="text" style="margin-top: 20px;">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMarriageLastPartnerName" class="input-text" label="Partner's Last Name" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+
+          <md-outlined-text-field id="documentMarriageRegistrationNo" class="input-text" label="Marriage Certificate Registration Number"
+            type="text" inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMarriageCertificateNo" class="input-text" label="Marriage Certificate Number"
+            type="text" inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field class="input-text" id="documentRegistrationDate" label="Marriage Certificate Registration Date"
+            type="text" inputmode="text" pattern="YYYY-MM-DD">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+              id="btn-registration-date">event</md-icon>
+          </md-outlined-text-field>
+          <md-outlined-text-field class="input-text" id="documentMarriageDateOfEvent" label="Wedding Date"
+            type="text" inputmode="text" pattern="YYYY-MM-DD">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+              id="btn-wedding-date">event</md-icon>
+          </md-outlined-text-field>
+
+          <md-outlined-select class="input-select review-details-select" id="documentIssuingState" class="review-details-select" label="State of Issue"
+            style="margin-bottom: 20px; width: 100%;">
+            <md-select-option value="ACT">
+              <div slot="headline">ACT</div>
+            </md-select-option>
+            <md-select-option value="NSW">
+              <div slot="headline">NSW</div>
+            </md-select-option>
+            <md-select-option value="VIC">
+              <div slot="headline">VIC</div>
+            </md-select-option>
+            <md-select-option value="QLD">
+              <div slot="headline">QLD</div>
+            </md-select-option>
+            <md-select-option value="WA">
+              <div slot="headline">WA</div>
+            </md-select-option>
+            <md-select-option value="TAS">
+              <div slot="headline">TAS</div>
+            </md-select-option>
+            <md-select-option value="SA">
+              <div slot="headline">SA</div>
+            </md-select-option>
+            <md-select-option value="NT">
+              <div slot="headline">NT</div>
+            </md-select-option>
+          </md-outlined-select>
+          
+
+
+          <div class="container-bottom">
+            <md-filled-button id="next-button" class="next-button" onclick="dispatchData()">Next</md-filled-button>
+          </div>
+          
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    const currentPage = 'PageBirthCertificate'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/pikaday.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/common.js"></script>
+
+  <script>
+    enableEnterKeyOnButtonId('next-button');
+  </script>
+  <script>
+
+    const thisYear = new Date().getFullYear()
+
+    const dobPicker = new Pikaday({
+      field: document.getElementById("documentDateOfBirth"),
+      format: "YYYY-MM-DD",
+      trigger: document.getElementById("btn-dob"),
+      yearRange: [1900, thisYear],
+      theme: 'month-year-dropdown'
+    });
+
+    const doePicker = new Pikaday({
+      field: document.getElementById("documentRegistrationDate"),
+      format: "YYYY-MM-DD",
+      trigger: document.getElementById("btn-registration-date"),
+      yearRange: [1900, thisYear],
+      theme: 'month-year-dropdown'
+    });
+
+    const dowPicker = new Pikaday({
+      field: document.getElementById("documentMarriageDateOfEvent"),
+      format: "YYYY-MM-DD",
+      trigger: document.getElementById("btn-wedding-date"),
+      yearRange: [1900, thisYear],
+      theme: 'month-year-dropdown'
+    });
+  </script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+</body>
+
+</html>

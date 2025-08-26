@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victoria Driver's License</title>
+    <!-- Importing Material Components Web -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import '@material/web/all.js';
+      import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+  
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="module" src="./assets/js/main.js"></script>
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/css/pikaday.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <i class="material-icons right">arrow_backward</i>
+      <div>
+        <h2>Confirm your ID details</h2>
+      </div>
+      <div class="card-panel">
+        <!-- <img
+          src="./assets/img/VIC-Driver-Licence-Full.jpg"
+          alt="Victoria Driver's License"
+          class="license-img"
+        /> -->
+        <div class="zoomist-container doc-zoomist">
+          <div class="zoomist-wrapper">
+            <div class="zoomist-image">
+              <img
+                src="./assets/img/VIC-Driver-Licence-Full.jpg"
+                alt="Victoria Driver's License"
+                class="license-img"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-title">Driver License Details</div> -->
+      <form class="form-container">
+        <div>
+          <h3>Full Legal Name</h3>
+        </div>
+
+        <md-outlined-text-field 
+          label="First Name" 
+          type="text" 
+          inputmode="text" 
+          style="width: 100%;"
+          onfocus="translateToName()">
+        </md-outlined-text-field>
+
+        <div class="radio-confirm">
+          <div class="mdc-form-field">
+            <div class="mdc-radio">
+              <input
+                class="mdc-radio__native-control"
+                type="radio"
+                id="confirm_name"
+                name="confirm_name"
+              />
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+            </div>
+            <label for="confirm_name">Confirm</label>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="given_name"
+            class="mdc-text-field__input"
+            onfocus="translateToName()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">First Name</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="middle_name"
+            class="mdc-text-field__input"
+            onfocus="translateToName()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Middle Name</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="last_name"
+            class="mdc-text-field__input"
+            onfocus="translateToName()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Last Name</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Date of Birth</h3>
+        </div>
+        <div class="radio-confirm">
+          <div class="mdc-form-field">
+            <div class="mdc-radio">
+              <input
+                class="mdc-radio__native-control"
+                type="radio"
+                id="confirm_dob"
+                name="confirm_dob"
+              />
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+            </div>
+            <label for="confirm_dob">Confirm</label>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="date_of_birth"
+            class="mdc-text-field__input"
+            onfocus="translateToDOB()"
+          />
+          <i
+            class="material-icons mdc-text-field__icon"
+            tabindex="0"
+            role="button"
+            id="dob-icon"
+            >event</i
+          >
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Date of Birth</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Address Information</h3>
+        </div>
+        <div class="radio-confirm">
+          <div class="mdc-form-field">
+            <div class="mdc-radio">
+              <input
+                class="mdc-radio__native-control"
+                type="radio"
+                id="confirm_address"
+                name="confirm_address"
+              />
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+            </div>
+            <label for="confirm_address">Confirm</label>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="address_street_number"
+            class="mdc-text-field__input"
+            onfocus="translateToAddress()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Street Number</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="address_street_name"
+            class="mdc-text-field__input"
+            onfocus="translateToAddress()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Street Name</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="address_suburb"
+            class="mdc-text-field__input"
+            onfocus="translateToAddress()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Suburb</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="address_state"
+            class="mdc-text-field__input"
+            onfocus="translateToAddress()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">State</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="address_postcode"
+            class="mdc-text-field__input"
+            onfocus="translateToAddress()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Postcode</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Drivers License Details</h3>
+        </div>
+        <div class="radio-confirm">
+          <div class="mdc-form-field">
+            <div class="mdc-radio">
+              <input
+                class="mdc-radio__native-control"
+                type="radio"
+                id="confirm_license_details"
+                name="confirm_license_details"
+              />
+              <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+              </div>
+            </div>
+            <label for="confirm_license_details">Confirm</label>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="license_number"
+            class="mdc-text-field__input"
+            onfocus="translateToLicNo()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">License Number</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="card_number"
+            class="mdc-text-field__input"
+            onfocus="translateToLicNo()"
+          />
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Card Number</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input
+            type="text"
+            id="date_of_expiry"
+            class="mdc-text-field__input"
+            onfocus="translateToLicExp()"
+          />
+          <i
+            class="material-icons mdc-text-field__icon"
+            tabindex="0"
+            role="button"
+            id="doe-icon"
+            >event</i
+          >
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Date of Expiry</span>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+
+        <md-outlined-select label="State of Issue">
+          <md-select-option aria-label="blank"></md-select-option>
+          <md-select-option selected value="act">
+            <div slot="headline">ACT</div>
+          </md-select-option>
+          <md-select-option value="nsw">
+            <div slot="headline">NSW</div>
+          </md-select-option>
+          <md-select-option selected value="vic">
+            <div slot="headline">VIC</div>
+          </md-select-option>
+          <md-select-option value="qld">
+            <div slot="headline">QLD</div>
+          </md-select-option>
+          <md-select-option selected value="wa">
+            <div slot="headline">WA</div>
+          </md-select-option>
+          <md-select-option value="tas">
+            <div slot="headline">TAS</div>
+          </md-select-option>
+          <md-select-option selected value="sa">
+            <div slot="headline">SA</div>
+          </md-select-option>
+          <md-select-option value="nt">
+            <div slot="headline">NT</div>
+        </md-outlined-select>
+
+
+        <div class="mdc-select mdc-select--outlined">
+          <div class="mdc-select__anchor">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label">State of Issue</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <span class="mdc-select__selected-text-container">
+              <span
+                id="state_of_issue"
+                class="mdc-select__selected-text"
+                onfocus="translateToLicState()"
+              ></span>
+            </span>
+            <span class="mdc-select__dropdown-icon">
+              <span class="mdc-select__dropdown-icon-inactive">
+                <svg
+                  class="mdc-select__dropdown-icon-graphic"
+                  viewBox="7 10 10 5"
+                >
+                  <polygon
+                    class="mdc-select__dropdown-icon-inactive"
+                    stroke="none"
+                    fill-rule="evenodd"
+                    points="7 10 12 15 17 10"
+                  ></polygon>
+                </svg>
+              </span>
+              <span class="mdc-select__dropdown-icon-active">
+                <svg
+                  class="mdc-select__dropdown-icon-graphic"
+                  viewBox="7 10 10 5"
+                >
+                  <polygon
+                    class="mdc-select__dropdown-icon-active"
+                    stroke="none"
+                    fill-rule="evenodd"
+                    points="7 15 12 10 17 15"
+                  ></polygon>
+                </svg>
+              </span>
+            </span>
+          </div>
+          <div
+            class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth"
+          >
+            <ul class="mdc-list">
+              <li class="mdc-list-item" data-value="" aria-selected="true"></li>
+              <li class="mdc-list-item" data-value="VIC">Victoria</li>
+              <li class="mdc-list-item" data-value="NSW">New South Wales</li>
+              <li class="mdc-list-item" data-value="QLD">Queensland</li>
+              <li class="mdc-list-item" data-value="SA">South Australia</li>
+              <li class="mdc-list-item" data-value="WA">Western Australia</li>
+              <li class="mdc-list-item" data-value="TAS">Tasmania</li>
+              <li class="mdc-list-item" data-value="ACT">
+                Australian Capital Territory
+              </li>
+              <li class="mdc-list-item" data-value="NT">Northern Territory</li>
+            </ul>
+          </div>
+        </div>
+        
+
+        <button class="mdc-button mdc-button--raised next-button" type="submit">
+          <span class="mdc-button__label">Next</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/pikaday.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      const zoomist = new Zoomist(".doc-zoomist", {
+        maxScale: 5,
+        slider: false,
+        zoomer: false,
+      });
+
+      console.log(`zoomist.transform: ${zoomist.transform}`);
+      console.log(`zoomist.transform: ${zoomist.transform}`);
+      console.log(`zoomist.data: ${zoomist.data}`);
+
+      // Scale
+      const zoomScale = 2;
+      // Container
+      const containerWidth = zoomist.data.containerData.width;
+      const containerHeight = zoomist.data.containerData.height;
+      console.log(
+        `container: { width: ${containerWidth}, height: ${containerHeight} }`
+      );
+      // Image
+      const imageWidth = zoomist.data.imageData.width;
+      const imageHeight = zoomist.data.imageData.height;
+      console.log(`image: { width: ${imageWidth}, height: ${imageHeight} }`);
+
+      // Initial zoom scale
+      zoomist.zoomTo(1);
+
+      // scale = 2 | TOP LEFT COORDINATE x: 400, y: 263
+
+      // VIC DL - name fields
+      // container width: 800px
+      // scale 1 | x: 0
+      // scale 2 | x: 400
+      // scale 3 | x: 800 (container w)
+      // scale 4 | x: 1200
+      // ...
+      const leftMostX = (containerWidth / 2) * (zoomScale - 1);
+
+      // scale 1 | y: 0
+      // scale 2 | x: 263
+      // scale 3 | x: 527 (container h)
+      // scale 4 | x: 791
+      // ...
+      const topMostY = (containerHeight / 2) * (zoomScale - 1);
+
+      // normalised (0,0)
+      let x = leftMostX;
+      let y = topMostY;
+
+      const moveRightByWidthPercent = (percent) => {
+        // whole number, e.g. moveRightByWidthPercent(50) is 50% of the container width to the right
+        x = leftMostX - (percent * containerWidth) / 100;
+        console.log(`x: ${x}`);
+        zoomist.moveTo({ x: x, y: y });
+      };
+
+      const moveDownByHeightPercent = (percent) => {
+        // whole number, e.g. moveDownByHighPercent(50) is 50% of the container height down
+        y = topMostY - (percent * containerHeight) / 100;
+        console.log(`y: ${y}`);
+        zoomist.moveTo({ x: x, y: y });
+      };
+
+      // moveRightByWidthPercent(100)
+      // moveDownByHighPercent(100)
+
+      const mapping = {
+        dl: {
+          vic: {
+            name: {
+              width: 0,
+              height: 0,
+            },
+            address: {
+              width: 0,
+              height: 20,
+            },
+            dob: {
+              width: 50,
+              height: 50,
+            },
+            licno: {
+              width: 100,
+              height: 0,
+            },
+            licexp: {
+              width: 0,
+              height: 60,
+            },
+            licType: {
+              width: 0,
+              height: 90,
+            },
+            licState: {
+              width: 50,
+              height: 0,
+            },
+          },
+        },
+      };
+
+      const resetScale = () => {
+        zoomist.zoomTo(1);
+      };
+
+      const translate = (coordinate) => {
+        zoomist.zoomTo(zoomScale);
+        moveRightByWidthPercent(coordinate.width);
+        moveDownByHeightPercent(coordinate.height);
+      };
+
+      const translateToName = () => translate(mapping.dl.vic.name);
+      const translateToAddress = () => translate(mapping.dl.vic.address);
+      const translateToDOB = () => translate(mapping.dl.vic.dob);
+      const translateToLicNo = () => translate(mapping.dl.vic.licno);
+      const translateToLicExp = () => translate(mapping.dl.vic.licexp);
+      const translateToLicType = () => translate(mapping.dl.vic.licType);
+      const translateToLicState = () => translate(mapping.dl.vic.licState);
+
+
+      zoomist.on("drag", (zoomist, transform, event) => {
+        console.log(
+          `drag | transform: {x: ${transform.x}, y: ${transform.y}})`
+        );
+      });
+
+      // Initialize MDC Text Field
+      const textFields = document.querySelectorAll(".mdc-text-field");
+      textFields.forEach((textField) => {
+        mdc.textField.MDCTextField.attachTo(textField);
+      });
+      mdc.select.MDCSelect.attachTo(document.querySelector(".mdc-select"));
+      mdc.radio.MDCRadio.attachTo(document.querySelector(".mdc-radio"));
+
+      const buttons = document.querySelectorAll(".mdc-button");
+      buttons.forEach((button) => {
+        mdc.ripple.MDCRipple.attachTo(button);
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const select = new mdc.select.MDCSelect(
+          document.querySelector(".mdc-select")
+        );
+
+        select.listen("MDCSelect:change", () => {
+          document.getElementById("state_of_issue").textContent =
+            select.selectedOptions[0].textContent;
+        });
+      });
+
+      const dobPicker = new Pikaday({
+        field: document.getElementById("date_of_birth"),
+        format: "DD/MM/YYYY",
+        trigger: document.getElementById("dob-icon"),
+      });
+
+      const doePicker = new Pikaday({
+        field: document.getElementById("date_of_expiry"),
+        format: "DD/MM/YYYY",
+        trigger: document.getElementById("doe-icon"),
+      });
+
+
+      // jquery - Out of focus reset scale back to 1
+      $(() => {
+        $("input").on('focusout', () => {
+          resetScale()
+        })
+      });
+    </script>
+  </body>
+</html>

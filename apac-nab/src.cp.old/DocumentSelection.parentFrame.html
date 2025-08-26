@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+    <script src="assets/js/payloadManager.js"></script>
+    <script>
+
+        function sendSomeData(){
+            const emulateType ="PARSED";
+            const channel = document.getElementById("channel").value;
+            var message = emulate(channel, emulateType);
+            var targetFrame = window.frames[0];
+            targetFrame.postMessage(message,"*");
+        }
+
+        function waitForReady(){
+            window.addEventListener("message", subscribeToReady, false)
+        }
+
+        function subscribeToReady(event) {
+            console.log(event);
+            if(event.data.event == "READY"){
+                document.getElementById("channel").removeAttribute("disabled");
+            }else if(event.data.event == "SEND"){
+                console.log(event);
+                var send = JSON.stringify(event.data);
+                var variabled = event.data.variables;
+                console.log(send);
+                document.getElementById('sendData').innerText = send;
+            }
+        }
+
+
+        waitForReady();
+    </script>
+</head>
+
+<body>
+<div><form class="form-container">
+    <!--
+    <div class="card-panel" id="sticky">
+      <div class="zoomist-container doc-zoomist">
+        <div class="zoomist-wrapper">
+          <div class="zoomist-image">
+            <img src="./assets/img/passport-au.jpeg" alt="Australian Passport" class="license-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 class="review-details-section-header">Full legal name</h3>
+    </div>
+    <div class="radio-confirm">
+      <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+      </md-radio>
+      <label class="confirm-label" for="confirm-name">Confirm</label>
+    -->
+    <!-- Alternatively, we can use switch -->
+    <!-- <label for="switch">Confirm</label>
+      <md-switch id="switch"></md-switch>  -->
+    <!--</div>-->
+
+    <md-outlined-text-field id="channel" class="input-text" label="Channel" type="text" inputmode="text"
+                            style="margin-top: 20px;" disabled>
+    </md-outlined-text-field>
+</form>
+    <div>
+        <md-filled-button class="next-button" onclick="sendSomeData()">Send Data</md-filled-button>
+    </div>
+    </form>
+</div>
+    <iframe id="iframe" src="http://localhost:63342/DocumentSelection/index.html" width="100%" height="600px"></iframe>
+    <div id="sendData"></div>
+</body>

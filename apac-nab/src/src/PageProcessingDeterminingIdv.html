@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Processing...</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css" />
+  </head>
+  <body id="overlay">
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation">
+          <div id="navigation-parent" style="position: relative;">
+          </div>
+        </div>
+        <div>
+          <h1>Please wait</h1>
+        </div>
+      </div>
+
+      <div class="container-content" style="height: 60%;">
+        <h3>
+          Determining your identity status
+        </h3>
+
+        <md-linear-progress indeterminate></md-linear-progress>
+      </div>
+
+
+      <div class="container-bottom">
+        <div>
+          <!-- <md-filled-button class="next-button" onclick="triggerNextActivity()">Next</md-filled-button> -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script>
+
+      
+      // This gets invoked each time custom page receives a message
+      const transmitSendEvent = () => {
+        console.log('postMessage: SEND -- start')
+        const delay = 1000 // ms
+        setTimeout(() => {
+          window.parent.postMessage({ event: 'SEND', variables: { message: 'Success' } }, '*');
+          console.log('postMessage: SEND -- done')
+        }, PROCESSING_DELAY)
+      }
+
+      window.addEventListener('message', transmitSendEvent, false);
+
+      // Notify TrustX that Custom UI is ready
+      window.parent.postMessage({ event: 'READY' }, '*');
+
+    </script>
+  </body>
+</html>

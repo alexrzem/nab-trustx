@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something went wrong</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay" onload="subscribeToTrustX();">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <div id="navigation-parent" style="position: relative;">
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <div class="container-body">
+
+          
+          <div class="container-input-header">
+            <h1 style="margin-bottom: 24px;">Something went wrong</h1>
+            <!-- <p class="header-text">Subtitle goes here</p> -->
+          </div>
+
+
+          <div class="container-input-section">
+            <h3 class="error-message" id="errorDocAuthenticity">
+              Sorry we are unable to process identity document. Please try with a different document type, ensure its valid. Please click <a href="#" class="nab-link">here</a> to try a different document type.
+            </h3>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div>
+        <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Progress</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+</head>
+
+<body>
+  <div class="container-top">
+    <div class="container-top-navigation">
+      <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 16px; margin-left: -16px;">
+        <img src="./assets/img/nab-icon.png" alt="NAB icon" style="width: 100px;" />
+        <h2 style="color: #161d1d; margin: 0">New Customer</h2>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container-content">
+    <div class="container-body">
+      <div class="container-input-header">
+
+        <h1>Before You Continue</h1>
+        <div class="notification-panel notification-panel-info" style="margin-top: 24px;">
+          <div class="notification-icon">
+            <i class="material-symbols-outlined">info</i>
+          </div>
+          <div class="notification-content">
+            <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">Banker note</p>
+            <p style="margin-top: 16px;">
+              Ensure the customer is willing to consent to electronic identity verification.
+              <b>
+                If the customer is unwilling to consent or does not have an email OR mobile,
+                please create a prospect profile first (link) and perform manual IDV.
+              </b>
+            </p>
+            <p>
+              Customers can now onboard themselves using their camera enabled phone for a simpler onboarding experience
+              –
+              Please choose “Onboard as customer” button for this option. Otherwise, you can continue to onboard as
+              banker.
+            </p>
+            <p>
+              Customer who provide a mobile number or email can save and resume their application online.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-input-section">
+        <div>
+          <h3 style="font-weight: 600; margin-top: 0;">Let the customer know they'll need to provide</h3>
+        </div>
+        <div>
+          <div width="100%" class="list-with-icon">
+            <md-icon style="color:green; horiz-align: center;">check_circle</md-icon></md-outlined-icon-button>
+            <p>Their personal details, name, date of birth, contact details, address</p>
+          </div>
+          <div width="100%" class="list-with-icon">
+            <md-icon style="color:green; horiz-align: center;">check_circle</md-icon></md-outlined-icon-button>
+            <p>Their citizenship status</p>
+          </div>
+          <div width="100%" class="list-with-icon">
+            <md-icon style="color:green; horiz-align: center;">check_circle</md-icon></md-outlined-icon-button>
+            <p>What they do for a living</p>
+          </div>
+          <div width="100%" class="list-with-icon">
+            <md-icon style="color:green; horiz-align: center;">check_circle</md-icon></md-outlined-icon-button>
+            <p>Provide information about their tax details, if they have their TFN handy</p>
+          </div>
+          <div width="100%" class="list-with-icon">
+            <md-icon style="color:green; horiz-align: center;">check_circle</md-icon></md-outlined-icon-button>
+            <p>Check that the customer has an eligbile drivers licence or passport, if not they will need to provided 2
+              forms of ID to complete identity verification.</p>
+          </div>
+        </div>
+        <!-- <div style="background: #eee; border-color: #eee; margin-top: 20px; padding: 16px" class="card">
+          <div>
+            <div class="card-content">
+              <md-icon style="color: #d80015">schedule</md-icon>Onboarding a customer will take approximately 5 minutes
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+
+
+    <div class="container-bottom">
+      <md-text-button onclick="dispatchData({ navigate: 'banker' })">
+        Onboard as Banker
+      </md-text-button>
+      <md-filled-button id="next-button" class="next-button" onclick="dispatchData({ navigate: 'client' })">Onboard as
+        customer</md-filled-button>
+    </div>
+  </div>
+
+
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script type="text/javascript" src="./assets/js/common.js"></script>
+    <script>
+        enableEnterKeyOnButtonId('next-button');
+    </script>
+</body>
+
+
+</html>

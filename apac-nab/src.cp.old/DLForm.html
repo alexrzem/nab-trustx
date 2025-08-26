@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review your details</title>
+    <!-- Importing Material Components Web -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import '@material/web/all.js';
+      import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+  
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/css/pikaday.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-top-navigation">
+        <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+        <div id="navigation-parent" style="position: relative;">
+          <md-text-button id="navigation-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+          <md-menu id="navigation-menu" anchor="navigation-anchor">
+            <!-- Menu items are generated dynamically using JS -->
+          </md-menu>
+        </div>
+      </div>
+      <div>
+        <h1>Confirm your ID details</h1>
+      </div>
+      <form class="form-container">
+        <!--<div class="card-panel" id="sticky">
+          <div class="zoomist-container doc-zoomist">
+            <div class="zoomist-wrapper">
+              <div class="zoomist-image">
+                <img
+                  src="./assets/img/VIC-Driver-Licence-Full.jpg"
+                  alt="Victoria Driver's License"
+                  class="license-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>-->
+        <div>
+          <h3 class="review-details-section-header">Full legal name</h3>
+        </div>
+        <div class="radio-confirm">
+          <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+          </md-radio>
+          <label class="confirm-label" for="confirm-name">Confirm</label>  
+
+          <!-- Alternatively, we can use switch -->
+          <!-- <label for="switch">Confirm</label>
+          <md-switch id="switch"></md-switch>  -->
+        </div>
+
+        <md-outlined-text-field
+          id="documentFirstName"
+          class="input-text"
+          label="First Name" 
+          type="text" 
+          inputmode="text" 
+          style="margin-top: 20px;">
+          <!--onfocus="translateToName()">-->
+        </md-outlined-text-field>
+        <md-outlined-text-field
+          id="documentMiddleName"
+          class="input-text"
+          label="Middle Name" 
+          type="text" 
+          inputmode="text">
+          <!--onfocus="translateToName()">-->
+        </md-outlined-text-field>
+        <md-outlined-text-field
+          id="documentLastName"
+          class="input-text"
+          label="Last Name" 
+          type="text" 
+          inputmode="text" >
+          <!-- onfocus="translateToName()"> -->
+        </md-outlined-text-field>
+
+
+        <div>
+          <h3 class="review-details-section-header">Date of birth</h3>
+        </div>
+        <div class="radio-confirm">
+          <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+          </md-radio>
+          <label class="confirm-label" for="confirm-dob">Confirm</label>  
+        </div>
+
+        <md-outlined-text-field
+          class="input-text"
+          id="documentDateOfBirth"
+          label="Date of Birth" 
+          type="text" 
+          inputmode="text" 
+          style="margin-top: 20px;">
+          <!-- onfocus="translateToDOB()"> -->
+          <md-icon 
+            class="material-icons btn-calendar" 
+            slot="trailing-icon" 
+            role="button"
+            id="dob-icon">event</md-icon>
+        </md-outlined-text-field>
+
+
+        <div>
+          <h3 class="review-details-section-header">Address information</h3>
+        </div>
+
+        <div class="radio-confirm">
+          <md-radio id="confirm-address" name="confirm-address" value="confirm-address">
+          </md-radio>
+          <label class="confirm-label" for="confirm-address">Confirm</label>  
+        </div>
+        <md-outlined-text-field 
+        id="streetNumber"
+        class="input-text"
+        label="Street Number" 
+        type="text" 
+        inputmode="text" 
+        style="margin-top: 20px;">
+        <!--onfocus="translateToAddress()">-->
+      </md-outlined-text-field>
+      <md-outlined-text-field
+        id="documentAddressStreetAddress"
+        class="input-text"
+        label="Street Name" 
+        type="text" 
+        inputmode="text" >
+        <!-- onfocus="translateToAddress()"> -->
+      </md-outlined-text-field>
+      <md-outlined-text-field 
+        id="documentAddressSuburb"
+        class="input-text"
+        label="Suburb" 
+        type="text" 
+        inputmode="text" >
+        <!-- onfocus="translateToAddress()"> -->
+      </md-outlined-text-field>
+      <md-outlined-select id="documentAddressState" class="review-details-select" label="State" style="margin-bottom: 20px; width: 100%;">
+        <md-select-option selected value="act">
+          <div slot="headline">ACT</div>
+        </md-select-option>
+        <md-select-option value="nsw">
+          <div slot="headline">NSW</div>
+        </md-select-option>
+        <md-select-option selected value="vic">
+          <div slot="headline">VIC</div>
+        </md-select-option>
+        <md-select-option value="qld">
+          <div slot="headline">QLD</div>
+        </md-select-option>
+        <md-select-option selected value="wa">
+          <div slot="headline">WA</div>
+        </md-select-option>
+        <md-select-option value="tas">
+          <div slot="headline">TAS</div>
+        </md-select-option>
+        <md-select-option selected value="sa">
+          <div slot="headline">SA</div>
+        </md-select-option>
+        <md-select-option value="nt">
+          <div slot="headline">NT</div>
+      </md-outlined-select>
+      
+      <md-outlined-text-field
+        id="documentAddressPostalCode"
+        class="input-text"
+        label="Postcode" 
+        type="text" 
+        inputmode="text" >
+        <!-- onfocus="translateToAddress()">-->
+      </md-outlined-text-field>
+
+        <div>
+          <h3 class="review-details-section-header">ID document details</h3>
+        </div>
+        <div class="radio-confirm">
+          <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+          </md-radio>
+          <label class="confirm-label" for="confirm-doc-details">Confirm</label>  
+        </div>
+
+        <md-outlined-text-field
+        id="documentNumber"
+        class="input-text"
+        label="License Number" 
+        type="text" 
+        inputmode="text" 
+        style="margin-top: 20px;">
+        <!--onfocus="translateToLicNo()">-->
+      </md-outlined-text-field>
+      <md-outlined-text-field
+        id="documentCardNumber"
+        class="input-text"
+        label="Card Number" 
+        type="text" 
+        inputmode="text">
+      </md-outlined-text-field>
+      <md-outlined-text-field
+      class="input-text"
+      id="documentDateOfExpiry"
+      label="Date of Expiry" 
+      type="text" 
+      inputmode="text" >
+      <!-- onfocus="translateToLicExp()"> -->
+      <md-icon 
+        class="material-icons btn-calendar" 
+        slot="trailing-icon" 
+        role="button"
+        id="doe-icon">event</md-icon>
+    </md-outlined-text-field>
+
+
+        <md-outlined-select id="documentStateOfIssue" class="review-details-select" label="State of Issue" style="margin-bottom: 20px; width: 100%;">
+          <md-select-option aria-label="blank"></md-select-option>
+          <md-select-option selected value="act">
+            <div slot="headline">ACT</div>
+          </md-select-option>
+          <md-select-option value="nsw">
+            <div slot="headline">NSW</div>
+          </md-select-option>
+          <md-select-option selected value="vic">
+            <div slot="headline">VIC</div>
+          </md-select-option>
+          <md-select-option value="qld">
+            <div slot="headline">QLD</div>
+          </md-select-option>
+          <md-select-option selected value="wa">
+            <div slot="headline">WA</div>
+          </md-select-option>
+          <md-select-option value="tas">
+            <div slot="headline">TAS</div>
+          </md-select-option>
+          <md-select-option selected value="sa">
+            <div slot="headline">SA</div>
+          </md-select-option>
+          <md-select-option value="nt">
+            <div slot="headline">NT</div>
+        </md-outlined-select>
+        
+
+        <div class="container-bottom">
+          <div>
+            <md-filled-button id="nextButton" class="next-button" onclick="dispatchData()">Next</md-filled-button>
+          </div>
+        </div>
+
+        <!-- <button class="mdc-button mdc-button--raised next-button" type="submit">
+          <span class="mdc-button__label">Next</span>
+        </button> -->
+      </form>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/pikaday.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- <script>
+      const zoomist = new Zoomist(".doc-zoomist", {
+        maxScale: 5,
+        slider: false,
+        zoomer: false,
+      });
+
+      console.log(`zoomist.transform: ${zoomist.transform}`);
+      console.log(`zoomist.transform: ${zoomist.transform}`);
+      console.log(`zoomist.data: ${zoomist.data}`);
+
+      // Scale
+      const zoomScale = 2;
+      // Container
+      const containerWidth = zoomist.data.containerData.width;
+      const containerHeight = zoomist.data.containerData.height;
+      console.log(
+        `container: { width: ${containerWidth}, height: ${containerHeight} }`
+      );
+      // Image
+      const imageWidth = zoomist.data.imageData.width;
+      const imageHeight = zoomist.data.imageData.height;
+      console.log(`image: { width: ${imageWidth}, height: ${imageHeight} }`);
+
+      // Initial zoom scale
+      zoomist.zoomTo(1);
+
+      // scale = 2 | TOP LEFT COORDINATE x: 400, y: 263
+
+      // VIC DL - name fields
+      // container width: 800px
+      // scale 1 | x: 0
+      // scale 2 | x: 400
+      // scale 3 | x: 800 (container w)
+      // scale 4 | x: 1200
+      // ...
+      const leftMostX = (containerWidth / 2) * (zoomScale - 1);
+
+      // scale 1 | y: 0
+      // scale 2 | x: 263
+      // scale 3 | x: 527 (container h)
+      // scale 4 | x: 791
+      // ...
+      const topMostY = (containerHeight / 2) * (zoomScale - 1);
+
+      // normalised (0,0)
+      let x = leftMostX;
+      let y = topMostY;
+
+      const moveRightByWidthPercent = (percent) => {
+        // whole number, e.g. moveRightByWidthPercent(50) is 50% of the container width to the right
+        x = leftMostX - (percent * containerWidth) / 100;
+        console.log(`x: ${x}`);
+        zoomist.moveTo({ x: x, y: y });
+      };
+
+      const moveDownByHeightPercent = (percent) => {
+        // whole number, e.g. moveDownByHighPercent(50) is 50% of the container height down
+        y = topMostY - (percent * containerHeight) / 100;
+        console.log(`y: ${y}`);
+        zoomist.moveTo({ x: x, y: y });
+      };
+
+      // moveRightByWidthPercent(100)
+      // moveDownByHighPercent(100)
+
+      const mapping = {
+        dl: {
+          vic: {
+            name: {
+              width: 0,
+              height: 0,
+            },
+            address: {
+              width: 0,
+              height: 20,
+            },
+            dob: {
+              width: 50,
+              height: 50,
+            },
+            licno: {
+              width: 100,
+              height: 0,
+            },
+            licexp: {
+              width: 0,
+              height: 60,
+            },
+            licType: {
+              width: 0,
+              height: 90,
+            },
+            licState: {
+              width: 50,
+              height: 0,
+            },
+          },
+        },
+      };
+
+      const resetScale = () => {
+        zoomist.zoomTo(1);
+      };
+
+      const translate = (coordinate) => {
+        zoomist.zoomTo(zoomScale);
+        moveRightByWidthPercent(coordinate.width);
+        moveDownByHeightPercent(coordinate.height);
+      };
+
+      const translateToName = () => translate(mapping.dl.vic.name);
+      const translateToAddress = () => translate(mapping.dl.vic.address);
+      const translateToDOB = () => translate(mapping.dl.vic.dob);
+      const translateToLicNo = () => translate(mapping.dl.vic.licno);
+      const translateToLicExp = () => translate(mapping.dl.vic.licexp);
+      const translateToLicType = () => translate(mapping.dl.vic.licType);
+      const translateToLicState = () => translate(mapping.dl.vic.licState);
+
+
+      zoomist.on("drag", (zoomist, transform, event) => {
+        console.log(
+          `drag | transform: {x: ${transform.x}, y: ${transform.y}})`
+        );
+      });
+
+
+
+      const dobPicker = new Pikaday({
+        field: document.getElementById("input-dob"),
+        format: "YYYY-MM-DD",
+        trigger: document.getElementById("dob-icon"),
+      });
+
+      const doePicker = new Pikaday({
+        field: document.getElementById("input-doe"),
+        format: "YYYY-MM-DD",
+        trigger: document.getElementById("doe-icon"),
+      });
+
+      // jquery - Out of focus reset scale back to 1
+      $(() => {
+        $("md-outlined-text-field").on('focusout', () => {
+          resetScale()
+        })
+      });
+    </script> -->
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/name.js"></script>
+  </body>
+</html>

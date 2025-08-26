@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Additional Document Selection</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet" />
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+  <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css" />
+</head>
+
+<body id="overlay" onload="subscribeToTrustX();">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+        <div id="navigation-parent" style="position: relative;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+      <div>
+        <h1>Provide your additional document</h1>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <p>
+          Select your ID type from the list below and click 'Next' to scan or upload your additional document.
+        </p>
+        <p>
+          <b>Select your identity document type</b>
+        </p>
+
+        <form class="document-type-form">
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-passport" name="doc-type" value="au-passport"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-passport">
+              <p><b>Australian passport</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-license" name="doc-type" value="au-license"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-license">
+              <p><b>Australian driver license</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="foreign-passport" name="doc-type" value="foreign-passport"></md-radio>
+            </div>
+            <label class="document-type-label" for="foreign-passport">
+              <p><b>Foreign passport</b></p>
+            </label>
+          </div>
+
+          <hr width="100%" style="border-width: 0.5px;">
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="medicare" name="doc-type" value="medicare"></md-radio>
+            </div>
+            <label class="document-type-label" for="medicare">
+              <p><b>Medicare card</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-birth-cert" name="doc-type" value="au-birth-cert"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-birth-cert">
+              <p><b>Australian birth certificate</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-citizenship-cert" name="doc-type" value="au-citizenship-cert"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-citizenship-cert">
+              <p><b>Australian citizenship certificate</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-death-cert" name="doc-type" value="au-death-cert"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-death-cert">
+              <p><b>Australian death certificate</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-change-of-name-cert" name="doc-type" value="au-change-of-name-cert"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-change-of-name-cert">
+              <p><b>Australian change of name certificate</b></p>
+            </label>
+          </div>
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="au-marriage-cert" name="doc-type" value="au-marriage-cert"></md-radio>
+            </div>
+            <label class="document-type-label" for="au-marriage-cert">
+              <p><b>Australian marriage certificate</b></p>
+            </label>
+          </div>
+
+
+          <hr width="100%" style="border-width: 0.5px;">
+
+          <div id="type-3-doc-list" style="display: none;">
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-proof-of-age" name="doc-type" value="au-proof-of-age"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-proof-of-age">
+                <p><b>Australian proof of age card</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="foreign-license" name="doc-type" value="foreign-license"></md-radio>
+              </div>
+              <label class="document-type-label" for="foreign-license">
+                <p><b>Foreign driver license</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="foreign-written-reference" name="doc-type" value="foreign-written-reference"></md-radio>
+              </div>
+              <label class="document-type-label" for="foreign-written-reference">
+                <p><b>Written reference from a verifying offier</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="foreign-travel-doc" name="doc-type" value="foreign-travel-doc"></md-radio>
+              </div>
+              <label class="document-type-label" for="foreign-travel-doc">
+                <p><b>International travel document (excluding passport)</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-concession-card" name="doc-type" value="au-concession-card"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-concession-card">
+                <p><b>Concession card</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="foreign-id-card" name="doc-type" value="foreign-id-card"></md-radio>
+              </div>
+              <label class="document-type-label" for="foreign-id-card">
+                <p><b>ID Card issued by foreign government/United Nations</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-indigenous-id" name="doc-type" value="au-indigenous-id"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-indigenous-id">
+                <p><b>Indigenous community proof of ID card</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-utility" name="doc-type" value="au-utility"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-utility">
+                <p><b>Utility bill</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-ato-notice" name="doc-type" value="au-ato-notice"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-ato-notice">
+                <p><b>Australian Taxation Office Notice</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-indigenous-letter" name="doc-type" value="au-indigenous-letter"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-indigenous-letter">
+                <p><b>Indigenous / Torres Strait Islander community letter</b></p>
+              </label>
+            </div>
+  
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="au-financial-benefit" name="doc-type" value="au-financial-benefit"></md-radio>
+              </div>
+              <label class="document-type-label" for="au-financial-benefit">
+                <p><b>Financial Benefit Statement</b></p>
+              </label>
+            </div>
+          </div>
+
+        </form>
+
+        <div style="margin-top: 16px;">
+          <small>
+            By clicking 'Next' you agree to
+            <a class="privacy-link" href="#">how we verify your identity online</a>.
+          </small>
+        </div>
+        <div style="margin-top: 8px;">
+          <small>
+            If you would prefer not to verify online, you can
+            <a class="privacy-link" href="#">verify in person instead</a>. Your
+            ID will be reviewed when you visit in person at a branch.
+          </small>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div style="display: flex; justify-content: flex-end; margin-top: 24px; align-items: flex-end;">
+        <md-text-button onclick="showType3DocumentList();">Other document types</md-text-button>
+        <div style="position: relative">
+          <md-filled-button class="next-button" id="upload-anchor" onclick="dispatchData()">Next</md-filled-button>
+          <md-menu id="upload-menu" anchor="upload-anchor">
+            <md-menu-item>
+              <div slot="headline">Photo Library</div>
+            </md-menu-item>
+            <md-menu-item>
+              <div slot="headline">Take Photo</div>
+            </md-menu-item>
+            <md-menu-item>
+              <div slot="headline">Choose File</div>
+            </md-menu-item>
+          </md-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="nav">
+    <div class="expanded-progress-header">
+      <h2>Your Progress</h2>
+      <md-icon-button id="expanded-progress-close-btn">
+        <md-icon>close</md-icon>
+      </md-icon-button>
+    </div>
+    <h4 style="margin-left: 16px; margin-right: 16px;">Application 35% complete</h4>
+    <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+      <div class="progress-bar" id="progress-bar" style="width: 35%;"></div>
+    </div>
+    <div class="card card-success" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">smartphone</i>
+        <h4>Set up your NAB Access</h4>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card card-warning" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">badge</i>
+        <h4>ID Verification</h4>
+      </div>
+      <div class="application-card-icon">
+          <small>In progress</small>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">account_circle</i>
+        <div class="card-content-with-description">
+          <h4>Personal details</h4>
+          <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">payments</i>
+        <div class="card-content-with-description">
+          <h4>Your finances</h4>
+          <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <span class="material-icons">menu</span>
+        <div class="card-content-with-description">
+          <h4>Review your information</h4>
+          <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script>
+
+    const nav = document.getElementById('nav');
+    const anchor = document.getElementById('progress-expand-anchor');
+    const overlay = document.getElementById('overlay');
+
+    anchor.addEventListener('click', () => {
+      anchor.classList.toggle('active');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    const closeBtn = document.getElementById('expanded-progress-close-btn');
+    closeBtn.addEventListener('click', () => {
+      anchor.classList.toggle('active');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+   // Show Type 3 doc list on a button click
+    const showType3DocumentList = () => {
+      const $type3DocList = $('#type-3-doc-list')
+      $type3DocList.css('display', 'block')
+    }
+
+    const $uploadAnchorEl = $('#upload-anchor')
+    // const $uploadMenuEl = $('#upload-menu')
+    const uploadMenuEl = document.body.querySelector('#upload-menu');
+    $uploadAnchorEl.on('click', () => { uploadMenuEl.open = !uploadMenuEl.open; });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile number</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+        <div id="navigation-parent" style="position: relative;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+          <md-menu id="navigation-menu" anchor="navigation-anchor">
+            <!-- Menu items are generated dynamically using JS -->
+          </md-menu>
+        </div>
+      </div>
+      <div>
+        <h1>What's your mobile number</h1>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <div class="container-body">
+          <div class="container-input-header">
+            <p class="header-text">We'll use your mobile number to identify your account.</p>
+          </div>
+          <div class="container-input-section">
+            <div class="phone-container">
+              <div class="phone-country">
+                <md-outlined-select label="Country" style="min-width: 150px;" disabled="disabled">
+                  <md-select-option selected value="au">
+                    <div slot="headline">AU +61</div>
+                  </md-select-option>
+                </md-outlined-select>
+              </div>
+              <div class="phone-number">
+                <md-outlined-text-field class="input-mobile-number" id="phone" label="Mobile number" type="text"
+                  inputmode="text" oninput="limitInput(this);"">
+                </md-outlined-text-field>
+
+                <div class="input-validation-message" id="phone-validation" style="display: none;">
+                  <small>Please enter a valid phone number</small>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 20px;">
+              <small>We will use this number to send you a one-time password when you login to your application.</small>
+            </div>
+
+            <div class="checkbox-container" style="margin-top: 64px;">
+              <md-checkbox id="checkbox-mobile" touch-target="wrapper"></md-checkbox>
+              <label for="checkbox-mobile">
+                <small>
+                  I confirm that I would like to suppress OTP to this mobile number
+                </small>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div>
+        <md-filled-button class="next-button" onClick="dispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+  <div id="nav">
+    <h2 style="margin-left: 16px; margin-top: 20vh;">Your Progress</h2>
+    <h4 style="margin-left: 16px; margin-right: 16px;">Application 10% complete</h4>
+    <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+      <div class="progress-bar" id="progress-bar" style="width: 10%;"></div>
+    </div>
+    <div class="card card-warning" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">smartphone</i>
+        <h4>Set up your NAB Access</h4>
+      </div>
+      <div class="application-card-icon">
+        <small>In progress</small>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">badge</i>
+        <h4>ID Verification</h4>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">account_circle</i>
+        <div class="card-content-with-description">
+          <h4>Personal details</h4>
+          <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">payments</i>
+        <div class="card-content-with-description">
+          <h4>Your finances</h4>
+          <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <span class="material-icons">menu</span>
+        <div class="card-content-with-description">
+          <h4>Review your information</h4>
+          <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+
+    const nav = document.getElementById('nav');
+    const anchor = document.getElementById('progress-expand-anchor');
+    const overlay = document.getElementById('overlay');
+
+    anchor.addEventListener('click', () => {
+      anchor.classList.toggle('active');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    const $validationElement = $('#phone-validation')
+    const checkValidPhone = (phone) => {
+      const regex = /^ ?(?:\((?=.*\)))?(0?4)\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/;
+      const matching = regex.test(phone);
+      return matching;
+    };
+
+    const validate = () => {
+      const $phoneEl = $('#phone')
+      const phoneNumber = $phoneEl.val();
+
+      if (!checkValidPhone(phoneNumber)) {
+        $validationElement.css("display", "block")
+      } else {
+        $validationElement.css("display", "none")
+      }
+    }
+
+    const limitInput = (e) => {
+      const firstChar = e.value.substring(0,1);
+      let maxChar = 10;
+      if (firstChar == '4') {
+        maxChar = 9;
+      }
+      e.value = e.value.toString().slice(0, maxChar);
+    };
+
+    $("#phone").on("input", validate)
+  </script>
+</body>
+
+</html>

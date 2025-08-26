@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Additional Document Selection</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet" />
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> -->
+  <!-- <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+  <link rel="stylesheet" href="./assets/css/sheet.css"/>
+</head>
+
+<body id="overlay">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <md-text-button id="back-button" onclick="dispatchBack()" style="visibility: hidden;">
+          <i class="material-icons">arrow_back</i>
+        </md-text-button>
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="navigation-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <div class="form-container">
+        <div class="container-body">
+          <div class="container-input-header">
+            <h1>Scan your ID</h1>
+            <p>
+              Select your ID type from the list below and click <span class="branded brand-wlkogan">"Yes, continue"</span><span class="branded brand-default">"Next"</span> to scan.
+            </p>
+            <!-- <p style="margin-bottom: 8px">
+              <small>
+                You can provide us with a digitally verifiable document (Drivers Licence, Passport, Medicare card, birth
+                certificate) that will help us accelerate your identity verification.
+              </small>
+            </p>
+            <p style="margin-top:0; margin-bottom: 8px">
+              <small>
+                If you are unable to provide the above, you can provide us with additional document types. These will need
+                to be verified by us prior to approval of your identity verification. These needs to pictures of original
+                documents or certified copies. The time needed to action your request will vary depending on the type of
+                request. For simple requests, we will complete your request within 2-4 business days.
+              </small>
+            </p>
+            <p style="margin-top:0">
+              <small>
+                You can monitor the progress of your identity verification status through your application dashboard that
+                is available on login.
+              </small>
+            </p> -->
+          </div>
+          <div class="container-input-section">
+
+            <!-- Conditional - only shown when an error object is passed into the page -->
+            <div class="notification-panel notification-panel-warning" style="margin-top: 24px;" id="notification-idv-unsuccessful">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined">warning</i>
+              </div>
+              <div class="notification-content">
+                <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+                  Your identity verification was unsuccessful
+                </p>
+                <p>
+                  We were unable to validate your identity with the information provided. Please choose an alternate document type.
+                </p>
+              </div>
+            </div>
+
+            <div id="isOverEighteenContainer">
+              <h3>Are you 18 years or older?</h3>
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="yes" name="isOverEighteen" value="yes" class="input-radio"></md-radio>
+                </div>
+                <label class="document-type-label" for="yes">
+                  <p>Yes</p>
+                </label>
+              </div>
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="no" name="isOverEighteen" value="no" class="input-radio"></md-radio>
+                </div>
+                <label class="document-type-label" for="no">
+                  <p>No</p>
+                </label>
+              </div>
+              <div id="isOverEighteenError" class="notification-panel notification-panel-error-transparent"  style="margin-top: 24px; display: none;">
+                  <div class="notification-icon">
+                      <i class="material-symbols-outlined error">info</i>
+                  </div>
+                  <div class="notification-content">
+                      Select if you are 18 years or older
+                  </div>
+              </div>
+            </div>
+
+            <!-- <div class="notification-panel notification-panel-info" style="margin-top: 24px; margin-bottom: 16px;">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined">info</i>
+              </div>
+              <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                  You must be 14 years or older to apply online. If you are 13 years or younger, please visit your
+                  closest NAB branch with a parent or guardian with a valid form of ID.
+                </p>
+              </div>
+            </div> -->
+
+
+            
+            <div class="document-type-form" id="selectedDocumentTypeContainer">
+              <h3>
+                <b>Select your identity document type</b>
+              </h3>
+  
+              <!-- TYPE 1 - OCRable and DVSable -->
+              <small>
+                Upload identity document for evidentiary purposes <u><b>and/or</b></u> enter details manually for
+                verifying identity information
+              </small>
+
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="dl" name="selectedAdditionalDocumentType" value="dl"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="dl">
+                  <p><b>Australian driver licence</b></p>
+                </label>
+              </div>
+
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="passport" name="selectedAdditionalDocumentType" value="passport"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="passport">
+                  <p><b>Australian passport</b></p>
+                </label>
+              </div>
+
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="foreignPassport" name="selectedAdditionalDocumentType" value="foreignPassport"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="foreignPassport">
+                  <p><b>Foreign passport</b></p>
+                </label>
+              </div>
+
+              <hr width="100%" style="border-width: 0.5px;">
+
+              <!-- TYPE 2 - Not OCRable but DVSable -->
+
+              <small>
+                Upload identity document for evidentiary purposes <u><b>and/or</b></u> enter details manually for verifying identity information
+              </small>
+              <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                  <md-radio id="medicare" name="selectedAdditionalDocumentType" value="medicare"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="medicare">
+                  <p><b>Medicare card</b></p>
+                </label>
+              </div>
+
+              <div class="document-type-radio document-type-under-18" style="display: none;">
+                <div class="document-type-radio-btn">
+                  <md-radio id="birthCertificate" name="selectedAdditionalDocumentType" value="birthCertificate"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="birthCertificate">
+                  <p><b>Australian birth certificate</b></p>
+                </label>
+              </div>
+
+
+              <div class="document-type-radio" style="display: none;">
+                <div class="document-type-radio-btn">
+                  <md-radio id="centrelinkConcessionCard" name="selectedAdditionalDocumentType"
+                    value="centrelinkConcessionCard" class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="centrelinkConcessionCard">
+                  <p><b>Centrelink concession card</b></p>
+                </label>
+              </div>
+
+              <div class="document-type-radio" style="display: none;">
+                <div class="document-type-radio-btn">
+                  <md-radio id="citizenshipCertificate" name="selectedAdditionalDocumentType"
+                    value="citizenshipCertificate" class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="citizenshipCertificate">
+                  <p><b>Australian citizenship certificate</b></p>
+                </label>
+              </div>
+
+              <div class="document-type-radio" style="display: none;">
+                <div class="document-type-radio-btn">
+                  <md-radio id="immiCard" name="selectedAdditionalDocumentType" value="immiCard"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="immiCard">
+                  <p><b>Immi card</b></p>
+                </label>
+              </div>
+
+
+              <!-- Only for CHANGE OF NAME flow  -->
+              <div class="document-type-radio changeOfNameOnly" style="display: none">
+                <div class="document-type-radio-btn">
+                  <md-radio id="changeOfNameCertificate" name="selectedAdditionalDocumentType"
+                    value="changeOfNameCertificate" class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="changeOfNameCertificate">
+                  <p><b>Australian change of name certificate</b></p>
+                </label>
+              </div>
+
+              <!-- Only for CHANGE OF NAME flow  -->
+              <div class="document-type-radio changeOfNameOnly" style="display: none">
+                <div class="document-type-radio-btn">
+                  <md-radio id="marriageCertificate" name="selectedAdditionalDocumentType" value="marriageCertificate"
+                    class="input-radio docSelection"></md-radio>
+                </div>
+                <label class="document-type-label" for="marriageCertificate">
+                  <p><b>Australian marriage certificate</b></p>
+                </label>
+              </div>
+
+
+              <hr width="100%" style="border-width: 0.5px;">
+
+
+              <!-- TYPE 3 - Not OCRable or DVSable -->
+
+              <div id="type-3-doc-list" style="display: none;">
+                <small>
+                  Upload one of these document types for evidentiary purposes. Uploaded document will be verified.
+                </small>
+                <div class="document-type-radio">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="proofOfAge" name="selectedAdditionalDocumentType" value="proofOfAge"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="proofOfAge">
+                    <p><b>Australian proof of age card</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="foreignLicence" name="selectedAdditionalDocumentType" value="foreignLicence"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="foreignLicence">
+                    <p><b>Foreign driver licence</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="foreignWrittenReference" name="selectedAdditionalDocumentType"
+                      value="foreignWrittenReference" class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="foreignWrittenReference">
+                    <p><b>Written reference from a verifying officer</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="foreignTravelDocument" name="selectedAdditionalDocumentType"
+                      value="foreignTravelDocument" class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="foreignTravelDocument">
+                    <p><b>International travel document (excluding passport)</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="concessionCard" name="selectedAdditionalDocumentType" value="concessionCard"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="concessionCard">
+                    <p><b>Concession card</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="foreignIdCard" name="selectedAdditionalDocumentType" value="foreignIdCard"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="foreignIdCard">
+                    <p><b>ID card issued by foreign government/United Nations</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="indigenousId" name="selectedAdditionalDocumentType" value="indigenousId"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="indigenousId">
+                    <p><b>Indigenous community proof of ID card</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="utilityBill" name="selectedAdditionalDocumentType" value="utilityBill"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="utilityBill">
+                    <p><b>Utility bill</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="atoNotice" name="selectedAdditionalDocumentType" value="atoNotice"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="atoNotice">
+                    <p><b>Australian Taxation Office (ATO) notice</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="indigenousLetter" name="selectedAdditionalDocumentType" value="indigenousLetter"
+                      class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="indigenousLetter">
+                    <p><b>Indigenous / Torres Strait Islander community letter</b></p>
+                  </label>
+                </div>
+
+                <div class="document-type-radio assistedBanker">
+                  <div class="document-type-radio-btn">
+                    <md-radio id="financialBenefitStatement" name="selectedAdditionalDocumentType"
+                      value="financialBenefitStatement" class="input-radio docSelection"></md-radio>
+                  </div>
+                  <label class="document-type-label" for="financialBenefitStatement">
+                    <p><b>Financial benefit statement</b></p>
+                  </label>
+                </div>
+
+                <hr width="100%" style="border-width: 0.5px;">
+              </div>
+            </div>
+
+            <!-- <div style="margin-top: 16px;">
+              <small>
+                By clicking 'Next' you agree to
+                <a class="nab-link" href="#">how we verify your identity online</a>.
+              </small>
+            </div> -->
+            <!-- <div style="margin-top: 8px;">
+              <small>
+                If you would prefer not to verify online, you can
+                <a class="nab-link" href="#">verify in person instead</a>. Your
+                ID will be reviewed when you visit in person at a branch.
+              </small>
+            </div> -->
+
+            <div id="selectedDocumentTypeError" class="notification-panel notification-panel-error-transparent"  style="margin-top: 24px; display: none;">
+                <div class="notification-icon">
+                    <i class="material-symbols-outlined error">info</i>
+                </div>
+                <div class="notification-content">
+                    Select your identity document type
+                </div>
+            </div>  
+
+            <div class="tooltip" id="tooltip">
+              <small style="color: white">
+                You must select a digitally verifiable document (Driver's licence, passport, Medicare or Birth
+                certificate) before choosing to use other document types.
+              </small>
+            </div>
+
+            <div class="additional-doc-button-container">
+              <div class="not-change-of-name btn-container-other-doc" style="visibility: hidden;">
+                <md-text-button onclick="handleOtherDocTypeButton()" id="btnOtherDocTypes">Other document
+                  types</md-text-button>
+              </div>
+              <div>
+                <div style="display: flex; gap: 8px;">
+                  <div>
+                    <md-text-button class="next-button assistedBanker" onclick="validateAndDispatchData({ isManualInput: true })">Manual Entry</md-text-button>
+                  </div>
+                  <div>
+                    <md-filled-button id="next-button" class="next-button assistedBankerDisappear branded brand-wlkogan"
+                                  onclick="validateAndDispatchData()">Yes, continue
+                    </md-filled-button>
+                    <md-filled-button class="next-button assistedBankerDisappear branded brand-default"
+                                  onclick="validateAndDispatchData()">Next
+                    </md-filled-button>
+                    <!-- <md-filled-button id="next-button" class="next-button assistedBankerDisappear"
+                      onclick="validateAndDispatchData()">Next</md-filled-button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="container-bottom">
+      <div style="display: flex; flex-direction: row;">
+        <div class="not-change-of-name">
+          <md-text-button onclick="showType3DocumentList()">Other document types</md-text-button>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 24px; align-items: flex-end;">
+          <div style="position: relative">
+            <md-text-button class="next-button" onclick="dispatchData({ isManualEntry: true })">Manual Entry</md-filled-button>
+          </div>
+          <div style="position: relative">
+            <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+          </div>
+        </div>
+      </div> -->
+
+    <!-- </div> -->
+  </div>
+
+  
+  <script>
+    const currentPage = 'PageAdditionalDocument'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script type="text/javascript" src="./assets/js/common.js"></script>
+  <script type="text/javascript" src="./assets/js/sheet.js"></script>
+
+  <script>
+    enableEnterKeyOnButtonId('next-button');
+  </script>
+  <script>
+
+    let brand = 'default'
+
+    // Remove isOverEighteenContainer the second time onwards
+    processCallback = (sessionData, _) => {
+        brand = sessionData.idv.config?.brand ?? 'default';
+
+        if (!customisedBrands.includes(brand))
+            brand = 'default'
+
+        const totalAttempt = sessionData.idv.totalAttempt ?? 0
+        if (totalAttempt > 0) {
+            $('#isOverEighteenContainer').css('display', 'none')
+        }
+
+      // const documentAttempt = sessionData.idv.documentAttempt;
+      const navigatedFromDocSelection = sessionData?.idv?.navigatedFromDocSelection ?? false
+
+      if (!navigatedFromDocSelection && totalAttempt > 0) {
+
+        const selectedDocType = sessionData.idv.selectedDocType
+        let documentName;
+            if (selectedDocType === 'dl')
+                documentName = 'Australian driver license'
+            else if (selectedDocType === 'passport')
+                documentName = 'Australian passport'
+            else if (selectedDocType === 'foreignPassport')
+                documentName = 'Foreign passport'
+            else if (selectedDocType === 'medicare')
+                documentName = 'Medicare card'
+            else if (selectedDocType === 'birthCertificate')
+                documentName = 'Australian birth certificate'
+        
+        sendPageOpenAnalyticsEvent("ID-Details-Outcome", "eidv-decision", documentName, "16" ) //NB-711
+
+        showSheet(
+                'Additional identity document is required',
+                [
+                  'To help further verify your identity, we require an additional identification document to be used.',
+                  'Please select a different identity document type to verify with.'
+                ],
+                { label: 'Close', onclick: closeSheet },
+                undefined,
+                { name: 'info', theme: 'info' }
+        )
+      }
+    }
+  </script>
+  <script>
+    analyticsSectionName = 'scan-your-id'
+
+    // Over 18 years radio handler
+    // If radio yes is selected, enable type 2
+    const $under18RadioNoEl = $('md-radio[name=isOverEighteen][id=no]')
+    const $under18DocContainerEls = $('.document-type-under-18')
+
+    const showUnder18DocType = () => {
+        $under18DocContainerEls.css('display', 'flex')
+    }
+
+    const hideUnder18DocType = () => {
+        $under18DocContainerEls.css('display', 'none')
+    }
+    
+    $('md-radio[name=isOverEighteen]').on('change', () => {
+      $('#isOverEighteenError').css('display', 'none')
+      $('#isOverEighteenContainer').removeClass('input-radio-error')
+      if ($under18RadioNoEl.prop('checked') && isDocumentTypeSupported('birthCertificate')) {
+          showUnder18DocType()
+      } else {
+          hideUnder18DocType()
+      }
+    });
+
+    // Radio button selected listener - selectedDocumentType
+    $('md-radio[name=selectedAdditionalDocumentType]').on('change', () => {
+      $('#selectedDocumentTypeError').css('display', 'none')
+      $('#selectedDocumentTypeContainer').removeClass('input-radio-error')
+    });
+  </script>
+  <script>
+
+    const anyRadioChecked = (name) => {
+      return $(`md-radio[name=${name}]`).filter(function() {
+        return $(this).prop("checked");
+      }).length > 0
+    }
+
+    const validate = () => {
+      if (!anyRadioChecked('selectedAdditionalDocumentType')) {
+        $('#selectedDocumentTypeError').css('display', 'flex')
+        $('#selectedDocumentTypeContainer').addClass('input-radio-error')
+        console.error("validation failed - selectedDocType")
+      } else {
+        $('#selectedDocumentTypeError').css('display', 'none')
+        $('#selectedDocumentTypeContainer').removeClass('input-radio-error')
+      }
+
+      if (!anyRadioChecked('isOverEighteen')) {
+        $('#isOverEighteenError').css('display', 'flex')
+        $('#isOverEighteenContainer').addClass('input-radio-error')
+        console.error("validation failed - isOverEighteen")
+      } else {
+        $('#isOverEighteenError').css('display', 'none')
+        $('#isOverEighteenContainer').removeClass('input-radio-error')
+      }
+
+      return anyRadioChecked('selectedAdditionalDocumentType') && anyRadioChecked('isOverEighteen')
+    }
+
+    function validateAndDispatchData(additionalParams) {
+      if (validate())
+        dispatchData(additionalParams);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Progress</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body style="display: flex; flex-direction: column; justify-content: center;" onload="subscribeToTrustX();">
+    <div class="container-top" style="flex: 0;">
+      <div class="container-top-navigation">
+        <!-- <div class="back-button"><i class="material-icons">arrow_backward</i></div> -->
+        <!-- <md-text-button id="navigation-anchor">
+          <i class="material-icons right">checklist_rtl</i>
+        </md-text-button> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="progress-screen-container">
+      <div class="backdrop-panel">
+        <div style="position: relative; z-index: 2; margin-top: 10vh;">
+          <h1 class="progress-heading">Your progress</h1>
+        </div>
+        <img
+          src="./assets/img/nab-backdrop.png"
+          alt="NAB backdrop image"
+          class="nab-backdrop-img"
+        />
+      </div>
+      
+      <div>
+        <h3>Application 30% complete</h3>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+      <div class="application-card">
+        <div style="flex: 3">
+          <p style="color: #aaa; font-weight: 600; margin-bottom: 4px">You are applying for</p>
+          <h3 style="margin-top: 0; margin-bottom: 0; font-weight: 600;">NAB Rewards Credit Card</h3>
+          <p style="color: #b8382f; margin-top: 4px; font-weight: 700;">100,000 Bonus Points Offer</p>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+
+      <h3>Next Steps</h3>
+      <!-- <div class="form-title">Driver License Details</div> -->
+        <div class="card card-success">
+          <div class="card-content">
+            <i class="material-symbols-outlined">smartphone</i>
+            <h4>Set up your NAB Access</h4>
+          </div>
+          <div class="application-card-icon">
+            <md-icon>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+            </md-icon>
+          </div>
+        </div>
+
+        <div class="card card-success">
+          <div class="card-content">
+            <i class="material-symbols-outlined">badge</i>
+            <h4>ID Verification</h4>
+          </div>
+          <div class="application-card-icon">
+            <md-icon>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+            </md-icon>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <i class="material-symbols-outlined">account_circle</i>
+            <div class="card-content-with-description">
+              <h4>Personal details</h4>
+              <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+            </div>
+          </div>
+          <div class="application-card-icon">
+            <md-icon>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+            </md-icon>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <i class="material-symbols-outlined">payments</i>
+            <div class="card-content-with-description">
+              <h4>Your finances</h4>
+              <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+            </div>
+          </div>
+          <div class="application-card-icon">
+            <md-icon>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+            </md-icon>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <span class="material-icons">menu</span>
+            <div class="card-content-with-description">
+              <h4>Review your information</h4>
+              <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+            </div>
+          </div>
+          <div class="application-card-icon">
+            <md-icon>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+            </md-icon>
+          </div>
+        </div>
+
+        <div>
+          <md-text-button class="save-button" style="--md-sys-color-primary: #006A6A; font-weight: 500; font-size: 1em;">
+            Save & Exit
+          </md-text-button>
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  </body>
+</html>

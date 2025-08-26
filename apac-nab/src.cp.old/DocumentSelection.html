@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Selection</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation">
+          <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+          <div id="navigation-parent" style="position: relative;">
+            <md-text-button id="navigation-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+            <md-menu id="navigation-menu" anchor="navigation-anchor">
+              <!-- Menu items are generated dynamically using JS -->
+            </md-menu>
+          </div>
+        </div>
+        <div>
+          <h1>Scan your ID</h1>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <form class="form-container">
+          <p>
+            Select your ID type from the list below and click 'Next' to scan.
+            Once you've scanned your ID, we'll also ask you to take a selfie.
+          </p>
+          <!-- <p>
+            <b>Select the country where your identity document was issued</b>
+          </p>
+
+          <md-outlined-select class="document-type-country-select" label="Issuing country" style="width: 100%;">
+            <md-select-option selected value="au">
+              <div slot="headline">Australia</div>
+            </md-select-option>
+            <md-select-option value="nz">
+              <div slot="headline">New Zealand</div>
+            </md-select-option>
+          </md-outlined-select> -->
+
+          <p>
+            <b>Select your identity document type</b>
+          </p>
+
+          <form class="document-type-form">
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="dl" name="doc-type" value="dl" class="docSelection"></md-radio>
+              </div>
+              <label class="document-type-label" for="dl">
+                <p><b>Australian driver license</b></p>
+                <p>Valid license</p>
+              </label>
+            </div>
+
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="passport" name="doc-type" value="passport" class="docSelection"></md-radio>
+              </div>
+              <label class="document-type-label" for="passport">
+                <p><b>Australian passport</b></p>
+                <p>Hasn't expired more than two years</p>
+              </label>
+            </div>
+          </form>
+
+          <hr width="95%" style="border-width: 0.5px;">
+
+          <div class="document-type-radio">
+            <div class="document-type-radio-btn">
+              <md-radio id="passport" name="doc-type" value="foreign passport" class="docSelection"></md-radio>
+            </div>
+            <label class="document-type-label" for="passport">
+              <p><b>Foreign passport</b></p>
+              <p>Must be the same passport used to obtain your Australian Visa</p>
+            </label>
+          </div>
+        </form>
+
+          <div style="margin-top: 16px;">
+            <small>
+              By clicking 'Next' you agree to
+              <a class="privacy-link" href="#"
+                >how we verify your identity online</a
+              >.
+            </small>
+          </div>
+          <div style="margin-top: 8px;">
+            <small>
+              If you would prefer not to verify online, you can
+              <a class="privacy-link" href="#">verify in person instead</a>. Your
+              ID will be reviewed when you visit in person at a branch.
+            </small>
+          </div>
+
+          <div class="checkbox-container, assistedChannelOnly" style="margin-top: 64px;">
+            <div>
+              <md-checkbox id="checkbox-doc-minor" touch-target="wrapper"></md-checkbox>
+            </div>
+            <label for="checkbox-doc-minor">
+              <small>
+                I confirm that I am a minor and I would like to upload a different document type
+              </small>
+            </label>
+          </div>
+
+          <div class="checkbox-container, assistedChannelOnly">
+            <div>
+              <md-checkbox id="checkbox-doc-no-primary" touch-target="wrapper"></md-checkbox>
+            </div>
+            <label for="checkbox-doc-no-primary">
+              <small>
+                I confirm I/customer is unable to provide a primary photographic document type
+              </small>
+            </label>
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="container-bottom">
+        <div>
+
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+          <md-filled-button class="next-button assistedChannelOnly" onclick="manualEntry()">Manual Entry</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+  </body>
+</html>

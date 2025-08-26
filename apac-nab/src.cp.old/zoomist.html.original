@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zoomist Demo</title>
+    <meta charset="UTF-8" />
+    <!-- styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #app {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 1rem;
+      }
+
+      .cat-zoomist {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cat-zoomist .zoomist-image {
+        aspect-ratio: 4 / 3;
+      }
+
+      .cat-zoomist img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="zoomist-container cat-zoomist">
+        <div class="zoomist-wrapper">
+          <div class="zoomist-image">
+            <img
+              src="./assets/img/VIC-Driver-Licence-Full.jpg"
+              alt="Victoria Driver's License"
+              class="license-img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+        <script>
+          const zoomist = new Zoomist(".cat-zoomist", {
+            maxScale: 2,
+            slider: false,
+            zoomer: false
+          });
+          zoomist.zoomTo(0.5)
+          zoomist.moveTo({x: 0, y: 0})
+          console.log(zoomist.transform)
+          console.log(zoomist.data)
+          // zoomist.slideTo(4)
+        </script>
+  </body>
+</html>

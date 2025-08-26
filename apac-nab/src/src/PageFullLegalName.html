@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preferred Name</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay" onload="subscribeToTrustX();">
+  <div class="container" style="flex: 1;">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <md-text-button id="back-button" onclick="dispatchBack()" style="visibility: hidden;">
+          <i class="material-icons">arrow_back</i>
+        </md-text-button>
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <div class="container-body">
+          <div class="container-input-header">
+            <h1>Is this your full legal name?</h1>
+          </div>
+          <div class="container-input-section">
+            <div class="notification-panel notification-panel-info" style="margin-top: 24px; margin-bottom: 24px;">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined">info</i>
+              </div>
+              <div class="notification-content">
+                <p id="fullLegalName" style="margin-top: 0; margin-bottom: 0; font-weight: 800; font-size: 1.1em;">John Smith</p>
+              </div>
+            </div>
+
+            <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                    <md-radio id="yes" name="isFullLegalNameRetained" value="yes"
+                              class="input-radio"></md-radio>
+                </div>
+                <label class="document-type-label" for="yes">
+                    <p>Yes</p>
+                </label>
+            </div>
+            <div class="document-type-radio">
+                <div class="document-type-radio-btn">
+                    <md-radio id="no" name="isFullLegalNameRetained" value="no"
+                              class="input-radio"></md-radio>
+                </div>
+                <label class="document-type-label" for="no">
+                    <p>No</p>
+                </label>
+            </div>
+
+            <div class="full-legal-name-form" style="display: none; margin-top: 24px;">
+              <h2 class="review-details-section-header" style="margin-bottom: 24px;">Full legal name</h2>
+
+              <md-outlined-text-field id="documentFirstName" class="input-text" label="First name" 
+                                        type="text" 
+                                        inputmode="text" 
+                                        tyle="margin-top: 20px;"></md-outlined-text-field>
+
+              <md-outlined-text-field id="documentMiddleName" class="input-text" label="Middle name" type="text"
+                                        inputmode="text"
+                                        error-text="Please enter a valid name"
+                                        supporting-text="Please provide your full middle name."></md-outlined-text-field>
+
+              <md-outlined-text-field id="documentLastName" class="input-text" label="Surname" type="text"
+                                        inputmode="text"
+                                        error-text="Please enter your name"></md-outlined-text-field>
+            </div>  
+
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div>
+        <md-filled-button id="next-button" class="next-button"
+          onclick="validateAndDispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const currentPage = 'PageFullLegalName'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script type="text/javascript" src="./assets/js/error.js"></script>
+  <script type="text/javascript" src="./assets/js/validation.js"></script>
+  <script type="text/javascript" src="./assets/js/common.js"></script>
+
+  <script>
+    enableEnterKeyOnButtonId('next-button');
+  </script>
+  <script>
+    analyticsSectionName = "what-is-your-full-legal-name?"
+
+
+    // Callback
+    processCallback = (sessionData, constants) => {
+      const first = sessionData.idv?.doc2?.documentFirstName
+      const fName = first.trim() === '-' ? "" : first
+      const mName = sessionData.idv?.doc2?.documentMiddleName ?? ""
+      const lName = sessionData.idv?.doc2?.documentLastName
+
+      // Consturct full legal name text
+      const fullLegalName = `${fName} ${mName} ${lName}`
+      $('#fullLegalName').text(fullLegalName)
+
+      // Prepopulating data previously captured
+      $('#documentFirstName').val(first)
+      $('#documentMiddleName').val(mName)
+      $('#documentLastName').val(lName)
+    }
+
+
+    const $fullLegalNameNo = $('md-radio[name=isFullLegalNameRetained][id=no]')
+
+    $('md-radio[name=isFullLegalNameRetained]').on('change', (evt) => {
+        if ($fullLegalNameNo.prop('checked')) {
+            showFullLegalName()
+        } else {
+            hideFullLegalName()
+        }
+    });
+
+    const showFullLegalName = () => {
+        $('.full-legal-name-form').css('display', 'block')
+    }
+
+    const hideFullLegalName = () => {
+        $('.full-legal-name-form').css('display', 'none')
+    }
+
+
+    // // Input validation
+    const checkValidName = (name) => {
+
+      if (name.trim().length == 0)
+        return true
+
+      const regex = /^[a-z '-]+$/i;
+      const matching = regex.test(name);
+      return isAlphaSpaceHyphenAposOnly(name);
+    }
+
+    const validate = () => {
+      const $firstNameEl = $('#documentFirstName')
+      const $middleNameEl = $('#documentMiddleName')
+      const $lastNameEl = $('#documentLastName')
+
+      const isFirstValid = checkFirstName($firstNameEl)
+      const isMiddleValid = checkMiddleName($middleNameEl)
+      const isLastValid = checkLastName($lastNameEl)
+
+      return isFirstValid && isMiddleValid && isLastValid
+    }
+
+    // NB-641 - fix validation
+    const checkMiddleName = (element) => {
+      const middle = element.val()
+      if(isBlank(middle)){
+        removeError(element)
+        return true
+      } else if (!isAlphaSpaceHyphenAposOnly(middle) || middle.length > 100) {
+        setError(element, ERROR_MID_NAME_LEN_SPECIAL_CHARS)
+        return false
+      } else {
+        removeError(element)
+      }
+      return true
+    }
+
+    const checkFirstName = (element) => {
+      const first = element.val()
+      if (!isBlank(first)) {
+        const validName = first.length <= 100 && isAlphaSpaceHyphenAposOnly(first)
+        if (!validName) {
+          setError(element, ERROR_FIRST_NAME_LEN_SPECIAL_CHARS)
+          return false
+        } else {
+          removeError(element)
+          return true
+        }
+      } else {
+        setError(element, ERROR_FIRST_NAME_HYPHEN)
+        return false
+      }
+    }
+
+    const checkLastName = (element) => {
+      const last = element.val()
+      if(isBlank(last)){
+        setError(element, ERROR_SURNAME_BLANK)
+        return false
+      } else if (!isAlphaSpaceHyphenAposOnly(last) || last.length > 100) {
+        setError(element, ERROR_SURNAME_LEN_SPECIAL_CHARS)
+        return false
+      } else {
+        removeError(element)
+      }
+      return true
+    }
+
+    const validateAndDispatchData = () => {
+      if (validate())
+        dispatchData()
+    }
+
+    $(".input-text, md-radio").on("change input", validate)
+    window.addEventListener('load', () => {
+      validate()
+    })
+  </script>
+</body>
+
+</html>

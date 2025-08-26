@@ -1,0 +1,105 @@
+#sheet #sheet-scrim {
+    position: absolute;
+    inset: 0;
+    background-color: #000000;
+    opacity: 0;
+    z-index: -1;
+}
+
+#sheet #sheet-container {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 1rem;
+    max-height: calc(100% - 3rem);
+    max-width: min(40rem, 100%);
+    background-color: white;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+#sheet #sheet-body {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /*gap: 1rem;*/
+    overflow: hidden;
+}
+
+#sheet #sheet-content {
+    display: inline-flex;
+    flex-direction: column;
+    overflow: auto;
+    margin-bottom: 32px;
+}
+
+#sheet #sheet-content > p {
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+#sheet {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    flex-direction: column-reverse;
+    /*justify-content: ;*/
+    align-items: center;
+    inset: 0;
+    width: 100dvw;
+    height: 100dvh;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    overflow: hidden;
+
+    &[open] {
+        display: inline-flex;
+    }
+
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    /*transition-duration: reset;*/
+
+    /*@include md.motion('transform');*/
+}
+
+#sheet::backdrop {
+    display: none;
+}
+
+#sheet-drag-handle {
+    margin-left: auto;
+    margin-right: auto;
+    width: 32px;
+    height: 4px;
+    border-radius: 100px;
+    background-color: #867E7E;
+    opacity: 0.4;
+}
+
+#sheet-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sheet #sheet-header {
+    margin-bottom: 16px;
+    font-size: 28px;
+    margin-top: 0;
+}
+
+#sheet #sheet-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    background-color: transparent !important;
+}
+
+#sheet #sheet-icon.info {
+    color: #206C92;
+}
+
+#sheet #sheet-icon.danger {
+    color: #ED0000;
+}

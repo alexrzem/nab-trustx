@@ -1,0 +1,250 @@
+
+.next-button.active {
+  display: none;
+}
+
+.consent-item-header {
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  align-items: flex-start;
+}
+
+
+.consent-content-left {
+  flex: 1;
+}
+.consent-content-right {
+  flex: 1;
+}
+
+.consent-back-button {
+  display: none;
+}
+.consent-back-button.active {
+  display: flex;
+}
+#biometric-back-button {
+  display: none;
+}
+#biometric-back-button.active {
+  display: flex !important;
+}
+
+#form-electronic li {
+  margin-top: 24px;
+}
+
+.accordion-content li {
+  margin-top: 24px;
+}
+
+
+/* Accordion */
+
+.accordion {
+  /*border: 1px solid #ccc;*/
+  /*border-radius: 8px;*/
+  margin: 8px 0;
+  overflow: hidden;
+}
+.accordion-header {
+  /*background-color: #f5f5f5;*/
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.accordion-header:hover {
+  /*background-color: #e0e0e0;*/
+}
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: #fff;
+  padding: 0 16px;
+}
+.accordion.open > .accordion-content {
+  max-height: 200px; /* Adjust as needed for content */
+  padding: 16px;
+}
+
+.accordion.open .material-icons {
+  transform: rotate(180deg);
+}
+
+.privacy-slide-container.active {
+  display: none;
+}
+
+
+/* Mobile */
+@media only screen and (max-width: 1023px) {
+
+  /* The container where the consent cards sit in */
+  #selfie-container {
+    overflow-x: hidden;
+    position: relative;
+  
+    --parent-width: 100%;
+    /* --parent-height: 100%; */
+  }
+  
+  /* Limit overflow vertically and expand height to acommodate consent contents */
+  #selfie-container.active {
+    overflow-y: scroll;
+    /* height: 80vh; */
+  }
+
+  #selfie-main-content-slide-container {
+    /*transform: translateX(0);*/
+    /* transition: transform 0.1s linear; */
+  }
+  
+  #selfie-main-content-slide-container.active {
+    /*transform: translateX(calc((var(--parent-width) * -1) - 50px));*/
+    display: none;
+  }
+
+  #biometric-slide-in {
+    margin-top: 2vh;
+    /* padding-left: 16px; */
+    /* padding-right: 16px; */
+  }
+
+
+  .inset-back-button.active {
+    display: flex; 
+    margin-top: 36px; 
+    margin-bottom: 36px; 
+    justify-content: flex-end;
+  }
+
+  .container-bottom.active {
+    display: none;
+  }
+
+  .container-input-header.active {
+    display: none;
+  }
+  
+  .container-input-section {
+    overflow: hidden;
+    position: relative;
+  
+    --parent-width: 100%;
+    --parent-height: 100%;
+  }
+  
+  .container-input-section.active {
+    overflow-y: scroll;
+    /*min-height: 95vh*/
+    /* height: 100vh; */
+  }
+  
+  #consent-card-slide-container {
+    /*transform: translateX(0);*/
+    /* transition: transform 0.1s linear; */
+  }
+  
+  #consent-card-slide-container.active {
+    /*transform: translateX(calc((var(--parent-width) * -1) - 50px));*/
+    display: none;
+  }
+
+  .consent-content {
+    display: none;
+
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: var(--parent-width);*/
+    /*right: calc((var(--parent-width) * -1) - 50px);*/
+    /*transform: translateX(0);*/
+    /* transition: transform 0.1s linear; */
+
+  }
+  .consent-content.active {
+    display: block;
+    /*transform: translateX(calc((var(--parent-width) * -1) - 50px));*/
+  }
+}
+
+
+
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+
+  
+  /* The container where the consent cards sit in */
+  .container-content {
+    /*overflow: hidden;*/
+    position: relative;
+  
+    --parent-width: 100%;
+    --parent-height: 100%;
+  }
+  
+  /* Limit overflow vertically and expand height to acommodate consent contents */
+  .container-content.active {
+    overflow-y: scroll;
+    height: 80vh;
+  }
+
+  .container-input-header.active {
+    display: none;
+  }
+
+  /* The container where the consent cards sit in */
+  .container-input-section {
+    overflow: hidden;
+    /* position: relative; */
+  
+    --parent-width: 100%;
+    --parent-height: 100%;
+  }
+  
+  /* Limit overflow vertically and expand height to acommodate consent contents */
+  .container-input-section.active {
+    overflow-y: scroll;
+    height: 80vh;
+  }
+  
+  /* Consent card div */
+  #consent-card-slide-container {
+    /*transform: translateX(0);*/
+    /* transition: transform 0.1s ease; */
+  }
+  
+  /* When active, slide consent cards div to the left, out of the container-input-section view */
+  #consent-card-slide-container.active {
+    /*transform: translateX(calc((var(--parent-width) * -1) - 50px));*/
+  }
+
+  .consent-content {
+    display: none;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: var(--parent-width);*/
+    /*right: calc((var(--parent-width) * -1) - 50px);*/
+    /*transform: translateX(0);*/
+    /* transition: transform 0.1s ease; */
+  }
+  .consent-content.active {
+    display: flex !important;
+    flex-direction: row;
+    gap: 48px;
+    grid-column: 1 / 3;
+
+    /*transform: translateX(calc((var(--parent-width) * -1) - 50px));*/
+  }
+
+  .inset-back-button {
+    display: none;
+  }
+
+}

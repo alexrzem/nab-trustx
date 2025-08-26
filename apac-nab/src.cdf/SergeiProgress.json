@@ -1,0 +1,27 @@
+{
+    "title": {
+        "values": {
+            "en": "Progress"
+        }
+    },
+    "subtitle": {
+        "values": {
+            "en": "Progress indicator"
+        }
+    },
+    "components": [
+        {
+            "id": "paragraph",
+            "type": "paragraph",
+            "label": {
+                "values": {
+                    "en": "We are processing your data"
+                }
+            },
+            "values": {
+                "en": "We are processing your data"
+            }
+        }
+    ],
+    "version": "1"
+}

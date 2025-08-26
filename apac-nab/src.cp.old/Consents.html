@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consolidated Consents</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+  </head>
+  <body id="overlay" onload="subscribeTrustX()">
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation">
+          <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+          <div id="navigation-parent" style="position: relative;">
+            <md-text-button id="progress-expand-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+            <md-menu id="navigation-menu" anchor="navigation-anchor">
+              <!-- Menu items are generated dynamically using JS -->
+            </md-menu>
+          </div>
+        </div>
+        <div>
+          <h1>Privacy notice and consent</h1>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <div class="form-container">
+          <div class="container-body">
+
+            <div class="container-input-header">
+              <p>
+                Our notification, consents and declaration are broken into simple sections below.
+                Please read and agree to these before continuing.
+              </p>
+              <div class="consent-card" onclick="togglePrivacyNotification()">
+                <div class="consent-card-leading-icon">
+                  <i class="material-symbols-outlined">description</i>
+                </div>
+                <div class="consent-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Privacy Notification</h3>
+                  <h4 style="color: #aaa; margin-top: 0; margin-bottom: 8px;">How we use, collect and handle your information.</h4>
+                </div>
+                <div class="consent-card-trailing-icon">
+                  <i class="material-symbols-outlined">chevron_right</i>
+                </div>
+              </div>
+    
+              <div class="consent-card">
+                <div class="consent-card-leading-icon">
+                  <i class="material-symbols-outlined">description</i>
+                </div>
+                <div class="consent-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Electronic Communication Consent</h3>
+                  <h4 style="color: #aaa; margin-top: 0; margin-bottom: 8px;">We'd like to communicate with you electronically.</h4>
+                </div>
+                <div class="consent-card-trailing-icon">
+                  <i class="material-symbols-outlined">chevron_right</i>
+                </div>
+              </div>
+    
+              <div class="consent-card">
+                <div class="consent-card-leading-icon">
+                  <i class="material-symbols-outlined">description</i>
+                </div>
+                <div class="consent-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">Declaration of Accurate Information</h3>
+                  <h4 style="color: #aaa; margin-top: 0; margin-bottom: 8px;">We need you to confirm your financial information is accurate.</h4>
+                </div>
+                <div class="consent-card-trailing-icon">
+                  <i class="material-symbols-outlined">chevron_right</i>
+                </div>
+              </div>
+    
+              <div class="consent-card">
+                <div class="consent-card-leading-icon">
+                  <i class="material-symbols-outlined">description</i>
+                </div>
+                <div class="consent-card-content">
+                  <h3 style="margin-top: 0; margin-bottom: 4px;">NAB Internet Banking Terms and Conditions</h3>
+                  <h4 style="color: #aaa; margin-top: 0; margin-bottom: 8px;">How the use of your NAB app and Internet Banking is governed.</h4>
+                </div>
+                <div class="consent-card-trailing-icon">
+                  <i class="material-symbols-outlined">chevron_right</i>
+                </div>
+              </div>
+              <small>
+                By clicking 'Next', you confirm you have reviewed and agree to th Privacy Notification,
+                Electronic Communication Consent, Declaration of Accurate Information and NAB Internet
+                Banking Terms and Conditions.
+              </small>
+            </div>
+
+            <div class="container-input-section">
+              <div class="consent-privacy" style="display: none;" id="consent-privacy">
+                <h2>Privacy Notification</h2>
+                <p>
+                  In addition to the below, please also read our 
+                  <a href="#">Privacy notification</a>.
+                  These documents contain more detailed information about our collection,
+                  use, and handling of personal information. Our Privacy policy also containes our
+                  Credit Reporting Policy and information about how you can:
+                  <ul>
+                    <li>request access to or the correction of your information</li>
+                    <li>make a privacy-related complaint</li>
+                    <li>
+                      contact the credit reporting bodies we deal with
+                      if you have queries about the information they hold
+                    </li>
+                  </ul>
+                </p>
+                <p>
+                  <b>We may exchange personal information about you with credit reporting bodies</b>
+                </p>
+                <p>
+                  We may obtain credit information about you from credit reporting bodies, 
+                  on one or more occasion, to assess your application or to collect any payment 
+                  that is overdue in relation to credit that we provide as a result of your application. 
+                  If you may a further application for credit within 30 days of us obtaining your credit information from a credit reporting body, 
+                  it may also be used in relation to that subsequent application.
+                </p>
+                <p>
+                  If a NAB Credit account is provided to you as a result of this Application, 
+                  we may disclose information about this to the credit reporting bodies, including:
+                  <ul>
+                    <li>the date the account is opened (and closed)</li>
+                    <li>the account type and credit limit</li>
+                    <li>your repayment history</li>
+                    <li>any temporary or permanent hardship arrangements</li>
+                    <li>any defaults or serious crime infringements</li>
+                  </ul>
+                </p>
+                <p>
+                  When we give your information to a credit reporting body, it may be included in reports 
+                  that the credit reporting body gives other organisations (such as other lenders) to help 
+                  them assess your credit worthiness. More information about your credit information handling 
+                  practices and how to contact the credit reporting bodies is contained in our 
+                  <a href="#">Credit Reporting Policy</a> 
+                  (please refer to Attachment 1 of our <a href="#">Privacy Policy</a>), available on our website or on request).
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="container-bottom">
+        <div>
+          <md-filled-button class="next-button" onClick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <div id="nav">
+      <h2 style="margin-left: 16px; margin-top: 20vh;">Your Progress</h2>
+      <h4 style="margin-left: 16px; margin-right: 16px;">Application 30% complete</h4>
+      <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="card card-success" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">smartphone</i>
+          <h4>Set up your NAB Access</h4>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card card-warning" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">badge</i>
+          <h4>ID Verification</h4>
+        </div>
+        <div class="application-card-icon">
+          <small>In progress</small>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">account_circle</i>
+          <div class="card-content-with-description">
+            <h4>Personal details</h4>
+            <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">payments</i>
+          <div class="card-content-with-description">
+            <h4>Your finances</h4>
+            <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <span class="material-icons">menu</span>
+          <div class="card-content-with-description">
+            <h4>Review your information</h4>
+            <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+      const nav = document.getElementById('nav');
+      const anchor = document.getElementById('progress-expand-anchor');
+      const overlay = document.getElementById('overlay');
+
+      anchor.addEventListener('click', () => {
+        anchor.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+
+
+      var isPrivacyOpen = false
+      let isElectronicCommOpen = false
+      let isDeclarationOfAccuracyOpen = false
+      let isInternetBankingOpen = false
+
+
+      const togglePrivacyNotification = () => {
+        isPrivacyOpen = !isPrivacyOpen
+
+        const $privacy = $('#consent-privacy')
+        const display = isPrivacyOpen ? 'block' : 'none'
+        $privacy.css('display', display)
+      }
+
+
+    </script>
+  </body>
+</html>

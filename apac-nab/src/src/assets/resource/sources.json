@@ -1,0 +1,112 @@
+{
+  "uis": [
+    {
+      "label": "Medicare",
+      "resource": "PageMedicare.html"
+    },
+    {
+      "label": "Medicare (QAS)",
+      "resource": "PageMedicareQas.html"
+    },
+    {
+      "label": "Full Legal Name",
+      "resource": "PageFullLegalName.html"
+    },
+    {
+      "label": "Middle Name",
+      "resource": "PageMiddleName.html"
+    },
+    {
+      "label": "Name",
+      "resource": "PagePreferredName.html"
+    },
+    {
+      "label": "Mobile",
+      "resource": "PageMobile.html"
+    },
+    {
+      "label": "Email",
+      "resource": "PageEmail.html"
+    },
+    {
+      "label": "Otp",
+      "resource": "PageOtp.html"
+    },
+    {
+      "label": "Consents",
+      "resource": "PageConsents.html"
+    },
+    {
+      "label": "Verify Identity Steps",
+      "resource": "PageVerifyIdentitySteps.html"
+    },
+    {
+      "label": "Selfie",
+      "resource": "PageSelfieInstruction.html"
+    },
+    {
+      "label": "Verify in person",
+      "resource": "PageVerifyInPerson.html"
+    },
+    {
+      "label": "Document Selection",
+      "resource": "PageDocumentSelection.html"
+    },
+    {
+      "label": "Additional Document",
+      "resource": "PageAdditionalDocument.html"
+    },
+    {
+      "label": "Drivers Licence",
+      "resource": "PageDriversLicence.html"
+    },
+    {
+      "label": "Drivers Licence (QAS)",
+      "resource": "PageDriversLicenceQas.html"
+    },
+    {
+      "label": "Passport",
+      "resource": "PagePassport.html"
+    },
+    {
+      "label": "Passport (QAS)",
+      "resource": "PagePassportQas.html"
+    },
+    {
+      "label": "Foreign Passport",
+      "resource": "PagePassportForeign.html"
+    },
+    {
+      "label": "Foreign Passport (QAS)",
+      "resource": "PagePassportForeignQas.html"
+    },
+    {
+      "label": "Birth Certificate",
+      "resource": "PageBirthCertificate.html"
+    },
+    {
+      "label": "Birth Certificate (QAS)",
+      "resource": "PageBirthCertificateQas.html"
+    },
+    {
+      "label": "Change Of Name",
+      "resource": "PageChangeOfName.html"
+    },
+    {
+      "label": "Marriage Certifcate",
+      "resource": "PageMarriageCertificate.html"
+    },
+    {
+      "label": "Birthday",
+      "resource": "PageBirthday.html"
+    },
+    {
+      "label": "Onboarding Page",
+      "resource": "PageNewCustomer.html"
+    },
+    {
+      "label": "Generic Form",
+      "resource": "PageGenericForm.html"
+    }
+  ]
+}

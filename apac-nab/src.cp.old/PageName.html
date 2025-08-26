@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preferred Name</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay">
+  <div class="top-navigation" style="display: none;">
+    <a href="./PageName.html"><small>Name</small></a>
+    <a href="PageMobile.html"><small>Mobile</small></a>
+    <a href="PageEmail.html"><small>Email</small></a>
+    <a href="PageOtp.html"><small>OTP</small></a>
+    <a href="PageConsents.html"><small>Consents</small></a>
+    <a href="PageDocumentSelection.html"><small>Doc Selection</small></a>
+    <a href="PageAdditionalDocument.html"><small>Additional Doc</small></a>
+    <a href="PageDriversLicence.html"><small>Review details DL</small></a>
+    <a href="PagePassport.html"><small>Review details PP</small></a>
+    <a href="./09-selfie-capture-instruction.html"><small>Selfie</small></a>
+    <a href="./10-outcome-success.html"><small>Outcome-success</small></a>
+    <a href="./11-outcome-failed.html"><small>Outcome-failed</small></a>
+    <a href="./12-outcome-review.html"><small>Outcome review</small></a>
+    <a href="./09-selfie-capture-instruction.html"><small>Selfie</small></a>
+    <a href="./99-qr-desktop.html"><small>QR Desktop</small></a>
+    <a href="./99-qr-mobile.html"><small>QR Mobile</small></a>
+  </div>
+
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+        <div id="navigation-parent" style="position: relative;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+          <md-menu id="navigation-menu" anchor="navigation-anchor">
+            <!-- Menu items are generated dynamically using JS -->
+          </md-menu>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <div class="container-body">
+          <div class="container-input-header">
+            <div>
+              <h1>What's your preferred name?</h1>
+            </div>
+            <p class="header-text">Our bankers will refer to this name when addressing you.</p>
+          </div>
+          <div class="container-input-section">
+            <md-outlined-text-field id="preferredName" class="input-text" label="Preferred name" type="text" inputmode="text">
+            </md-outlined-text-field>
+            <br />
+            <small>
+              We will use your preferred name and other information you provide
+              for purposes related to assessing your application, interacting with
+              you and verifying your identity. For more information about NAB's
+              personal information handling practices, including how to lodge a
+              privacy related request, enquiry or complaint, please refer to the
+              <a class="privacy-link" href="#">NAB Group Privacy Notification</a>
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div>
+        <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+  <div id="nav">
+    <h2 style="margin-left: 16px; margin-top: 20vh;">Your Progress</h2>
+    <h4 style="margin-left: 16px; margin-right: 16px;">Application 5% complete</h4>
+    <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+      <div class="progress-bar" id="progress-bar" style="width: 5%;"></div>
+    </div>
+    <div class="card card-warning" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">smartphone</i>
+        <h4>Set up your NAB Access</h4>
+      </div>
+      <div class="application-card-icon">
+        <small>In progress</small>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">badge</i>
+        <h4>ID Verification</h4>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">account_circle</i>
+        <div class="card-content-with-description">
+          <h4>Personal details</h4>
+          <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <i class="material-symbols-outlined">payments</i>
+        <div class="card-content-with-description">
+          <h4>Your finances</h4>
+          <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+
+    <div class="card" style="margin-left: 16px; margin-right: 16px;">
+      <div class="card-content">
+        <span class="material-icons">menu</span>
+        <div class="card-content-with-description">
+          <h4>Review your information</h4>
+          <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+        </div>
+      </div>
+      <div class="application-card-icon">
+        <md-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+        </md-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/name.js"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    const anchor = document.getElementById('progress-expand-anchor');
+    const overlay = document.getElementById('overlay');
+
+    anchor.addEventListener('click', () => {
+      anchor.classList.toggle('active');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+      
+    });
+  </script>
+</body>
+
+</html>

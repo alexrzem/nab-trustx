@@ -1,0 +1,19 @@
+{
+    "countryCode": "AU",
+    "service": [
+        "Australia Change of Name Certificate"
+    ],
+    "clientReference": "Test_001",
+    "dateOfBirth": "1959-09-20",
+    "firstName": "Benjamin Paul",
+    "lastName": "MUNFORTE",
+    "identityVariables": {
+        "changeOfNameRegistrationState": "VIC",
+        "changeOfNameCertificateNo": "",
+        "changeOfNameRegistrationNo": "75920",
+        "changeOfNameRegistrationDate": "" 
+    },
+    "consentObtained": {
+        "Australia Change of Name Certificate": true
+    }
+}

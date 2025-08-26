@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review your details</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/pikaday.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+<!--        <md-text-button id="back-button" onclick="dispatchBack()">-->
+<!--          <i class="material-icons">arrow_back</i>-->
+<!--        </md-text-button>-->
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-body">
+      <div class="container-input-header">
+        <h1>Enter your identity document details</h1>
+        <div class="notification-panel notification-panel-info" style="margin-top: 24px;">
+          <div class="notification-icon">
+            <i class="material-symbols-outlined">info</i>
+          </div>
+          <div class="notification-content">
+            Please enter your ID document details exactly as they are on the captured ID document
+          </div>
+        </div>
+      </div>
+      <div class="container-input-section">
+
+        <!-- Conditional - only shown when an error object is passed into the page -->
+        <div class="notification-panel notification-panel-warning" id="dvs-fail-panel" style="margin-top: 24px;">
+          <div class="notification-icon">
+            <i class="material-symbols-outlined">warning</i>
+          </div>
+          <div class="notification-content">
+            <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+              Did we get everything right? 
+            </p>
+            <p>
+              We were unable to verify the identity details provided. Please confirm the information entered/captured is accurate. If we are unable verify this information, we will ask you provide an alternate identity document.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-container">
+          <!--<div class="card-panel" id="sticky">
+          <div class="zoomist-container doc-zoomist">
+            <div class="zoomist-wrapper">
+              <div class="zoomist-image">
+                <img
+                  src="./assets/img/VIC-Driver-Licence-Full.jpg"
+                  alt="Victoria Driver's License"
+                  class="licence-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>-->
+          <div>
+            <h3 class="review-details-section-header">Full legal name</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+            </md-radio>
+            <label class="confirm-label" for="confirm-name">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentFirstName" class="input-text" label="First name" type="text"
+            inputmode="text" style="margin-top: 20px;">
+            <!--onfocus="translateToName()">-->
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMiddleName" class="input-text" label="Middle name/s (if any)" type="text"
+            inputmode="text" supporting-text="Please provide your full middle name.">
+            <!--onfocus="translateToName()">-->
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentLastName" class="input-text" label="Surname" type="text"
+            inputmode="text">
+            <!-- onfocus="translateToName()"> -->
+          </md-outlined-text-field>
+
+
+          <div>
+            <h3 class="review-details-section-header">Date of birth</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+            </md-radio>
+            <label class="confirm-label" for="confirm-dob">Confirm</label>
+          </div>
+
+          <md-outlined-text-field class="input-text" id="documentDateOfBirth" label="Date of birth" type="text"
+            inputmode="text" style="margin-top: 20px;" data-trustx-map-date="true">
+            <!-- onfocus="translateToDOB()"> -->
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+              id="input-dob">event</md-icon>
+          </md-outlined-text-field>
+
+          <div>
+            <h3 class="review-details-section-header">ID document details</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+            </md-radio>
+            <label class="confirm-label" for="confirm-doc-details">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentNumber" class="input-text" label="Document number" type="text"
+            inputmode="text" style="margin-top: 20px;">
+            <!--onfocus="translateToLicNo()">-->
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentClassification" class="input-text" label="Document classification" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentIssuingCountryCode" class="input-text" label="Issuing country code" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentIssuingState" class="input-text" label="Issuing state" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field class="input-text" id="documentDateOfExpiry" label="Date of expiry" type="text"
+            inputmode="text"
+            supporting-text="Input format should be DD/MM/YYYY." data-trustx-map-date="true">
+            <!-- onfocus="translateToLicExp()"> -->
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+              id="input-doe">event</md-icon>
+          </md-outlined-text-field>
+
+
+          <div>
+            <h3 class="review-details-section-header">Address details</h3>
+          </div>
+
+          <div class="radio-confirm">
+            <md-radio id="confirm-address" name="confirm-address" value="confirm-address">
+            </md-radio>
+            <label class="confirm-label" for="confirm-address">Confirm</label>
+          </div>
+          <!-- <md-outlined-text-field id="streetNumber" class="input-text" label="Street Number" type="text"
+            inputmode="text" style="margin-top: 20px;">
+            onfocus="translateToAddress()">
+          </md-outlined-text-field> -->
+          <md-outlined-text-field id="documentAddressStreetAddress" class="input-text" label="Street address" type="text"
+            inputmode="text" style="margin-top: 20px;">
+            <!-- onfocus="translateToAddress()"> -->
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentAddressSuburb" class="input-text" label="Suburb" type="text"
+            inputmode="text">
+            <!-- onfocus="translateToAddress()"> -->
+          </md-outlined-text-field>
+          <md-outlined-select id="documentAddressState" class="input-select review-details-select" label="State"
+            style="margin-bottom: 20px; width: 100%;">
+            <md-select-option value="ACT">
+              <div slot="headline">ACT</div>
+            </md-select-option>
+            <md-select-option value="NSW">
+              <div slot="headline">New South Wales</div>
+            </md-select-option>
+            <md-select-option value="VIC">
+              <div slot="headline">Victoria</div>
+            </md-select-option>
+            <md-select-option value="QLD">
+              <div slot="headline">Queensland</div>
+            </md-select-option>
+            <md-select-option value="WA">
+              <div slot="headline">Western Australia</div>
+            </md-select-option>
+            <md-select-option value="TAS">
+              <div slot="headline">Tasmania</div>
+            </md-select-option>
+            <md-select-option value="SA">
+              <div slot="headline">South Australia</div>
+            </md-select-option>
+            <md-select-option value="NT">
+              <div slot="headline">Northern Territory</div>
+            </md-select-option>
+          </md-outlined-select>
+
+          <md-outlined-text-field id="documentAddressPostalCode" class="input-text" label="Postcode" type="text"
+            inputmode="text">
+            <!-- onfocus="translateToAddress()">-->
+          </md-outlined-text-field>
+
+          <div class="container-bottom">
+            <div>
+              <md-filled-button id="nextButton" class="next-button" onclick="dispatchData()">Next</md-filled-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <script>
+      const currentPage = 'PageGenericForm'
+    </script>
+    <!-- Importing Material Components Web JS -->
+    <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/pikaday.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      // const zoomist = new Zoomist(".doc-zoomist", {
+      //   maxScale: 5,
+      //   slider: false,
+      //   zoomer: false,
+      // });
+
+      // console.log(`zoomist.transform: ${zoomist.transform}`);
+      // console.log(`zoomist.transform: ${zoomist.transform}`);
+      // console.log(`zoomist.data: ${zoomist.data}`);
+
+      // // Scale
+      // const zoomScale = 2;
+      // // Container
+      // const containerWidth = zoomist.data.containerData.width;
+      // const containerHeight = zoomist.data.containerData.height;
+      // console.log(
+      //   `container: { width: ${containerWidth}, height: ${containerHeight} }`
+      // );
+      // // Image
+      // const imageWidth = zoomist.data.imageData.width;
+      // const imageHeight = zoomist.data.imageData.height;
+      // console.log(`image: { width: ${imageWidth}, height: ${imageHeight} }`);
+
+      // // Initial zoom scale
+      // zoomist.zoomTo(1);
+
+      // // scale = 2 | TOP LEFT COORDINATE x: 400, y: 263
+
+      // // VIC DL - name fields
+      // // container width: 800px
+      // // scale 1 | x: 0
+      // // scale 2 | x: 400
+      // // scale 3 | x: 800 (container w)
+      // // scale 4 | x: 1200
+      // // ...
+      // const leftMostX = (containerWidth / 2) * (zoomScale - 1);
+
+      // // scale 1 | y: 0
+      // // scale 2 | x: 263
+      // // scale 3 | x: 527 (container h)
+      // // scale 4 | x: 791
+      // // ...
+      // const topMostY = (containerHeight / 2) * (zoomScale - 1);
+
+      // // normalised (0,0)
+      // let x = leftMostX;
+      // let y = topMostY;
+
+      // const moveRightByWidthPercent = (percent) => {
+      //   // whole number, e.g. moveRightByWidthPercent(50) is 50% of the container width to the right
+      //   x = leftMostX - (percent * containerWidth) / 100;
+      //   console.log(`x: ${x}`);
+      //   zoomist.moveTo({ x: x, y: y });
+      // };
+
+      // const moveDownByHeightPercent = (percent) => {
+      //   // whole number, e.g. moveDownByHighPercent(50) is 50% of the container height down
+      //   y = topMostY - (percent * containerHeight) / 100;
+      //   console.log(`y: ${y}`);
+      //   zoomist.moveTo({ x: x, y: y });
+      // };
+
+      // // moveRightByWidthPercent(100)
+      // // moveDownByHighPercent(100)
+
+      // const mapping = {
+      //   dl: {
+      //     vic: {
+      //       name: {
+      //         width: 0,
+      //         height: 0,
+      //       },
+      //       address: {
+      //         width: 0,
+      //         height: 20,
+      //       },
+      //       dob: {
+      //         width: 50,
+      //         height: 50,
+      //       },
+      //       licno: {
+      //         width: 100,
+      //         height: 0,
+      //       },
+      //       licexp: {
+      //         width: 0,
+      //         height: 60,
+      //       },
+      //       licType: {
+      //         width: 0,
+      //         height: 90,
+      //       },
+      //       licState: {
+      //         width: 50,
+      //         height: 0,
+      //       },
+      //     },
+      //   },
+      // };
+
+      // const resetScale = () => {
+      //   zoomist.zoomTo(1);
+      // };
+
+      // const translate = (coordinate) => {
+      //   zoomist.zoomTo(zoomScale);
+      //   moveRightByWidthPercent(coordinate.width);
+      //   moveDownByHeightPercent(coordinate.height);
+      // };
+
+      // const translateToName = () => translate(mapping.dl.vic.name);
+      // const translateToAddress = () => translate(mapping.dl.vic.address);
+      // const translateToDOB = () => translate(mapping.dl.vic.dob);
+      // const translateToLicNo = () => translate(mapping.dl.vic.licno);
+      // const translateToLicExp = () => translate(mapping.dl.vic.licexp);
+      // const translateToLicType = () => translate(mapping.dl.vic.licType);
+      // const translateToLicState = () => translate(mapping.dl.vic.licState);
+
+
+      // zoomist.on("drag", (zoomist, transform, event) => {
+      //   console.log(
+      //     `drag | transform: {x: ${transform.x}, y: ${transform.y}})`
+      //   );
+      // });
+
+      const thisYear = new Date().getFullYear()
+
+      const dobPicker = new Pikaday({
+        field: document.getElementById("documentDateOfBirth"),
+        format: "DD/MM/YYYY",
+        trigger: document.getElementById("dob-icon"),
+        yearRange: [1900, thisYear],
+        theme: 'month-year-dropdown'
+      });
+
+      const doePicker = new Pikaday({
+        field: document.getElementById("documentDateOfExpiry"),
+        format: "DD/MM/YYYY",
+        trigger: document.getElementById("doe-icon"),
+        yearRange: [thisYear, thisYear + 20],
+        theme: 'month-year-dropdown'
+      });
+
+      // jquery - Out of focus reset scale back to 1
+      // $(() => {
+      //   $("md-outlined-text-field").on('focusout', () => {
+      //     resetScale()
+      //   })
+      // });
+    </script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script type="text/javascript" src="./assets/js/common.js"></script>
+    <script>
+      enableEnterKeyOnButtonId('nextButton');
+    </script>
+    <!-- <script type="text/javascript" src="./assets/js/name.js"></script> -->
+</body>
+
+</html>

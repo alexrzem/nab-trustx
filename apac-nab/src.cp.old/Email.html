@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation">
+          <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+          <div id="navigation-parent" style="position: relative;">
+            <md-text-button id="navigation-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+            <md-menu id="navigation-menu" anchor="navigation-anchor">
+              <!-- Menu items are generated dynamically using JS -->
+            </md-menu>
+          </div>
+        </div>
+        <div>
+          <h1>What's your email address?</h1>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <form class="form-container">
+          <div class="container-body">
+            <div class="container-input-header">
+              <p class="header-text">We'll use your email address to identify your account.</p>
+            </div>
+            <div class="container-input-section">
+              <md-outlined-text-field
+              class="input-text"
+              id="email"
+              label="Email"
+              type="email"
+              inputmode="email"
+              style="margin-bottom: 16px;"
+              required
+            >
+            </md-outlined-text-field>
+            <div class="input-validation-message" id="email-validation" style="display: none;">
+              <small>Please enter a valid email address</small>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <small>We will use this email address to send you a one-time password when you login to your application.</small>
+            </div>
+
+            <div class="checkbox-container" style="margin-top: 64px;">
+              <md-checkbox id="checkbox-mobile" touch-target="wrapper"></md-checkbox>
+              <label for="checkbox-mobile">
+                <small>
+                  I confirm that I would like to suppress OTP to this email address
+                </small>
+              </label>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container-bottom">
+        <div>
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+      const $validationElement = $('#email-validation')
+
+      const isValidEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
+      const validate = () => {
+        const $emailEl = $('#email')
+        const email = $emailEl.val();
+
+        if (!isValidEmail(email)) {
+          console.error("email not valid")
+          $validationElement.css("display", "block")
+        } else {
+          console.log("email valid")
+          $validationElement.css("display", "none")
+        }
+      }
+
+      $("#email").on("input", validate)
+
+    </script>
+  </body>
+</html>

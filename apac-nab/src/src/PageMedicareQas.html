@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicare Form</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/pikaday.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+  <link rel="stylesheet" href="./assets/css/sheet.css"/>
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+<!--        <md-text-button id="back-button" onclick="dispatchBack()">-->
+<!--          <i class="material-icons">arrow_back</i>-->
+<!--        </md-text-button>-->
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="navigation-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-body">
+      <div class="container-input-header">
+        <div>
+          <h1>Confirm your details</h1>
+          <div class="notification-panel notification-panel-info" style="margin-top: 24px;">
+            <div class="notification-icon">
+              <i class="material-symbols-outlined">info</i>
+            </div>
+            <div class="notification-content">
+              Please confirm what we have captured matches your ID details, and add any information that is missing.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-input-section">
+
+        <!-- Conditional - only shown when an error object is passed into the page -->
+        <div class="notification-panel notification-panel-warning" id="dvs-fail-panel" style="margin-top: 24px;">
+          <div class="notification-icon">
+            <i class="material-symbols-outlined">warning</i>
+          </div>
+          <div class="notification-content">
+            <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+              Did we get everything right? 
+            </p>
+            <p>
+              We were unable to verify the identity details provided. Please confirm the information entered/captured is accurate. If we are unable verify this information, we will ask you provide an alternate identity document.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="form-container">
+          <div id="documentNameHeader">
+            <h3 class="review-details-section-header">Full legal name</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+            </md-radio>
+            <label class="confirm-label" for="confirm-name">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentFirstName" class="input-text" label="First name" type="text"
+            error-text="If you do not have a first name, add a hyphen and complete the name in the last name field"
+            inputmode="text" style="margin-top: 20px;">
+            <!--onfocus="translateToName()">-->
+          </md-outlined-text-field>
+
+          <md-outlined-text-field id="documentMiddleName" class="input-text medicareAsPrimaryDoc" label="Middle name (if any)" type="text" 
+            inputmode="text" style="display: none;">
+          </md-outlined-text-field>
+          
+          <md-outlined-text-field id="documentLastName" class="input-text" label="Last name" type="text"
+            inputmode="text">
+            <!-- onfocus="translateToName()"> -->
+          </md-outlined-text-field>
+
+          <div id="medicareMiddleNameRadioContainer">
+            <p>
+              <b class="medicareAsSecondaryDoc">Is your middle name or initial shown on your Medicare card?</b>
+              <b class="medicareAsPrimaryDoc">Does your middle name appear differently on your Medicare card?</b>
+            </p>
+
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="Yes" name="documentMedicareMiddleNamePresent" value="Yes" class="input-radio"></md-radio>
+              </div>
+              <label class="document-type-label" for="Yes">
+                <p>Yes</p>
+              </label>
+            </div>
+
+            <div class="document-type-radio">
+              <div class="document-type-radio-btn">
+                <md-radio id="No" name="documentMedicareMiddleNamePresent" value="No" class="input-radio"></md-radio>
+              </div>
+              <label class="document-type-label" for="No">
+                <p>No</p>
+              </label>
+            </div>
+          </div>
+
+          <div id="documentMiddleNameContainer" style="display: none; margin-top: 20px; margin-bottom: 20px;">
+            <md-outlined-text-field id="documentMedicareMiddleName" class="input-text" label="Middle name or initial" type="text"
+              error-text="Please enter a valid name"
+              supporting-text="Enter your middle name or initial as it appears on your Medicare card."
+              inputmode="text">
+              <!--onfocus="translateToName()">-->
+            </md-outlined-text-field>
+          </div>
+
+          <!-- Commented for NB-536 , DOB moved into PageBirthday -->
+          <!-- <div>
+            <h3 class="review-details-section-header">Date of birth</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+            </md-radio>
+            <label class="confirm-label" for="confirm-dob">Confirm</label>
+          </div>
+
+          <md-outlined-text-field class="input-text" id="documentDateOfBirth" label="Date of birth" type="text"
+            inputmode="text" style="margin-top: 20px;" data-trustx-map-date="true">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="btn-dob">event</md-icon>
+          </md-outlined-text-field> -->
+
+          <div id="documentDetailsHeader">
+            <h3 class="review-details-section-header">Medicare details</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+            </md-radio>
+            <label class="confirm-label" for="confirm-doc-details">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentNumber" class="input-text" label="Medicare number" type="text"
+            inputmode="numeric" style="margin-top: 20px;" supporting-text="The Medicare card number is located above the name(s) on the card.">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMedicareReferenceNo" class="input-text"
+            label="Medicare card reference number" type="text" inputmode="numeric">
+          </md-outlined-text-field>
+
+          <md-outlined-select id="documentMedicareType" class="input-select review-details-select" label="Medicare card type"
+            style="margin-bottom: 20px; width: 100%;">
+            <md-select-option value="G">
+              <div slot="headline">Green</div>
+            </md-select-option>
+            <md-select-option value="Y">
+              <div slot="headline">Yellow</div>
+            </md-select-option>
+            <md-select-option value="B">
+              <div slot="headline">Blue</div>
+            </md-select-option>
+          </md-outlined-select>
+
+          <div id="medicare-expiry-not-green" style="display: none;">
+            <md-outlined-text-field class="input-text documentMedicareValidTo" id="documentMedicareValidToNotGreen" label="Medicare card expiry date (DD/MM/YYYY)"
+              type="text" inputmode="text" data-trustx-map-date="true">
+              <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+                id="btn-expiry">event</md-icon>
+            </md-outlined-text-field>
+          </div>
+          
+          <div id="medicare-expiry-green" style="display: none;">
+            <md-outlined-text-field id="documentMedicareValidTo" class="input-text documentMedicareValidTo" label="Medicare expiry date (MM/YYYY)" type="text" oninput="limitInput(this);"
+              inputmode="numeric" style="margin-bottom: 0;">
+            </md-outlined-text-field>
+          </div>
+
+
+
+          <div id="documentAddressHeader" style="margin-bottom: 20px">
+            <h3 class="review-details-section-header" style="margin-bottom: 10px">Address details</h3>
+            <div>
+              Enter your home address. We can't accept a PO Box.
+            </div>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-address" name="confirm-address" value="confirm-address" class="input-radio">
+            </md-radio>
+            <label class="confirm-label" for="confirm-address">Confirm</label>
+          </div>
+
+          <div id="addressAutocomplete" style="display: block; position: relative;">
+            <md-outlined-text-field
+                    id="addressSearchInput"
+                    class="input-text"
+                    label="Address"
+                    type="text"
+                    inputmode="text"
+                    aria-controls="addressSuggestions"
+                    aria-autocomplete="list"
+                    aria-expanded="false"
+                    role="combobox">
+
+              <md-icon slot="leading-icon"
+                       class="material-icons btn-search"
+                       role="button"
+                       id="search-icon">
+                search
+              </md-icon>
+
+              <md-icon
+                      id="addressClearButton"
+                      onclick="clearNabAddress()"
+                      style="display: none; cursor: pointer; pointer-events: auto"
+                      class="material-icons btn-close"
+                      slot="trailing-icon"
+                      role="button">
+                close
+              </md-icon>
+            </md-outlined-text-field>
+
+            <md-menu
+                    id="addressSuggestions"
+                    role="listbox"
+                    aria-label="Address Suggestions"
+                    style="min-width: 100%">
+            </md-menu>
+          </div>
+
+          <md-text-button class="button-get-another-code" onclick="toggleAddressSearch()" id="addressManualLink">
+            Enter address manually
+          </md-text-button>
+
+
+          <div id="addressForm" style="display: none">
+
+            <md-outlined-select id="documentAddressCountry" class="input-select review-details-select"
+                                label="Country" disabled="true" value="AU"
+                                style="margin-bottom: 24px; width: 100%;">
+              <md-select-option value="AU">
+                <div slot="headline">Australia</div>
+              </md-select-option>
+            </md-outlined-select>
+
+            <md-outlined-text-field id="documentAddressBuildingPropertyName" class="input-text"
+                                    label="Building name (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <!-- Not currently present in requirements or Figma's, but needed for validation and passthrough purposes -->
+            <md-outlined-text-field id="documentAddressLevelNumber" class="input-text"
+                                    label="Level number (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px; display: none;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressUnitNumber" class="input-text"
+                                    label="Flat / Unit number (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressStreetNumber" class="input-text" label="Street number"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;"
+                                    error-text="Please enter your street number">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressStreetName" class="input-text" label="Street Name"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+
+            <md-outlined-select id="documentAddressStreetType" class="input-select review-details-select"
+                                label="Street type"
+                                style="margin-bottom: 24px; width: 100%;">
+            </md-outlined-select>
+
+
+            <md-outlined-text-field id="documentAddressPostalCode" class="input-text" label="Postcode/zip"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressSuburb" class="input-text" label="City/town"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-select id="documentAddressState" class="input-select review-details-select" label="State" style="margin-bottom: 20px; width: 100%;">
+              <md-select-option value="ACT">
+                <div slot="headline">ACT</div>
+              </md-select-option>
+              <md-select-option value="NSW">
+                <div slot="headline">New South Wales</div>
+              </md-select-option>
+              <md-select-option value="NT">
+                <div slot="headline">North Territory</div>
+              </md-select-option>
+              <md-select-option value="QLD">
+                <div slot="headline">Queensland</div>
+              </md-select-option>
+              <md-select-option value="SA">
+                <div slot="headline">South Australia</div>
+              </md-select-option>
+              <md-select-option value="TAS">
+                <div slot="headline">Tasmania</div>
+              </md-select-option>
+              <md-select-option value="VIC">
+                <div slot="headline">Victoria</div>
+              </md-select-option>
+              <md-select-option value="WA">
+                <div slot="headline">Western Australia</div>
+              </md-select-option>
+            </md-outlined-select>
+
+            <div class="notification-panel notification-panel-error" style="margin-bottom: 24px; display: none;"
+                 id="postcodeError">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined error">error</i>
+              </div>
+              <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                  There is a mismatch between state, suburb and/or postcode. Please review and correct
+                  your details.
+                </p>
+              </div>
+            </div>
+
+            <md-text-button class="button-get-another-code" onclick="toggleAddressSearch()">
+              Enter address using quick search
+            </md-text-button>
+          </div>
+
+
+          <!-- <input type="month" id="start" name="start" min="2018-03" value="2018-05" /> -->
+          
+
+          
+        </div>
+
+        <div class="container-bottom">
+          <div>
+            <!-- <md-outlined-button class="branded brand-wlkogan back-button" onclick="dispatchBack()">Back</md-outlined-button> -->
+            <md-text-button class="branded brand-default brand-wlkogan back-button-text" style="visibility: hidden;" onclick="dispatchBack()">Change ID document type</md-text-button>
+          </div>
+          <div>
+            <md-filled-button class="next-button" onclick="validateAndDispatchData()">Next</md-filled-button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const currentPage = 'PageMedicareQas'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/pikaday.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/error.js"></script>
+  <script type="text/javascript" src="./assets/js/validation.js"></script>
+  <script type="text/javascript" src="./assets/js/address-validation.js"></script>
+  <script type="text/javascript" src="./assets/js/address-validation-v2.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/sheet.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script>
+    analyticsSectionName = 'confirm-your-ID-details'
+    pageIdType = 'Medicare Card'
+    // Medicare middle name radio button handler
+    $('#Yes, #No').on('click', (event) => {
+      const selected = event.target.id // 
+      const $middleNameContainerEl = $('#documentMiddleNameContainer')
+      const $middleNameTextEl = $('#documentMedicareMiddleName') // NB-669
+
+      if (selected.toLowerCase() === 'yes') {
+        $middleNameContainerEl.css('display', 'flex')
+      } else {
+        $middleNameContainerEl.css('display', 'none')
+        // explicitly setting the value of the middle name to an empty string
+        $middleNameTextEl.val('')
+      }
+    });
+  </script>
+  <script>
+
+    // Handle expiry date
+    const $medicareGreenExpiryDivEl = $('#medicare-expiry-green')
+    const $medicareNotGreenExpiryDivEl = $('#medicare-expiry-not-green')
+    const $medicareTypeEl = $('#documentMedicareType')
+
+    // Display expiry date if documentMedicareType is not empty onload
+    const showExpiryDateInput = (medicareType) => {
+      if (medicareType === 'G') {
+        $medicareGreenExpiryDivEl.css('display', 'block')
+        $medicareNotGreenExpiryDivEl.css('display', 'none')
+      } else {
+        $medicareGreenExpiryDivEl.css('display', 'none')
+        $medicareNotGreenExpiryDivEl.css('display', 'block')
+      }
+    }
+
+    // Dynamically display expiry date on input change
+    $medicareTypeEl.on('change', (event) => {
+      const selectedMedicareType = event.target.value
+      console.log(selectedMedicareType)
+      showExpiryDateInput(selectedMedicareType)
+    })
+
+    // Limit green medicare input
+    const limitInput = (e) => {
+      const MAX_CHAR = 7;
+      e.value = e.value.toString().slice(0, MAX_CHAR);
+    };
+
+
+    // Green medicare validation
+    const BACKSPACE_EVENT_CODE = 8
+
+    // Expiry date - add forward slash to follow MM/YYYY format
+    const $expiryTextEl = $('#documentMedicareValidTo')
+    $expiryTextEl.on('keyup', (e) => {
+      if (e.which !== BACKSPACE_EVENT_CODE) {
+        let expiryStr = $expiryTextEl.val();
+        let len = expiryStr.length;
+        if (len === 2) {
+          expiryStr += '/'
+          $expiryTextEl.val(expiryStr)
+        }
+      }
+    })
+
+    // Expiry date - validation
+    //const $validationElement = $('#medicare-green-expiry-validation');
+    // const checkValidMedicareGreenExpiry = (value) => {
+    //   const regex = /^(1[0-2]|0[1-9])\/(20\d{2})$/;
+    //   const matching = regex.test(value);
+    //   return matching;
+    // }
+
+    // const validate = () => {
+    //   const value = $expiryTextEl.val()
+
+    //   if (!checkValidMedicareGreenExpiry(value)) {
+    //     $validationElement.css("display", "block")
+    //   } else {
+    //     $validationElement.css("display", "none")
+    //   }
+    // }
+
+    function isInPast(dateStr, format, cardType) {
+      let inPastFlag = false
+      let date = ''
+      let today = ''
+      if (cardType === 'G') {
+        date = moment(dateStr, format, true).endOf('month'); // strict parsing
+        today = moment().endOf('month').startOf('day'); // midnight today
+      }
+      else {
+        date = moment(dateStr, format, true).startOf('day'); // strict parsing
+        today = moment().startOf('day'); // midnight today
+      }
+
+      return date.isValid() && date.isBefore(today, 'day');
+    }
+
+    const validateGreenMedicare = () => {
+
+      const MEDICARE_GREEN_DATE_FMT = 'MM/YYYY'
+      const cardType = $('#documentMedicareType').val()
+      const greenMedicareExpiryDateEl = $('#documentMedicareValidTo')
+      const greenMedicareExpiryDate = greenMedicareExpiryDateEl.val()
+      
+      const expiryDate = moment(greenMedicareExpiryDate, MEDICARE_GREEN_DATE_FMT, true);
+      if (!expiryDate.isValid()) {
+        setError(greenMedicareExpiryDateEl, ERROR_MEDICARE_GREEN_INVALID_DATE_FMT)
+        removeIdFromValidatedMatrix('documentMedicareValidTo')
+      } else {
+        if (isInPast(greenMedicareExpiryDate, MEDICARE_GREEN_DATE_FMT, cardType)) {
+          setError(greenMedicareExpiryDateEl, ERROR_MEDICARE_PAST_DATE)
+          removeIdFromValidatedMatrix('documentMedicareValidTo')
+        }
+        else if(!isMedicareCardValid(cardType, greenMedicareExpiryDate)) {        
+          const errMsg = ERROR_MEDICARE_GREEN_INVALID_DATE_RANGE
+          console.log(errMsg)
+          setError(greenMedicareExpiryDateEl, errMsg)
+          removeIdFromValidatedMatrix('documentMedicareValidTo')
+        } else {
+          removeError(greenMedicareExpiryDateEl)
+          currentlyValidatedMatrix.add('documentMedicareValidTo')
+        }
+      }
+    }
+
+
+    const validateNotGreenMedicare = () => {
+      const MEDICARE_NOT_GREEN_DATE_FMT = 'DD/MM/YYYY'
+      const cardType = $('#documentMedicareType').val()
+      const notGreenMedicareExpiryDateEl = $('#documentMedicareValidToNotGreen')
+      const notGreenMedicareExpiryDate = notGreenMedicareExpiryDateEl.val()
+
+      const expiryDate = moment(notGreenMedicareExpiryDate, MEDICARE_NOT_GREEN_DATE_FMT, true);
+
+      if (!expiryDate.isValid()) {
+        setError(notGreenMedicareExpiryDateEl, ERROR_MEDICARE_NOT_GREEN_INVALID_DATE_FMT)
+        removeIdFromValidatedMatrix('documentMedicareValidTo')
+      }
+      else {
+        if (isInPast(notGreenMedicareExpiryDate, MEDICARE_NOT_GREEN_DATE_FMT, cardType)) {
+          setError(notGreenMedicareExpiryDateEl, ERROR_MEDICARE_PAST_DATE)
+          removeIdFromValidatedMatrix('documentMedicareValidTo')
+        } else if(!isMedicareCardValid(cardType, notGreenMedicareExpiryDate)) {        
+        const errMsg = cardType === 'B' ? ERROR_MEDICARE_BLUE_INVALID_DATE_RANGE : ERROR_MEDICARE_YELLOW_INVALID_DATE_RANGE
+        console.log(errMsg)
+        setError(notGreenMedicareExpiryDateEl, errMsg)
+        removeIdFromValidatedMatrix('documentMedicareValidTo')
+        } else {
+          removeError(notGreenMedicareExpiryDateEl)
+          currentlyValidatedMatrix.add('documentMedicareValidTo')
+        }
+      }
+    }
+
+    function isMedicareCardValid(cardType, expiryDateStr) {
+    const currentDate = moment();
+    let expiryDate;
+    let maxValidityDate;
+
+    switch (cardType.toUpperCase()) {
+      case 'B':
+        expiryDate = moment(expiryDateStr, 'DD/MM/YYYY', true).endOf('day');
+        maxValidityDate = currentDate.clone().add(1, 'years').endOf('day');
+        break;
+      case 'Y':
+        expiryDate = moment(expiryDateStr, 'DD/MM/YYYY', true).endOf('day');
+        maxValidityDate = currentDate.clone().add(2, 'years').endOf('day');
+        break;
+      case 'G':
+        expiryDate = moment(expiryDateStr, 'MM/YYYY', true).endOf('month');
+        maxValidityDate = currentDate.clone().add(5, 'years').endOf('month');
+        break;
+      default:
+        throw new Error('Invalid card type');
+    }
+
+    console.log('Current Date' + currentDate)
+    console.log('Expiry Date' + maxValidityDate)
+    console.log('MaxValidity Date' + maxValidityDate)
+    // Check if expiry date is within the validity period from today
+    return expiryDate.isSameOrBefore(maxValidityDate) && expiryDate.isSameOrAfter(currentDate);
+  }
+
+    // NB-650 fix medicare expiry validation
+    const validateMedicareValidTo = () => {
+      if ($('#medicare-expiry-green').css('display') !== 'none') { // Medicare green displayed
+        validateGreenMedicare()
+      } else {
+        validateNotGreenMedicare()
+      }
+    }
+
+    $(".documentMedicareValidTo").on("blur", validateMedicareValidTo)
+    // $("#documentMedicareValidTo").on("input", validateGreenMedicare)
+    // $("#documentMedicareValidToNotGreen").on("input", validateNotGreenMedicare)
+
+
+    // Date picker
+    const thisYear = new Date().getFullYear()
+    const twoYearsAgo = new Date(new Date().setFullYear(thisYear - 2 ))
+
+    const dobPicker = new Pikaday({
+      field: document.getElementById("documentDateOfBirth"),
+      format: "DD/MM/YYYY",
+      yearRange: [1900, thisYear],
+      maxDate: new Date(),
+      theme: 'month-year-dropdown',
+      keyboardInput: false,
+    });
+
+    const doePicker = new Pikaday({
+      field: document.getElementById("documentMedicareValidToNotGreen"),
+      format: "DD/MM/YYYY",
+      yearRange: [twoYearsAgo, thisYear + 20],
+      minDate: twoYearsAgo,
+      theme: 'month-year-dropdown',
+      keyboardInput: false,
+      onSelect: function(date) {
+        validateNotGreenMedicare()
+      }
+    });
+
+
+  </script>
+  <script>
+
+    // Validation
+
+    let bypassValidation = false
+    let medicareAsPrimaryDoc = false
+
+    processCallback = (sessionData, constants) => {
+      this.sessionData = sessionData;
+
+      brand = sessionData.idv.config?.brand ?? 'default';
+      if (!customisedBrands.includes(brand))
+        brand = 'default'
+
+      // If we get docAuthBypass from the process, then we always enable Next button
+      const isUiValidationBypassedStr = sessionData.idv.config.uiValidationBypass ?? ''
+      if (isUiValidationBypassedStr !== '' && isUiValidationBypassedStr != '0') {
+        bypassValidation = true
+      }
+
+      if (sessionData.idv.doc2?.documentMedicareType) {
+        showExpiryDateInput(sessionData.idv.doc2?.documentMedicareType)
+      }
+
+      // NB-644 Check when to present middle name field
+      const idv = sessionData?.idv
+      const isOverEighteen = sessionData?.isOverEighteen ?? true
+      const idValidated = idv?.decider?.idValidated ?? 0
+      const consistentDocumentActive = idv?.consistentDocumentActive ?? false
+
+      if (!consistentDocumentActive && !isOverEighteen && idValidated < 1) {
+        $('.medicareAsPrimaryDoc').css('display', 'flex')
+        $('.medicareAsSecondaryDoc').css('display', 'none')
+        medicareAsPrimaryDoc = true
+      } else {
+        $('.medicareAsPrimaryDoc').css('display', 'none')
+        $('.medicareAsSecondaryDoc').css('display', 'flex')
+      }
+
+      const navigatedFromDocSelection = sessionData?.idv?.navigatedFromDocSelection ?? false
+      if(navigatedFromDocSelection) {
+        console.log('Navigated From DS') //TODO Remove Log, after diagnosis
+        attemptOcrAddressFind();
+      } else {
+        console.log('Not Navigated From DS') //TODO Remove Log, after diagnosis
+      }
+
+      //TODO Extract to method   
+      if (consistentDocumentActive) {
+        try {
+        //This is when need to validate matrix has to get rid
+        //of 'addressSearchInput' as control flow to this block means its gonna be manual address
+        const newNeedToValidateMatrix = new Set(needToValidateMatrix)
+        console.log('Remove addressSearchInput from needToValidateMatrix')
+        newNeedToValidateMatrix.delete('addressSearchInput')
+        needToValidateMatrix = newNeedToValidateMatrix;
+        } catch (error) {
+            console.log('Error during delete addressSearchInput from needtovalidatematrix' + e)
+        }        
+      }
+         
+    }
+
+    // Field-level validation
+    const validateInputFields = (idToCheck) => {
+
+	  //Name
+      let middleNameElt = ''
+      if(medicareAsPrimaryDoc) {
+        middleNameElt = 'documentMiddleName'
+      } else {
+        middleNameElt = 'documentMedicareMiddleName'
+      }
+
+      if (idToCheck === undefined || idToCheck === 'documentFirstName')
+        validateFirstName($('#documentFirstName'), $('#' + middleNameElt), $('#documentLastName'))
+
+      // NB-780 ensure both medicare middle name gets validated
+      validateMiddleName($('#documentMiddleName'))
+      validateMiddleName($('#documentMedicareMiddleName'))
+        
+      if (idToCheck === undefined || idToCheck === 'documentLastName')
+        validateLastName($('#documentLastName'), $('#' + middleNameElt), $('#documentFirstName'))
+
+
+      // Document
+      if (idToCheck === undefined || idToCheck === 'documentNumber')
+        validateMedicareNumber($('#documentNumber'))
+      if (idToCheck === undefined || idToCheck === 'documentMedicareReferenceNo')
+        validateMedicareReferenceNumber($('#documentMedicareReferenceNo'))
+      if (idToCheck === undefined || idToCheck === 'documentMedicareType')
+        validateMedicareType($('#documentMedicareType'))
+
+
+      // Dates
+      // validateDOB($('#documentDateOfBirth')) Commented for NB-536
+      // validateMedicareValidTo($('#documentMedicareValidTo'))
+      // validateMedicareValidTo($('#documentMedicareValidToNotGreen'))
+      
+      // NB-650 fix medicare expiry validation
+      // Medicare valid expiry logic is handled separately on the input-by-input basis
+      if (idToCheck === undefined)
+        validateMedicareValidTo()
+
+      // Address validation is done separately for the individual fields to avoid duplicated logic
+      if (idToCheck === undefined)
+        validateAddressFields();
+
+      // Validate input matrix - only if docAuthBypass is not used or set to 0
+      if (!bypassValidation) {
+        return validateInputs()
+      }
+
+      return true
+    }
+
+    function validateAndDispatchData() {
+      if (validateInputFields())
+        dispatchData({documentAddressStreetAddress: getDataZooAddress()}); // NB-777 
+    }
+
+    // Also check general validity
+    $(".input-text, .input-select, md-radio").on("change input", (event) => {
+        validateInputFields(event.target.id)
+    })
+
+    handleFieldBlurAndRecordErrorForAnalytics(analyticsSectionName)
+
+    onFocusKeepElementsInView();
+  </script>
+</body>
+
+</html>

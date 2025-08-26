@@ -1,0 +1,1070 @@
+{
+  "payloads": [
+    {
+      "name": "medicare-as-primary",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "selectedDocType": "passport",
+            "assisted": "1",
+            "role": "banker",
+            "isOverEighteen": false,
+            "idv": {
+              "decider": {
+                "idValidated": 0
+              },
+              "consistentDocumentActive": false,
+              "documentAttempt": 0,
+              "documentAttemptMatrix": {
+                "passport": {
+                  "totalAttempts": 0
+                },
+                "dl": {
+                  "totalAttempts": 0
+                },
+                "medicare": {
+                  "totalAttempts": 0
+                }
+              },
+              "config": {
+                "brand": "wlkogan",
+                "consistentDocumentHide": true,
+                "consistentDocumentFields": [
+                  "documentFirstName",
+                  "documentLastName",
+                  "documentMiddleName",
+                  "documentDateOfBirth",
+                  "documentAddressStreetAddress",
+                  "documentAddressSuburb",
+                  "documentAddressPostalCode",
+                  "documentAddressState"
+                ],
+                "isSwitched": true,
+                "analyticsurl": "https://google.com"
+              },
+              "doc2": {
+                "documentFirstName": "John",
+                "documentMiddleName": "Michael",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentCardNumber": "1111111111",
+                "documentDateOfBirth": "1999-01-01",
+                "documentDateOfExpiry" : "2034-01-01",
+                "documentAddressStreetAddress":"12 Braddon St",
+                "documentAddressSuburb": "Braddon",
+                "documentAddressPostalCode": "2612",
+                "documentAddressState": "NSW",
+                "documentIssuingState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+        {
+      "name": "medicare-as-secondary",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "selectedDocType": "passport",
+            "assisted": "1",
+            "role": "banker",
+            "isOverEighteen": false,
+            "idv": {
+              "decider": {
+                "idValidated": 1
+              },
+              "consistentDocumentActive": true,
+              "documentAttempt": 0,
+              "documentAttemptMatrix": {
+                "passport": {
+                  "totalAttempts": 0
+                },
+                "dl": {
+                  "totalAttempts": 0
+                },
+                "medicare": {
+                  "totalAttempts": 0
+                }
+              },
+              "config": {
+                "brand": "wlkogan",
+                "consistentDocumentHide": true,
+                "consistentDocumentFields": [
+                  "documentFirstName",
+                  "documentLastName",
+                  "documentMiddleName",
+                  "documentDateOfBirth",
+                  "documentAddressStreetAddress",
+                  "documentAddressSuburb",
+                  "documentAddressPostalCode",
+                  "documentAddressState"
+                ],
+                "isSwitched": true,
+                "analyticsurl": "https://google.com"
+              },
+              "doc2": {
+                "documentFirstName": "John",
+                "documentMiddleName": "Michael",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentCardNumber": "1111111111",
+                "documentDateOfBirth": "1999-01-01",
+                "documentDateOfExpiry" : "2034-01-01",
+                "documentAddressStreetAddress":"12 Braddon St",
+                "documentAddressSuburb": "Braddon",
+                "documentAddressPostalCode": "2612",
+                "documentAddressState": "NSW",
+                "documentIssuingState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "total-attempt-2-consistentDocumentActive",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "selectedDocType": "passport",
+            "assisted": "1",
+            "role": "banker",
+            "idv": {
+              "consistentDocumentActive": true,
+              "documentAttempt": 1,
+              "documentAttemptMatrix": {
+                "passport": {
+                  "totalAttempts": 1
+                },
+                "dl": {
+                  "totalAttempts": 1
+                },
+                "medicare": {
+                  "totalAttempts": 1
+                }
+              },
+              "config": {
+                "brand": "wlkogan",
+                "consistentDocumentHide": true,
+                "consistentDocumentFields": [
+                  "documentFirstName",
+                  "documentLastName",
+                  "documentMiddleName",
+                  "documentDateOfBirth",
+                  "documentAddressStreetAddress",
+                  "documentAddressSuburb",
+                  "documentAddressPostalCode",
+                  "documentAddressState",
+                  "addressManualLink",
+                  "addressAutocomplete"
+                ],
+                "isSwitched": true,
+                "analyticsurl": "https://google.com"
+              },
+              "doc2": {
+                "documentFirstName": "John",
+                "documentMiddleName": "Michael",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentCardNumber": "1111111111",
+                "documentDateOfBirth": "1999-01-01",
+                "documentDateOfExpiry" : "2034-01-01",
+                "documentAddressStreetAddress":"12 Braddon St",
+                "documentAddressSuburb": "Braddon",
+                "documentAddressPostalCode": "2612",
+                "documentAddressState": "NSW",
+                "documentIssuingState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "otp-get-code",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            },
+            "otpType": "mobile"
+          },
+          "sessionData": {
+            "otpCounter": 0,
+            "idv": {
+              "doc2": {
+                "phoneNumber": "0499030225"
+              },
+              "isIncorrectOtp": true,
+              "isNewOtpGenerated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "otp-type",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            },
+            "otpType": "email"
+          },
+          "sessionData": {
+            "otpCounter": 1,
+            "idv": {
+              "doc2": {
+                "phoneNumber": "0499030225"
+              },
+              "config": {
+                "brand": "NAB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "otp-counter-1",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "otpCounter": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "new-configurable-doc-type",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "idv": {
+              "config": {
+                "supportedAdditionalDocumentTypes": ["medicare", "immiCard", "birthCertificate"]
+              },
+              "selectedDocumentType": "foreignPassport",
+              "isManualInput": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "doc-selection-attempt-1",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "isOverEighteen": false,
+            "idVerifiedOnline": true,
+            "usedDocumentList": ["passport"],
+            "idv" : {
+              "config": {
+                "brand": "NAB",
+                "supportedAdditionalDocumentTypes": ["medicare", "birthCertificate"]
+              },
+              "documentAttempt" : 1,
+              "totalAttempt": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-Banker",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "role": "banker",
+            "selectedDocumentType": "foreignPassport",
+            "isManualInput": true
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-self-serve",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "flowType": "banker"
+          }
+        }
+      }
+    },
+    {
+      "name": "koganBrand-selfServe",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "idv": {
+              "config": {
+                "channel": "selfServe",
+                "brand": "wlkogan"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "unsecuredLending-selfServe",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "idv": {
+              "config": {
+                "channel": "selfServe",
+                "productFamily": "Unsecured Lending CC"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "equityLending-selfServe",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "idv": {
+              "config": {
+                "channel": "selfServe",
+                "productFamily": "NAB Equity Lending"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "brandDefault-selfServe",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "idv": {
+              "config": {
+                "channel": "selfServe",
+                "brand": ""
+              }
+            }
+          }
+        }
+      }
+    },    
+    {
+      "name": "assistedChannel-Client",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","change-of-name"],
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "flowType" : "client"
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-ChangeOfName",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","change-of-name"],
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "flowType" : "demo-name-change-1"
+          }
+        }
+      }
+    },
+    {
+      "name": "post-dvs-return-to-form-documentAttempt-0",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "selectedDocType": "passport",
+            "assisted": "1",
+            "role": "banker",
+            "idv": {
+              "navigatedFromDocSelection": true,
+              "documentAttemptMatrix": {
+                "passport": {
+                  "totalAttempts": 0
+                },
+                "dl": {
+                  "totalAttempts": 0
+                }
+              },
+              "config": {
+                "docAuthBypass": "1"
+              },
+              "doc": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentCardNumber": "111111111",
+                "documentDateOfBirth": "1999-01-01",
+                "documentDateOfExpiry" : "2034-01-01",
+                "documentAddressStreetAddress":"12 Braddon St",
+                "documentAddressSuburb": "Braddon",
+                "documentAddressPostalCode": "2612",
+                "documentAddressState": "NSW",
+                "documentIssuingState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "post-dvs-return-to-form-documentAttempt-1",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "selectedDocType": "passport",
+            "assisted": "1",
+            "role": "banker",
+            "idv": {
+              "navigatedFromDocSelection": true,
+              "documentAttemptMatrix": {
+                "passport": {
+                  "totalAttempts": 1
+                },
+                "dl": {
+                  "totalAttempts": 1
+                }
+              },
+              "config": {
+              },
+              "doc2": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentCardNumber": "1111111111",
+                "documentDateOfBirth": "1999-01-01",
+                "documentDateOfExpiry" : "2034-01-01",
+                "documentAddressStreetAddress":"12 Braddon St",
+                "documentAddressSuburb": "Braddon",
+                "documentAddressPostalCode": "2612",
+                "documentAddressState": "NSW",
+                "documentIssuingState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "confirm-prepopulate-OCRable-doc",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "role": "banker",
+            "documentAttempt": 0,
+            "idv": {
+              "doc": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentAddressState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "confirm-prepopulate-OCRable-doc2",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "role": "banker",
+            "documentAttempt": 1,
+            "idv": {
+              "doc2": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentAddressState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "confirm-prepopulate-manual-doc",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "role": "banker",
+            "documentAttempt": 0,
+            "idv": {
+              "doc": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentAddressState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "confirm-prepopulate-manual-doc2",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "assisted": "1",
+            "role": "banker",
+            "documentAttempt": 0,
+            "idv": {
+              "doc2": {
+                "documentFirstName": "John",
+                "documentLastName": "Smith",
+                "documentNumber": "11111111",
+                "documentAddressState": "NSW"
+              }
+            }
+          }
+        }
+      }
+    },
+    {"name": "assistedChannel-ChangeOfName-withDoc",
+    "data":
+    {
+      "command": "PROCESS",
+      "variables": {
+        "constants": {
+          "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+          "language": "en",
+          "screenId": "custom-page",
+          "screens": [
+            "custom-page"
+          ],
+          "timeoutInSeconds": 270,
+          "assistedChannels": ["assisted","value"],
+          "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+        },
+        "sessionData": {
+          "channel": "assisted",
+          "flowType" : "demo-name-change-1",
+          "passportType": "foreign-passport",
+          "attempt" : "1",
+          "documentHistory": {
+            "DRIVERS_LICENSE": "AU Driver's License",
+            "PASSPORT": "AU Passport",
+            "ID_CARD": "AU Medicare",
+            "OTHER": "Foreign Passport"
+          },
+          "idv": {
+            "documentKey": "doc1",
+            "attemptNo": 2,
+            "availableDocumentTypes": {
+              "DRIVERS_LICENSE": "AU Driver's License",
+              "PASSPORT": "AU Passport",
+              "ID_CARD": "AU Medicare",
+              "OTHER": "Foreign Passport"
+            },
+            "doc": {
+              "documentNumber": "P123455677",
+              "documentFirstName": "Homer",
+              "documentMiddleName": "",
+              "documentLastName": "Simpson",
+              "documentDateOfBirth": "1956-05-12",
+              "documentIssuingState": "Australia",
+              "documentDateOfExpiry": "2025-01-12",
+              "documentAddressStreetAddress": "1 lonely lane",
+              "documentAddressStreetType": "",
+              "documentAddressSuburb": "Kingston",
+              "documentAddressPostalCode": "2905",
+              "documentCountry": "Australia",
+              "documentType": "PASSPORT",
+              "documentCardNumber": "CAC1234",
+              "documentClassification": "Australian Passport",
+              "documentType" : "Australian Passport"
+            }
+          }
+        }
+      }
+    }},
+    {
+     "name": "assistedChannel-ChangeOfName-with-parsed",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","value"],
+            "changeOfNameFlowTypes": "changeOfName",
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "flowType": "changeOfName1",
+            "channel": "assisted",
+            "documentHistory": {
+              "DRIVERS_LICENSE": "AU Driver's License",
+              "PASSPORT": "AU Passport",
+              "ID_CARD": "AU Medicare",
+              "OTHER": "Foreign Passport"
+            },
+            "parsedDocument": {
+              "documentNumber": "P123455677",
+              "documentFirstName": "Homer",
+              "documentMiddleName": "",
+              "documentLastName": "Simpson",
+              "documentDateOfBirth": "1956-05-12",
+              "documentIssuingState": "Australia",
+              "documentDateOfExpiry": "2025-01-12",
+              "documentAddressStreetAddress": "1 lonely lane",
+              "documentAddressStreetType": "",
+              "documentAddressSuburb": "Kingston",
+              "documentAddressPostalCode": "2905",
+              "documentCountry": "Australia",
+              "documentType": "PASSPORT",
+              "documentCardNumber": "CAC1234",
+              "documentClassification": "Australian Passport"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "mock-address-validation",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","value"],
+            "changeOfNameFlowTypes": "changeOfName",
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "nabAddressServiceBaseUrl":  "https://sit1.customer.api.extnp.national.com.au",
+            "nabAddressSearchUrl": "/v1/party/addresses/search",
+            "nabAddressGetUrl": "/v1/party/addresses",
+            "nabAddressValidateUrl": "/v1/party/addresses/validate",
+
+            "idv": {
+              "dataZooAddressFormat": "",
+              "config": {
+                "openAPIToken": "AT.Q4zns5r78TXpQVNanxJc61BP9nrJVtMTomsiuaj6t-g"
+              },
+              "doc": {
+                "documentNumber": "P123455677",
+                "documentFirstName": "Homer",
+                "documentMiddleName": "",
+                "documentLastName": "Simpson",
+                "documentDateOfBirth": "1956-05-12",
+                "documentIssuingState": "Australia",
+                "documentDateOfExpiry": "2025-01-12",
+                "documentAddressStreetAddress": "1 lonely lane",
+                "documentAddressStreetType": "",
+                "documentAddressSuburb": "Kingston",
+                "documentAddressPostalCode": "2905",
+                "documentCountry": "Australia",
+                "documentType": "PASSPORT",
+                "documentCardNumber": "CAC1234",
+                "documentClassification": "Australian Passport"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

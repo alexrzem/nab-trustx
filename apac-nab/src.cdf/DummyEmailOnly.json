@@ -1,0 +1,45 @@
+{
+    "title": {
+        "values": {
+            "en": "Enter your email"
+        }
+    },
+    "subtitle": {
+        "values": {
+            "en": ""
+        }
+    },
+    "components": [
+        {
+            "type": "email",
+            "id": "email",
+            "label": {
+                "values": {
+                    "en": "Email Address"
+                }
+            },
+            "default": "",
+            "validate": {
+                "required": true,
+                "minLength": 5,
+                "maxLength": 100,
+                "missingMessage": {
+                    "values": {
+                        "en": "Please enter your email"
+                    }
+                },
+                "invalidMessage": {
+                    "values": {
+                        "en": "Please enter a valid email address"
+                    }
+                },
+                "invalidLengthMessage": {
+                    "values": {
+                        "en": "Email must be between 5 and 100 characters"
+                    }
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

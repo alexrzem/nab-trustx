@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Consolidated Consents</title>
+    <!-- Importing Material Components Web -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+          rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import {styles as typescaleStyles} from "@material/web/typography/md-typescale-styles.js";
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <script type="text/javascript" src="./assets/js/consents.js"></script>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> -->
+    <!-- <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+    <link rel="stylesheet" href="./assets/css/main.css"/>
+    <link rel="stylesheet" href="./assets/css/consents.css"/>
+    <link rel="stylesheet" href="./assets/css/progress-expand.css"/>
+</head>
+
+<body id="overlay">
+<div class="container">
+    <div class="container-top">
+        <div class="container-top-navigation" style="visibility: hidden;">
+            <md-text-button id="back-button" onclick="dispatchBack()">
+                <i class="material-icons">arrow_back</i>
+            </md-text-button>
+            <div id="navigation-parent" style="position: relative; visibility: hidden;">
+                <md-text-button id="progress-expand-anchor">
+                    <i class="material-icons right">checklist_rtl</i>
+                </md-text-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-content">
+        <div class="form-container">
+            <div class="container-body">
+
+                <div class="container-input-header" id="container-input-header">
+                    <h1>Privacy notice and consent</h1>
+                    <p>
+                        Our notification, consents and declaration are broken into simple sections below.
+                        Please read and agree to these before continuing.
+                    </p>
+                </div>
+
+                <div class="container-input-section privacy-slide-container" id="privacy-slide-container">
+                    <div class="consent-card-slide-container" id="consent-card-slide-container">
+
+                        <div id="consent-cards">
+
+                        </div>
+
+                        <small class="branded brand-default">
+                            By clicking 'Next', you confirm you have reviewed and
+                            agree to the Privacy Notice, Electronic Communications
+                            Consent, Declaration of Accurate Information and NAB
+                            Internet Banking Terms and Conditions.
+                        </small>
+
+                        <small class="branded brand-wlkogan" style="display: none">
+                            By clicking 'Next', you confirm you have reviewed and agree to the Privacy Notice,
+                            Electronic Communication Consent,
+                            Declaration of Accurate Information, and Kogan Money Credit Cards
+                            Terms and Conditions.
+                        </small>
+
+                    </div>
+                </div>
+
+                <div id="consent-panels" style="display: contents;">
+<!--                    <div class="consent-content" id="privacy-slide-in">-->
+<!--                        <div class="consent-content-left">-->
+<!--                            <div class="consent-item-header">-->
+<!--                                <h1 style="margin-top: 0">Privacy Notice</h1>-->
+<!--                            </div>-->
+
+<!--                            <div id="form-privacy">-->
+<!--                                <div class="branded brand-default">-->
+<!--                                    <p>-->
+<!--                                        Any information you provide is collected in accordance with <a class="nab-link"-->
+<!--                                                                                                       href="https://www.nab.com.au/common/privacy-policy/privacy-notification"-->
+<!--                                                                                                       target="_blank">NAB's-->
+<!--                                        Privacy Notification</a> and <a class="nab-link"-->
+<!--                                                                        href="https://www.nab.com.au/common/privacy-policy?own_cid=shortURL:privacy"-->
+<!--                                                                        target="_blank">NAB's Privacy Policy</a>-->
+<!--                                    </p>-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; start &ndash;&gt;-->
+<!--                                <div class="branded brand-wlkogan" style="display: none">-->
+
+<!--                                    <p>-->
+<!--                                        We will securely use and disclose the information you provide in this-->
+<!--                                        application for purposes-->
+<!--                                        related to assessing the application and administering any resultant products.-->
+<!--                                        Please refer to the <a class="nab-link"-->
+<!--                                                               href="https://koganmoney.com.au/credit-cards/important-information/"-->
+<!--                                                               target="_blank"> Kogan Money Credit Card-->
+<!--                                        Privacy Notification</a> for information about our personal information handling-->
+<!--                                        practices.-->
+<!--                                        This notification also contains information about how you can:-->
+<!--                                    <ul>-->
+<!--                                        <li>request access to or the correction of your information</li>-->
+<!--                                        <li>make a privacy-related complaint.</li>-->
+<!--                                        <li>-->
+<!--                                            contact the credit reporting bodies we deal with-->
+<!--                                            if you have queries about the information they hold-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        <b>We may exchange personal information about you with credit reporting bodies-->
+<!--                                            and other credit-->
+<!--                                            providers</b>-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        Kogan Money Credit Cards are issued by NAB (AFSL and Australian Credit Licence-->
+<!--                                        230686). In this-->
+<!--                                        section, ‘we’ and ‘our’-->
+<!--                                        means NAB.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        Please carefully read the below and refer to our Credit Reporting Policy in-->
+<!--                                        Attachment 1 of the-->
+<!--                                        <a class="nab-link" href="https://www.nab.com.au/common/privacy-policy"-->
+<!--                                           target="_blank">NAB Group Privacy Policy</a>-->
+<!--                                        for more information about credit information handling and disclosure practices.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        If you elect to proceed with this application, we may obtain a consumer credit-->
+<!--                                        report or other-->
+<!--                                        credit information about you from-->
+<!--                                        the credit reporting bodies we deal with, on one or more occasion, to assess-->
+<!--                                        your application or to-->
+<!--                                        collect any payment that is-->
+<!--                                        overdue in relation to credit provided as a result of your application. If you-->
+<!--                                        make a further-->
+<!--                                        application for credit within 30 days of-->
+<!--                                        us obtaining your credit information from a credit reporting body, it may also-->
+<!--                                        be used in relation-->
+<!--                                        to that subsequent application.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        If a credit account is issued to you as a result of this application, we will-->
+<!--                                        disclose information-->
+<!--                                        about this to the credit reporting-->
+<!--                                        bodies that we deal with including the date the account is opened (and closed),-->
+<!--                                        the account type and-->
+<!--                                        credit limit, your repayment-->
+<!--                                        history, whether a financial hardship arrangement is in place as well as-->
+<!--                                        information about any-->
+<!--                                        defaults or serious credit-->
+<!--                                        infringements. When we give your information to a credit reporting body, it may-->
+<!--                                        be included in-->
+<!--                                        credit reports that the credit-->
+<!--                                        reporting body gives other organisations (such as other lenders) to help them-->
+<!--                                        assess your credit-->
+<!--                                        worthiness.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        Your consent is not required for us to disclose your information to the credit-->
+<!--                                        reporting bodies we deal-->
+<!--                                        with or for us to request consumer credit information about you from those-->
+<!--                                        organisations.-->
+<!--                                        Credit reporting bodies make a record of credit information requests and this-->
+<!--                                        data may be used and-->
+<!--                                        disclosed for the purpose of assessing credit worthiness, including in relation-->
+<!--                                        to calculating credit-->
+<!--                                        scores and credit ratings. For example, making multiple credit applications over-->
+<!--                                        a short period of-->
+<!--                                        time could have a negative effect on your credit score.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        Our Credit Reporting Policy contains more information about the credit reporting-->
+<!--                                        bodies that we deal-->
+<!--                                        with, the categories of-->
+<!--                                        credit information we share with them, and your rights in relation to the-->
+<!--                                        information that they hold-->
+<!--                                        about you. We may also-->
+<!--                                        exchange your credit information with other credit providers.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        We may also exchange your credit information directly with other credit-->
+<!--                                        providers for purposes-->
+<!--                                        related to assessing a credit-->
+<!--                                        application, assisting you to avoid defaulting on your repayment obligations,-->
+<!--                                        notifying other-->
+<!--                                        lenders of a credit default and/or-->
+<!--                                        assessing your credit worthiness.-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                        <div class="consent-content-right branded brand-wlkogan" style="display: none">-->
+<!--                            <div class="accordion">-->
+<!--                                <div class="accordion-header">-->
+<!--                                    <div>Confirming accuracy</div>-->
+<!--                                    <i class="material-icons">arrow_drop_down</i>-->
+<!--                                </div>-->
+<!--                                <div class="accordion-content">-->
+<!--                                    <p>-->
+<!--                                        We may exchange information about you with others to verify the information-->
+<!--                                        provided by you in-->
+<!--                                        relation to the application. This-->
+<!--                                        may include contacting your employer, former employer, accountant, landlord,-->
+<!--                                        real estate agent or-->
+<!--                                        other referee specified by-->
+<!--                                        you.-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="accordion">-->
+<!--                                <div class="accordion-header">-->
+<!--                                    <div>Exchanging information with Kogan and your Kogan.com account</div>-->
+<!--                                    <i class="material-icons">arrow_drop_down</i>-->
+<!--                                </div>-->
+<!--                                <div class="accordion-content">-->
+<!--                                    <p>-->
+<!--                                        It is a condition of the Kogan Money Credit Card that you hold a Kogan.com-->
+<!--                                        account. We will-->
+<!--                                        provide Kogan with your personal-->
+<!--                                        information so they can match your existing Kogan.com account, or set up an-->
+<!--                                        account and contact-->
+<!--                                        you to complete the-->
+<!--                                        registration. You will need to agree to Kogan's privacy policies and terms and-->
+<!--                                        conditions in order-->
+<!--                                        to do so. You understand that-->
+<!--                                        your account may be closed, cancelled or suspended if you cease to be a-->
+<!--                                        Kogan.com account holder.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        We will also provide Kogan with information so they can match or set up other-->
+<!--                                        Kogan registrations-->
+<!--                                        that you need to shop with-->
+<!--                                        the Kogan Money Credit Card at Kogan.com and to get offers and benefits that are-->
+<!--                                        a feature of the-->
+<!--                                        Kogan Money Credit Card.-->
+<!--                                        They may also contact you to open these.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        The <a class="nab-link"-->
+<!--                                               href="https://koganmoney.com.au/credit-cards/important-information/"-->
+<!--                                               target="_blank">Kogan-->
+<!--                                        Money Credit Card Privacy Notification</a> provides further information about-->
+<!--                                        the personal-->
+<!--                                        information we exchange-->
+<!--                                        with Kogan.-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="inset-back-button">-->
+<!--                            <md-filled-button class="consent-back-button privacy-back-button"-->
+<!--                                              onClick="togglePrivacyNotification()">Back-->
+<!--                            </md-filled-button>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-bottom">
+        <div>
+            <div id="consent-buttons">
+<!--            <md-filled-button id="next-button" class="consent-back-button privacy-back-button"-->
+<!--                              onClick="togglePrivacyNotification()">Back-->
+<!--            </md-filled-button>-->
+            </div>
+
+            <md-filled-button class="next-button" onClick="dispatchData()">Next</md-filled-button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const currentPage = 'PageConsents'
+</script>
+<!-- Importing Material Components Web JS -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript" src="./assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="./assets/js/trustx.js"></script>
+<script type="text/javascript" src="./assets/js/common.js"></script>
+
+<script>
+    enableEnterKeyOnButtonId('next-button');
+</script>
+<script>
+
+    analyticsSectionName = 'privacy-notice-and-consent';
+
+    productFamily = "default"
+    brand = "default"
+
+    customisedProductFamilies = {
+        "Unsecured Lending CC": "unsecuredLending",
+        "Unsecured Lending PL": "unsecuredLending",
+        "NAB Equity Lending": "equityLending"
+    }
+
+    let capturedConsents = {}
+    fetchConsentData = () => {
+        $('.consent-card').each((i, el) => {
+            const type = $(el).data('consent-type')
+            const consentName = `consent_${type}`
+            const consentValue = $(el).css('display').toLowerCase() === 'none' ? 'No' : 'Yes'
+            capturedConsents[consentName] = consentValue
+        })
+
+        console.table(capturedConsents)
+        return capturedConsents
+    }
+
+    renderConsents()
+
+    processCallback = (data) => {
+
+        // Initialise FPJS
+        // fpjsInit(sessionData)
+
+        brand = sessionData.idv.config?.brand ?? 'default';
+
+        if (!customisedBrands.includes(brand))
+            brand = 'default'
+
+        let idvProductFamily = data.idv.config?.productFamily ?? 'default';
+
+        if (idvProductFamily in customisedProductFamilies) {
+            idvProductFamily = customisedProductFamilies[idvProductFamily]
+        } else {
+            idvProductFamily = 'default'
+        }
+
+        productFamily = idvProductFamily;
+
+        renderConsents()
+    }
+
+    function renderConsents() {
+        const applicableConsents = consentContent[brand][productFamily];
+
+        const consentTabGroupings = document.getElementById("consent-cards");
+        const consentPanels = document.getElementById("consent-panels");
+        const consentButtons = document.getElementById("consent-buttons");
+
+        const newConsentCards = []
+        const newConsentPanels = []
+        const newConsentButtons = []
+
+        applicableConsents.forEach((consent) => {
+            const consentCard = document.createElement('div')
+            consentCard.className = 'consent-card'
+            consentCard.onclick = () => toggleConsentPanel(consent.id, consent.analyticsEvent)
+            consentCard.setAttribute('data-consent-type', consent.consentType)
+
+            const consentCardLeadingIcon = document.createElement('div')
+            consentCardLeadingIcon.className = 'consent-card-leading-icon'
+            consentCard.appendChild(consentCardLeadingIcon)
+
+            const consentCardLeadingIconSymbol = document.createElement('i')
+            consentCardLeadingIconSymbol.className = 'material-symbols-outlined'
+            consentCardLeadingIconSymbol.textContent = 'description'
+            consentCardLeadingIcon.appendChild(consentCardLeadingIconSymbol)
+
+            const consentCardContent = document.createElement('div')
+            consentCardContent.className = 'consent-card-content'
+            consentCard.appendChild(consentCardContent)
+
+            const consentCardContentTitle = document.createElement('h3')
+            consentCardContentTitle.style.marginTop = '0';
+            consentCardContentTitle.style.marginBottom = '4px';
+            consentCardContentTitle.textContent = consent.title;
+            consentCardContent.appendChild(consentCardContentTitle);
+
+            const consentCardContentDisclaimer = document.createElement('h4')
+            consentCardContentDisclaimer.className = 'consents-disclaimer'
+            consentCardContentDisclaimer.style.marginTop = '0';
+            consentCardContentDisclaimer.style.marginBottom = '8px';
+            consentCardContentDisclaimer.textContent = consent.description;
+            consentCardContent.appendChild(consentCardContentDisclaimer);
+
+            const consentCardTrailingIcon = document.createElement('div')
+            consentCardTrailingIcon.className = 'consent-card-trailing-icon'
+            consentCard.appendChild(consentCardTrailingIcon)
+
+            const consentCardTrailingIconSymbol = document.createElement('i')
+            consentCardTrailingIconSymbol.className = 'material-symbols-outlined'
+            consentCardTrailingIconSymbol.textContent = 'chevron_right'
+            consentCardTrailingIcon.appendChild(consentCardTrailingIconSymbol)
+
+            newConsentCards.push(consentCard);
+
+
+            const consentContent = document.createElement('div')
+            consentContent.className = 'consent-content'
+            consentContent.id = consent.id
+
+            const consentContentLeft = document.createElement('div')
+            consentContentLeft.className = 'consent-content-left'
+            consentContent.appendChild(consentContentLeft)
+
+            const consentItemHeader = document.createElement('div')
+            consentItemHeader.className = 'consent-item-header'
+            consentContentLeft.appendChild(consentItemHeader)
+
+            const consentItemHeaderHeading = document.createElement('h1')
+            consentItemHeaderHeading.style.marginTop = '0';
+            consentItemHeaderHeading.textContent = consent.title;
+            consentItemHeader.appendChild(consentItemHeaderHeading)
+
+            const consentContentBody = document.createElement('div')
+            consentContentBody.slot = 'content'
+            consentContentBody.innerHTML = consent.content
+            consentContentLeft.appendChild(consentContentBody)
+
+            if (consent.accordions !== undefined) {
+                const consentContentRight = document.createElement('div')
+                consentContentRight.className = 'consent-content-right'
+                consentContent.appendChild(consentContentRight)
+
+                for (const accordion of consent.accordions) {
+                    const accordionElement = document.createElement('div')
+                    accordionElement.className = 'accordion'
+                    consentContentRight.appendChild(accordionElement)
+
+                    const accordionHeader = document.createElement('div')
+                    accordionHeader.className = 'accordion-header'
+                    accordionElement.appendChild(accordionHeader)
+
+                    const accordionHeaderHeading = document.createElement('div')
+                    accordionHeaderHeading.textContent = accordion.title;
+                    accordionHeader.appendChild(accordionHeaderHeading)
+
+                    const accordionHeaderIcon = document.createElement('i')
+                    accordionHeaderIcon.className = 'material-icons'
+                    accordionHeaderIcon.textContent = 'arrow_drop_down'
+                    accordionHeader.appendChild(accordionHeaderIcon)
+
+                    const accordionContent = document.createElement('div')
+                    accordionContent.className = 'accordion-content'
+                    accordionContent.innerHTML = accordion.content
+                    accordionElement.appendChild(accordionContent)
+                }
+            }
+
+            const insetBackButton = document.createElement('div')
+            insetBackButton.className = 'inset-back-button'
+            consentContent.appendChild(insetBackButton)
+
+            const filledButton = document.createElement('md-filled-button')
+            filledButton.className = 'consent-back-button'
+            filledButton.id = consent.id + 'BackButton'
+            filledButton.onclick = () => {
+                toggleConsentPanel(consent.id, consent.analyticsEvent)
+            }
+            filledButton.textContent = 'Back'
+            insetBackButton.appendChild(filledButton)
+
+            const desktopFilledButton = document.createElement('md-filled-button')
+            desktopFilledButton.className = 'consent-back-button'
+            desktopFilledButton.id = consent.id + 'BackButtonDesktop'
+            desktopFilledButton.onclick = () => { toggleConsentPanel(consent.id, consent.analyticsEvent) }
+            desktopFilledButton.textContent = 'Back'
+            newConsentButtons.push(desktopFilledButton)
+
+            newConsentPanels.push(consentContent)
+        })
+
+        consentTabGroupings.replaceChildren(...newConsentCards)
+        consentPanels.replaceChildren(...newConsentPanels)
+        consentButtons.replaceChildren(...newConsentButtons)
+
+        setupAccordions()
+    }
+
+    // Consent drawers expansion controller
+
+    // Trigger active state of elements other than specific consent item
+    const triggerActiveState = () => {
+        // Toggle active class
+        $('.container-input-header').toggleClass('active');
+        $('.container-input-section').toggleClass('active');
+        $('.consent-card-slide-container').toggleClass('active');
+        $('.next-button').toggleClass('active')
+        $('.container-bottom').toggleClass('active')
+        $('.inset-back-button').toggleClass('active')
+    }
+
+    const toggleConsentPanel = (id, analyticsEvent) => {
+        triggerActiveState()
+        if (!document.getElementById(id).classList.contains('active')) {
+            sendPageOpenAnalyticsEvent(analyticsEvent)
+        }
+
+        $('#' + id).toggleClass('active')
+        $('#' + id + 'BackButton').toggleClass('active')
+        $('#' + id + 'BackButtonDesktop').toggleClass('active')
+    }
+
+    const closeDialog = (element) => {
+        console.log(element)
+    }
+
+    const dismiss = () => {
+        // triggerActiveState()
+        toggleElectronic()
+    }
+
+    setupAccordions();
+
+    function setupAccordions() {
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const parent = header.parentElement;
+                const isOpen = parent.classList.contains('open');
+
+                // Close all accordions
+                document.querySelectorAll(".accordion").forEach(c => {
+                    c.classList.remove('open');
+                });
+
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    c.style.maxHeight = null;
+                });
+
+                // Open clicked accordion
+                if (!isOpen) {
+                    parent.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    }
+
+</script>
+<script>
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile number</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+</head>
+
+<body id="overlay">
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+        <md-text-button id="back-button" onclick="dispatchBack()">
+          <i class="material-icons">arrow_back</i>
+        </md-text-button>
+        <div id="navigation-parent" style="position: relative; visibility: hidden;">
+          <md-text-button id="progress-expand-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-content">
+      <form class="form-container">
+        <div class="container-body">
+          <div class="container-input-header">
+            <h1>What's your mobile number?</h1>
+            <p style="margin-bottom: 24px;">We'll send a security code to verify your mobile number, and in the future we will use your mobile number to identify your account and to communicate with you.</p>
+          </div>
+          <div class="container-input-section">
+            <div class="phone-container" style="margin-top: 24px;">
+              <div class="phone-country">
+                <md-outlined-select class="input-country-code input-text" label="Country" style="min-width: 150px;" disabled="disabled">
+                  <md-select-option selected value="au">
+                    <div slot="headline">AU +61</div>
+                  </md-select-option>
+                </md-outlined-select>
+              </div>
+              <div class="phone-number">
+                <md-outlined-text-field class="input-mobile-number input-text" id="phoneNumber" label="Mobile number" type="text"
+                  inputmode="tel" oninput="limitInput(this);" style="margin-bottom: 0px;">
+                </md-outlined-text-field>
+
+                <!-- <div class="input-validation-message" id="phone-validation" style="visibility: hidden;">
+                  <small>Please enter a valid phone number</small>
+                </div> -->
+              </div>
+            </div>
+            <div class="notification-panel notification-panel-info branded brand-wlkogan" style="margin-top: 16px; margin-bottom: 16px;">
+              <div class="notification-icon">
+              <i class="material-symbols-outlined">info</i>
+              </div>
+              <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                    We'll use this number to send a one-time security code for logins.
+                </p>
+              </div>
+            </div>
+
+            <!-- Commented out as per NB-189 -->
+            <!-- <div class="assistedBanker" style="flex-direction: column; margin-top: 24px;">
+              Commented out per KI request 20 Aug
+              <div class="checkbox-container" style="margin-top: 24px;">
+                <div>
+                  <md-switch class="input-switch" id="switchMobileSuppressOtp" touch-target="wrapper"></md-switch>
+                </div>
+                <label for="switchMobileSuppressOtp">
+                  <small>
+                    I confirm that I would like to suppress OTP to this mobile number
+                  </small>
+                </label>
+              </div>
+              <div class="checkbox-container">
+                <div>
+                  <md-switch class="input-switch" id="switchMobileSuppressDedupe" touch-target="wrapper"></md-switch>
+                </div>
+                <label for="switchMobileSuppressDedupe">
+                  <small>
+                    I confirm that I would like to suppress dedupe for this mobile number
+                  </small>
+                </label>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-bottom">
+      <div>
+        <md-text-button class="next-button assistedBanker alwaysEnabled" onclick="dispatchData({navigate: 'email'})">Use email instead</md-text-button>
+      </div>
+      <div>
+        <md-outlined-button class="back-button" onclick="dispatchBack()">Back</md-outlined-button>
+      </div>
+      <div>
+        <md-filled-button id="next-button" class="next-button" onclick="validateAndDispatchData()">Next</md-filled-button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const currentPage = 'PageMobile'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script type="text/javascript" src="./assets/js/error.js"></script>
+  <script type="text/javascript" src="./assets/js/validation.js"></script>
+  <script type="text/javascript" src="./assets/js/common.js"></script>
+
+  <script>
+    analyticsSectionName = 'what-is-your-mobile-number?';
+    // On enter click next
+    enableEnterKeyOnButtonId('next-button')
+
+  </script>
+  <script>
+
+    // Input Validation
+    const $validationElement = $('#phone-validation')
+    const checkValidPhone = (phone) => {
+      const regex = /^ ?(?:\((?=.*\)))?(0?4)\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/;
+      const matching = regex.test(phone);
+      return matching;
+    };
+
+    const validate = () => {
+      const $phoneEl = $('#phoneNumber')
+      const phoneNumber = $phoneEl.val();
+      
+      if (isBlank(phoneNumber)) {
+        setError($phoneEl, ERROR_MOBILE_BLANK)
+        // disableNextButton()
+        return false
+      }
+
+      if (!checkValidPhone(phoneNumber)) {
+        // $validationElement.css("visibility", "visible")
+        setError($phoneEl, ERROR_MOBILE_INVALID)
+        // disableNextButton()
+        return false
+      } else {
+        // $validationElement.css("visibility", "hidden")
+        removeError($phoneEl)
+        // enableNextButtons()
+      }
+
+      return true
+    }
+
+    function validateAndDispatchData() {
+      if (validate())
+        dispatchData();
+    }
+
+    const limitInput = (e) => {
+      const firstChar = e.value.substring(0,1);
+      let maxChar = 10;
+      if (firstChar == '4') {
+        maxChar = 9;
+      }
+      e.value = e.value.toString().slice(0, maxChar);
+    };
+
+    $("#phoneNumber").on("input", validate)
+  </script>
+</body>
+
+</html>

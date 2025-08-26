@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marriage Certificate Form</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/css/pikaday.min.css" />
+  <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-top-navigation">
+      <div class="back-button"><i class="material-icons">arrow_backward</i></div>
+      <div id="navigation-parent" style="position: relative;">
+        <md-text-button id="navigation-anchor">
+          <i class="material-icons right">checklist_rtl</i>
+        </md-text-button>
+        <md-menu id="navigation-menu" anchor="navigation-anchor">
+          <!-- Menu items are generated dynamically using JS -->
+        </md-menu>
+      </div>
+    </div>
+    <div>
+      <h1>Enter your Marriage Certificate details</h1>
+    </div>
+    <form class="form-container">
+      <div>
+        <h3 class="review-details-section-header">Full legal name</h3>
+      </div>
+      <div class="radio-confirm">
+        <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+        </md-radio>
+        <label class="confirm-label" for="confirm-name">Confirm</label>
+
+        <!-- Alternatively, we can use switch -->
+        <!-- <label for="switch">Confirm</label>
+          <md-switch id="switch"></md-switch>  -->
+      </div>
+
+      <md-outlined-text-field id="documentFirstName" class="input-text" label="First Name" type="text" inputmode="text"
+        style="margin-top: 20px;" onfocus="translateToName()">
+      </md-outlined-text-field>
+      <md-outlined-text-field id="documentLastName" class="input-text" label="Last Name" type="text" inputmode="text"
+        onfocus="translateToName()">
+      </md-outlined-text-field>
+
+
+      <div>
+        <h3 class="review-details-section-header">Date of birth</h3>
+      </div>
+      <div class="radio-confirm">
+        <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+        </md-radio>
+        <label class="confirm-label" for="confirm-dob">Confirm</label>
+      </div>
+
+      <md-outlined-text-field class="input-text" id="documentDateOfBirth" label="Date of Birth" type="text" inputmode="text"
+        style="margin-top: 20px;">
+        <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="dob-icon">event</md-icon>
+      </md-outlined-text-field>
+
+      <div>
+        <h3 class="review-details-section-header">ID document details</h3>
+      </div>
+      <div class="radio-confirm">
+        <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+        </md-radio>
+        <label class="confirm-label" for="confirm-doc-details">Confirm</label>
+      </div>
+
+
+      <md-outlined-text-field id="documentPartnerFirstName" class="input-text" label="Partner First Name" type="text" inputmode="text"
+                              style="margin-top: 20px;" onfocus="translateToName()">
+      </md-outlined-text-field>
+      <md-outlined-text-field id="documentPartnerLastName" class="input-text" label="Partner Last Name" type="text" inputmode="text"
+                              onfocus="translateToName()">
+      </md-outlined-text-field>
+
+      <md-outlined-select id="documentRegistrationState" class="review-details-select" label="State of Issue"
+        style="margin-bottom: 20px; margin-top: 20px; width: 100%;">
+        <md-select-option aria-label="blank"></md-select-option>
+        <md-select-option selected value="act">
+          <div slot="headline">ACT</div>
+        </md-select-option>
+        <md-select-option value="nsw">
+          <div slot="headline">NSW</div>
+        </md-select-option>
+        <md-select-option selected value="vic">
+          <div slot="headline">VIC</div>
+        </md-select-option>
+        <md-select-option value="qld">
+          <div slot="headline">QLD</div>
+        </md-select-option>
+        <md-select-option selected value="wa">
+          <div slot="headline">WA</div>
+        </md-select-option>
+        <md-select-option value="tas">
+          <div slot="headline">TAS</div>
+        </md-select-option>
+        <md-select-option selected value="sa">
+          <div slot="headline">SA</div>
+        </md-select-option>
+        <md-select-option value="nt">
+          <div slot="headline">NT</div>
+      </md-outlined-select>
+      <md-outlined-text-field id="documentNumber" class="input-text" label="Registration Number" type="text" inputmode="text">
+      </md-outlined-text-field>
+      <md-outlined-text-field id="documentCertificateNumber" class="input-text" label="Certificate Number" type="text" inputmode="text">
+      </md-outlined-text-field>
+      <md-outlined-text-field class="input-text" id="documentDateOfEvent" label="Date Of Event" type="text" inputmode="text">
+        <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="doe-icon">event</md-icon>
+      </md-outlined-text-field>
+      <md-outlined-text-field class="input-text" id="documentDateOfRegistration" label="Registration Date" type="text" inputmode="text">
+        <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="doe-icon">event</md-icon>
+      </md-outlined-text-field>
+
+
+      <div class="container-bottom">
+        <div>
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+
+      <!-- <button class="mdc-button mdc-button--raised next-button" type="submit">
+          <span class="mdc-button__label">Next</span>
+        </button> -->
+    </form>
+  </div>
+
+  <!-- Importing Material Components Web JS -->
+  <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.2/pikaday.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    
+    const dobPicker = new Pikaday({
+      field: document.getElementById("input-dob"),
+      format: "YYYY-MM-DD",
+      trigger: document.getElementById("dob-icon"),
+    });
+
+    const doePicker = new Pikaday({
+      field: document.getElementById("input-doe"),
+      format: "YYYY-MM-DD",
+      trigger: document.getElementById("doe-icon"),
+    });
+
+    // jquery - Out of focus reset scale back to 1
+    $(() => {
+      $("md-outlined-text-field").on('focusout', () => {
+        resetScale()
+      })
+    });
+  </script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/trustx.js"></script>
+</body>
+
+</html>

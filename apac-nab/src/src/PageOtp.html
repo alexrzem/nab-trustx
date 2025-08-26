@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure code (OTP)</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <!-- <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/progress-expand.css" />
+  </head>
+  <body id="overlay">
+    <div class="container" style="flex: 1;">
+      <div class="container-top">
+        <div class="container-top-navigation">
+          <!-- <md-text-button id="back-button" onclick="dispatchBack()">
+            <i class="material-icons">arrow_back</i>
+          </md-text-button> -->
+          <div id="navigation-parent" style="position: relative; visibility: hidden;">
+            <md-text-button id="progress-expand-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <div class="form-container">
+          <div class="container-body">
+            <div class="container-input-header">
+              <h1>Enter security code</h1>
+              <p id="otp-instruction-text">
+                
+              </p>
+              <p id="expire-in" style="margin-bottom: 24px;">This code expires in 5 minutes.</p>
+            </div>
+  
+            <div class="container-input-section">
+
+              <!-- Success panel: new OTP is generated -->
+              <div class="notification-panel notification-panel-success" style="margin-top: 24px; margin-bottom: 24px; display: none;" id="notification-otp-new-code">
+                <div class="notification-icon">
+                <i class="material-symbols-outlined error">check_circle</i>
+                </div>
+                <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                  A new code has been requested.
+                </p>
+                </div>
+              </div>
+
+              <!-- Error panel: new code requested before 60s is up -->
+              <div class="notification-panel notification-panel-error" style="margin-top: 24px; margin-bottom: 24px; display: none;" id="notification-otp-throttle-limit">
+                <div class="notification-icon">
+                <i class="material-symbols-outlined error">error</i>
+                </div>
+                <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                  You can only request a security code once per minute. Wait and try again.
+                </p>
+                </div>
+              </div>
+
+              <md-outlined-text-field
+                id="otp"
+                class="input-text"
+                label="One time security code"
+                type="text" 
+                error-text="Enter a valid security code"
+                inputmode="numeric"
+                oninput="limitInput(this);">
+              </md-outlined-text-field>
+
+              <!-- <div id= "otp" class="otp-container">
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+                <md-outlined-text-field class="input-otp" type="text" inputmode="numeric"></md-outlined-text-field>
+              </div> -->
+    
+              <div style="margin-top: 16px;">
+                <md-text-button class="button-get-another-code" onclick="requestNewCode()">
+                  Get another code
+                </md-text-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-bottom">
+        <div>
+          <md-outlined-button class="back-button" onclick="dispatchBack()">Back</md-outlined-button>
+        </div>        
+        <div>
+          <md-filled-button id="next-button" class="next-button" onclick="validateAndDispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <div id="nav">
+      <div class="expanded-progress-header">
+        <h2>Your Progress</h2>
+        <md-icon-button id="expanded-progress-close-btn">
+          <md-icon>close</md-icon>
+        </md-icon-button>
+      </div>
+      <h4 style="margin-left: 16px; margin-right: 16px;">Application 20% complete</h4>
+      <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+        <div class="progress-bar" id="progress-bar" style="width: 20%;"></div>
+      </div>
+      <div class="card card-warning" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">smartphone</i>
+          <h4>Set up your NAB Access</h4>
+        </div>
+        <div class="application-card-icon">
+          <small>In progress</small>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">badge</i>
+          <h4>ID Verification</h4>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">account_circle</i>
+          <div class="card-content-with-description">
+            <h4>Personal details</h4>
+            <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">payments</i>
+          <div class="card-content-with-description">
+            <h4>Your finances</h4>
+            <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <span class="material-icons">menu</span>
+          <div class="card-content-with-description">
+            <h4>Review your information</h4>
+            <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const currentPage = 'PageOtp'
+    </script>
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script type="text/javascript" src="./assets/js/common.js"></script>
+
+    <script>
+      enableEnterKeyOnButtonId('next-button');
+    </script>
+    <script type="text/javascript" src="./assets/js/error.js"></script>
+    <script type="text/javascript" src="./assets/js/validation.js"></script>
+    <script>
+
+      let brand = 'default'
+
+      analyticsSectionName = "enter-security-code"
+
+      // Change OTP instruction text
+      let OTP_THROTTLE_SECONDS = 60 * 1000 //
+      let canGenerateNewCode = false
+
+
+      const startOtpThrottleTimer = (timeout) => {
+        setTimeout(() => {
+          canGenerateNewCode = true
+          console.log("canGenerateNewCode is now true")
+        }, timeout)
+      }
+
+      // Handle OTP input variables
+      // isIncorrectOtp - set #otp state to error
+      // isNewOtpGenerated - display new code success panel and start throttle timer (1 code per 60s)
+      processCallback = (sessionData, constants) => {
+
+        brand = sessionData.idv.config?.brand ?? 'default';
+        if (!customisedBrands.includes(brand))
+            brand = 'default'
+
+        const isIncorrectOtp = sessionData.idv.isIncorrectOtp ?? false
+        const isNewOtpGenerated = sessionData.idv.isNewOtpGenerated ?? false
+
+        // Initial setup
+        $('#notification-otp-new-code').css('display', 'none')
+        $('#notification-otp-throttle-limit').css('display', 'none')
+        startOtpThrottleTimer(OTP_THROTTLE_SECONDS)
+
+        if (isIncorrectOtp) {
+          const incorrectOtp = sessionData.idv?.doc2?.otp
+          $("#otp").val(incorrectOtp)
+          setError($('#otp'), "Security code is incorrect")
+        }
+
+        if (isNewOtpGenerated) {
+          canGenerateNewCode = false
+
+          $('#notification-otp-new-code').css('display', 'flex')
+          // startOtpThrottleTimer(OTP_THROTTLE_SECONDS)
+        }
+
+        if (constants.otpType) {
+          let $otpInstructionTextEl = $('#otp-instruction-text')
+          if (constants.otpType === 'email') {
+            let emailText = "To confirm your identity, we've sent a security code to your email address. This code expires in 5 minutes."
+            $('#expire-in').css('display', 'none')
+            
+            if (brand === 'wlkogan') {
+              emailText = "We've sent a security code to your email address."
+              $('#expire-in').css('display', 'flex')
+            }
+
+            $otpInstructionTextEl.text(emailText)
+          } else {
+            const phoneNumber =  sessionData.idv.doc2.phoneNumber ?? '0499999999'
+            const partialPhoneNo = phoneNumber.slice(-3)
+            const mobileText = `We've sent a security code to the mobile number ending in ${partialPhoneNo}.`
+            $otpInstructionTextEl.text(mobileText)
+          }
+        } 
+      }
+
+      const requestNewCode = () => {
+        sendUserInteractionAnalyticsEvent("get-another-code")
+        if (!canGenerateNewCode) {
+          $('#notification-otp-new-code').css('display', 'none')
+          $('#notification-otp-throttle-limit').css('display', 'flex')
+        } else {
+          $('#notification-otp-throttle-limit').css('display', 'none')
+          dispatchData({ otpState: 'generate' })
+        }
+      }
+
+    </script>
+    <script>
+
+      // Input validation
+      const OTP_LENGTH_REQUIRED = 6
+
+      const validate = () => {
+        const $otpEl = $('#otp')
+        const otp = $otpEl.val();
+
+        if (otp.length === OTP_LENGTH_REQUIRED) {
+          removeError($('#otp'))
+          return true
+        } else {
+          setError($('#otp'), "Enter a valid 6-digit security code")
+          return false
+        }
+      }
+
+      function validateAndDispatchData() {
+        if (validate())
+          dispatchData({ otpState: 'verify' })
+      }
+
+      // Limit OTP value to 6 digits
+      const limitInput = (e) => {
+        const firstChar = e.value.substring(0,1);
+        let maxChar = 6;
+        e.value = e.value.toString().slice(0, maxChar);
+      };
+
+
+      $("#otp").on("input", validate)
+
+    </script>
+  </body>
+</html>

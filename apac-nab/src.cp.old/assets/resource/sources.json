@@ -1,0 +1,60 @@
+{
+  "uis": [
+    {
+      "label": "Name",
+      "resource": "PagePreferredName.html"
+    },
+    {
+      "label": "Mobile",
+      "resource": "PageMobile.html"
+    },
+    {
+      "label": "Email",
+      "resource": "PageEmail.html"
+    },
+    {
+      "label": "Otp",
+      "resource": "PageOtp.html"
+    },
+    {
+      "label": "Consents",
+      "resource": "PageConsents.html"
+    },
+    {
+      "label": "Document Selection",
+      "resource": "PageDocumentSelection.html"
+    },
+    {
+      "label": "Additional Document",
+      "resource": "PageAdditionalDocument.html"
+    },
+    {
+      "label": "Drivers Licence",
+      "resource": "PageDriversLicence.html"
+    },
+    {
+      "label": "Passport",
+      "resource": "PagePassport.html"
+    },
+    {
+      "label": "Birth Certificate",
+      "resource": "PageBirthCertificate.html"
+    },
+    {
+      "label": "Medicare",
+      "resource": "PageMedicare.html"
+    },
+    {
+      "label": "Change Of Name",
+      "resource": "PageChangeOfName.html"
+    },
+    {
+      "label": "Marriage Certifcate",
+      "resource": "PageMarriageCertificate.html"
+    },
+    {
+      "label": "Onboarding Page",
+      "resource": "PageNewCustomer.html"
+    }
+  ]
+}

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document Selection</title>
+    <!-- Importing Material Components Web -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+          rel="stylesheet"/>
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+
+    </script>
+    <script type="module">
+        import "@material/web/all.js";
+        import {styles as typescaleStyles} from "@material/web/typography/md-typescale-styles.js";
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> -->
+    <!-- <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/> -->
+    <link rel="stylesheet" href="./assets/css/main.css"/>
+    <link rel="stylesheet" href="./assets/css/consents.css"/>
+    <link rel="stylesheet" href="./assets/css/sheet.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="container-top">
+        <div class="container-top-navigation" style="visibility: hidden;">
+            <md-text-button id="back-button" onclick="dispatchBack()">
+                <i class="material-icons">arrow_back</i>
+            </md-text-button>
+            <div id="navigation-parent" style="position: relative; visibility: hidden;">
+                <md-text-button id="navigation-anchor">
+                    <i class="material-icons right">checklist_rtl</i>
+                </md-text-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-content">
+        <div class="form-container">
+            <div class="container-body">
+                <div class="container-input-header">
+                    <h1 style="margin-top: 0;">Scan your ID</h1>
+                    <p>
+                        Select your ID type from the list below and click <span class="branded brand-wlkogan">"Yes, continue"</span><span class="branded brand-default">"Next"</span> to scan.
+                    </p>                   
+                    <div class="notification-panel notification-panel-info assistedBanker"
+                         style="margin-top: 24px;">
+                        <div class="notification-icon">
+                            <i class="material-symbols-outlined">info</i>
+                        </div>
+                        <div class="notification-content">
+                            <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">Banker note</p>
+                            <p style="margin-top: 16px;">
+                                You're required to read the following consent action script to your customer and
+                                obtain their
+                                consent to electronically verify their identity.
+                                If the customer does not consent to this, please <a class="nab-link" href="#">create
+                                a prospect profile</a> first and perform manual IDV.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="assistedBanker" id="document-selection-banker-note-container">
+                        <h3 style="font-weight: 600; margin-bottom: 8px;">Please read this note to the customer</h3>
+                        <p>
+                            To meet our regulatory obligations under the Anti-Money Laundering and Counter Terrorism
+                            Financing Act,
+                            NAB needs to verify or re-verify your identity. This can be completed online (only if
+                            you consent) or
+                            if you don’t want to verify online, you’ll have to verify your identity at your nearest
+                            NAB branch.
+                        </p>
+                        <p>
+                            With your consent to electronically verify or re-verify your identity on on or more
+                            occasions,
+                            NAB and its related companies may:
+                        </p>
+                        <ol>
+                            <li>
+                                Provide your name, address and date of birth to credit reporting bodies, as well as
+                                details
+                                and copies of your ID documents to a verification service to assess how ell that
+                                information matches the information they hold or can access about you.
+                            </li>
+                            <li>
+                                The verification service many contact the authority that issues the document, use a
+                                government or other verification service,
+                                or use third party systems, databases and services (which may involve sending your
+                                information from Australia to New Zealand or vice versa) to perform the assessment
+                            </li>
+                            <li>
+                                The process of electronic verification will not include a credit check,
+                                and will not affect your credit score.
+                            </li>
+                        </ol>
+                        <p>
+                            Find out more about how NAB handles personal information in our (available on
+                            nab.com.au) including how to access or correct information
+                            NAB holds about you and how to make a privacy – related enquiry or complaint.
+                        </p>
+                    </div>
+                </div>
+                <div class="container-input-section">
+                    <div class="consent-card-slide-container" id="consent-card-slide-container">
+                        <!-- Conditional - only shown when an error object is passed into the page -->
+                        <div class="notification-panel notification-panel-warning" style="margin-top: 24px;"
+                             id="notification-idv-unsuccessful">
+                            <div class="notification-icon">
+                                <i class="material-symbols-outlined">warning</i>
+                            </div>
+                            <div class="notification-content">
+                                <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+                                    Your identity verification was unsuccessful
+                                </p>
+                                <p>
+                                    We were unable to validate your identity with the information provided. Please
+                                    choose an alternate document type.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="isOverEighteenContainer">
+                            <h3>Are you 18 years or older?</h3>
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="yes" name="isOverEighteen" value="yes" onChange="notify18('yes')"
+                                              class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="yes">
+                                    <p>Yes</p>
+                                </label>
+                            </div>
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="no" name="isOverEighteen" value="no" onChange="notify18('no')"
+                                              class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="no">
+                                    <p>No</p>
+                                </label>
+                            </div>
+                            <div class="notification-panel notification-panel-info" id="under-18-notification-panel" style="margin-top: 24px; display: none;">
+                                <div class="notification-icon">
+                                    <i class="material-symbols-outlined">info</i>
+                                </div>
+                                <div class="notification-content">
+                                You must meet the minimum age eligibility to be able to complete your verification online.
+                                </div>
+                            </div>
+                            <div id="isOverEighteenError" class="notification-panel notification-panel-error-transparent"  style="margin-top: 24px; display: none;">
+                                <div class="notification-icon">
+                                    <i class="material-symbols-outlined error">info</i>
+                                </div>
+                                <div class="notification-content">
+                                    Select if you are 18 years or older
+                                </div>
+                            </div>                        
+                        </div>
+
+                        <!-- <div class="notification-panel notification-panel-info" style="margin-top: 24px; margin-bottom: 16px;">
+                    <div class="notification-icon">
+                    <i class="material-symbols-outlined">info</i>
+                    </div>
+                    <div class="notification-content">
+                    <p style="margin-top: 0; margin-bottom: 0;">
+                        You must be 14 years or older to apply online. If you are 13 years or younger, please visit your closest NAB branch with a parent or guardian with a valid form of ID.
+                    </p>
+                    </div>
+                </div> -->
+
+                        <div class="document-type-form" id="selectedDocumentType1Container">
+                            <h3>Select your identity document type</h3>
+
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="dl" name="selectedDocumentType" value="dl" onChange="selectDocument('license')"
+                                              class="input-radio docSelection"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="dl">
+                                    <p><b>Australian driver licence</b></p>
+                                    <p class="consents-disclaimer">Valid licence</p>
+                                </label>
+                            </div>
+
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="passport" name="selectedDocumentType" value="passport" onChange="selectDocument('aus passport')"
+                                              class="input-radio docSelection"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="passport">
+                                    <p><b>Australian passport</b></p>
+                                    <p class="consents-disclaimer">Hasn't expired more than two years</p>
+                                </label>
+                            </div>
+
+
+                            <hr width="95%" style="border-width: 0.5px;">
+
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="foreignPassport" name="selectedDocumentType" onChange="selectDocument('foreign passport')"
+                                              value="foreignPassport" class="input-radio docSelection"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="foreignPassport">
+                                    <p><b>Foreign passport</b></p>
+                                    <p class="consents-disclaimer">Must be the same passport used to obtain your Australian Visa</p>
+                                </label>
+                            </div>
+
+                            <hr width="95%" style="border-width: 0.5px;">
+                        </div>
+
+                        <div class="document-type-form document-type-under-18" id="selectedDocumentType2Container" style="display: none;">
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="medicare" name="selectedDocumentType" value="medicare" onChange="selectDocument('medicare')"
+                                              class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="medicare">
+                                    <p><b>Medicare card</b></p>
+                                    <p>Hasn't expired</p>
+                                </label>
+                            </div>
+
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="birthCertificate" name="selectedDocumentType" onChange="selectDocument('birth cert')"
+                                              value="birthCertificate" class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="birthCertificate">
+                                    <p><b>Australian birth certificate</b></p>
+                                    <p>Valid birth certificate</p>
+                                </label>
+                            </div>
+
+                            <hr width="95%" style="border-width: 0.5px;">
+                        </div>
+
+                        <div id="selectedDocumentTypeError" class="notification-panel notification-panel-error-transparent"  style="margin-top: 24px; display: none;">
+                            <div class="notification-icon">
+                                <i class="material-symbols-outlined error">info</i>
+                            </div>
+                            <div class="notification-content">
+                                Select your identity document type
+                            </div>
+                        </div>  
+
+
+                        <div class="document-type-form assistedBanker">
+                            <div style="display: flex; flex-direction: row;">
+                                <div id="document-selection-switch-container">
+                                    <div class="checkbox-container">
+                                        <div>
+                                            <!-- <md-checkbox id="checkbox-doc-minor" class="manual-reason" touch-target="wrapper" onclick="manualReasonSelect()"></md-checkbox> -->
+                                            <md-switch class="input-switch navigateToAdditional" id="switchDocMinor"
+                                                       touch-target="wrapper"></md-switch>
+                                        </div>
+                                        <label for="switchDocMinor">
+                                            <small>
+                                                I confirm that I am a minor and I would like to upload a different
+                                                document type
+                                            </small>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-container">
+                                        <div>
+                                            <!-- <md-checkbox id="checkbox-doc-no-primary" class="manual-reason" touch-target="wrapper"  onclick="manualReasonSelect()"></md-checkbox> -->
+                                            <md-switch class="input-switch navigateToAdditional"
+                                                       id="switchDocNoPrimary" touch-target="wrapper"></md-switch>
+                                        </div>
+                                        <label for="switchDocNoPrimary">
+                                            <small>
+                                                I confirm I/customer is unable to provide a primary photographic
+                                                document type
+                                            </small>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="document-selection-go-btn-container">
+                                    <md-text-button id="go-button" disabled trailing-icon
+                                                    onclick="dispatchData({ navigate: 'additionalDocument' })">
+                                        <div style="display: flex; flex-direction: row;">
+                                            <div>Go</div>
+                                            <i class="material-icons right"
+                                               style="font-size: 20px;">chevron_right</i>
+                                        </div>
+                                    </md-text-button>
+                                </div>
+                            </div>
+                            <hr width="95%" style="border-width: 0.5px;">
+                        </div>
+
+
+                        <div class="branded brand-default" id="explicitIdvConsent">
+                            <h3>Do you consent to having your ID verified online?</h3>
+
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="onlineYes" name="idVerifiedOnline" value="yes"
+                                              class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="onlineYes">
+                                    <p>Yes</p>
+                                </label>
+                            </div>
+                            <div class="document-type-radio">
+                                <div class="document-type-radio-btn">
+                                    <md-radio id="onlineNo" name="idVerifiedOnline" value="no"
+                                              class="input-radio"></md-radio>
+                                </div>
+                                <label class="document-type-label" for="onlineNo">
+                                    <p>No</p>
+                                </label>
+                            </div>
+
+                            <div id="explicitIdvConsentError" class="notification-panel notification-panel-error-transparent"  style="margin-top: 24px; display: none;">
+                                <div class="notification-icon">
+                                    <i class="material-symbols-outlined error">info</i>
+                                </div>
+                                <div class="notification-content">
+                                    Select an option
+                                </div>
+                            </div>  
+
+                            <small>
+                                <div style="margin-top: 16px;">By selecting "Yes" you provide consent for NAB to:</div>
+                                <ul>
+                                    <li>Check your information with the ID document issuer or record holder for the purposes of verifying your identifiy; and</li>
+                                    <li>Securely send your name, date of birth and address to one or more of the Credit Reporting Bodies that we use to confirm whether it matches the information that they hold about you.</li>
+                                </ul>
+                                <div style="margin-bottom: 8px;">Read more about how we <a class="nab-link" style="text-decoration: underline; cursor: pointer;" onClick="toggleOnlineVerification()">verify your ID online</a>.</div>
+                                <div>If you do not consent, select "No" and you will be directed to scan your ID and verify in person at a NAB branch.</div>
+                            </small>
+                        </div>
+
+                        <div class="branded brand-wlkogan">
+                            <div style="margin-top: 16px;">
+                                    By selecting "Yes, continue" you provide your consent for us to verify your
+                                    identity by checking your information with the document issuer or official record
+                                    holder.
+                                    Read more about how we <a class="nab-link" style="text-decoration: underline; cursor: pointer;"
+                                                              onClick="toggleOnlineVerification()">verify your ID online</a>.
+                            </div>
+                            <!-- <div style="margin-top: 8px;">
+                        <small>
+                            If you would prefer not to verify online, you can
+                            <a class="nab-link" href="#">verify in person instead</a>. Your
+                            ID will be reviewed when you visit in person at a branch.
+                        </small>
+                    </div> -->
+                            <div class="checkbox-container" style="margin-top: 24px;">
+                                <div>
+                                    <!-- <md-switch selected class="input-switch" id="isCreditHeaderConsented"
+                                touch-target="wrapper"></md-switch> -->
+                                    <md-checkbox class="input-checkbox" id="isCreditHeaderConsented"
+                                                 touch-target="wrapper"></md-checkbox>
+                                </div>
+                                <label for="isCreditHeaderConsented" id="labelIsCreditHeaderConsented">
+
+                                        By ticking this box, you also consent to us securely sending your name,
+                                        date of birth and address to one or more of the credit reporting bodies that
+                                        we use to confirm whether it matches the information that they hold about you. 
+                                        This will provide a better chance of verifying your identity online.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="notification-panel notification-panel-tertiary" id="notificationCreditScore"
+                             style="margin-top: 24px; margin-bottom: 16px;">
+                            <div class="notification-icon">
+                                <i class="material-symbols-outlined">info</i>
+                            </div>
+                            <div class="notification-content">
+                                <p style="margin-top: 0; margin-bottom: 0;">
+                                    This will not impact your credit score
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Consent content -->
+                    <div class="consent-content" id="online-verification-slide-in">
+                        <div class="consent-content-left">
+                            <div class="consent-item-header">
+                                <h1 class="branded brand-default" style="margin-top: 0">Important information about how we verify your identity online</h1>
+                                <h1 class="branded brand-wlkogan" style="margin-top: 0">How we verify your identity online</h1>
+                            </div>
+
+                            <div id="form-privacy">
+                                <p>
+                                    To meet our regulatory obligations under the Anti-Money Laundering and Counter Terrorism Financing Act,
+                                    <span class="branded brand-wlkogan">we</span><span class="branded brand-default">NAB</span> need<span class="branded brand-default">s</span>
+                                    to verify your identity. To verify your identity electronically, <span
+                                        class="branded brand-wlkogan">we</span><span class="branded brand-default">NAB and its related companies</span>
+                                    may (with your
+                                    consent):
+                                <ul>
+                                    <li>
+                                        Provide your name, address and date of birth to credit reporting bodies to
+                                        provide an assessment of how well that information matches the information they
+                                        hold about you.
+                                    </li>
+                                    <li>
+                                        Provide your name, address, date of birth and details or copies of your ID
+                                        documents to a verification service to conduct an assessment of how well that
+                                        information matches the information they hold or can access about you. They may
+                                        contact the authority that issued the document, use a government or other
+                                        verification service, or use third party systems, databases and services (which
+                                        may involve sending your information from Australia to New Zealand or vice
+                                        versa) to help them do this.
+                                    </li>
+                                </ul>
+                                </p>
+                                <p>
+                                    <b>Please note: </b> the process of electronic verification will not include
+                                    a
+                                    credit check, and will not affect your credit score. We will
+                                    not ask you to provide banking information, including your banking password
+                                    or
+                                    security codes.
+                                </p>
+                                <p class="branded brand-default">
+                                    Find out more about how NAB handles personal information in our
+                                    <a class="privacy-link" href="https://www.nab.com.au/common/privacy-policy" target="_blank">Privacy Policy</a>
+                                    including information on how to access or correct the information NAB holds about you
+                                    and how to make a privacy-related enquiry or complaint.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-bottom">
+            <div>
+                <md-text-button class="next-button assistedBanker"
+                                onclick="validateAndDispatchData({ navigate: 'manual', isManualInput: true })">Manual
+                    Entry
+                </md-text-button>
+            </div>
+            <div>
+                <md-filled-button class="consent-back-button" id="online-verification-back-button"
+                                  onClick="toggleOnlineVerification()">Back
+                </md-filled-button>
+
+                <md-filled-button id="next-button" class="next-button assistedBankerDisappear branded brand-wlkogan"
+                                  onclick="validateAndDispatchData({ isManualInput: false })">Yes, continue
+                </md-filled-button>
+
+                <md-filled-button class="next-button assistedBankerDisappear branded brand-default"
+                                  onclick="validateAndDispatchData({ isManualInput: false })">Next
+                </md-filled-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container-bottom">
+    <div>
+        <md-text-button disabled class="next-button assistedBanker" onclick="dispatchData({ navigate: 'manual', isManualInput: true })">Manual Entry</md-text-button>
+    </div>
+    <div>
+        <md-filled-button disabled class="next-button assistedBankerDisappear" onclick="dispatchData({ isManualInput: false })">Next</md-filled-button>
+    </div>
+</div> -->
+
+<script>
+    const currentPage = 'PageDocumentSelection'
+</script>
+<!-- Importing Material Components Web JS -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript" src="./assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="./assets/js/trustx.js"></script>
+<script type="text/javascript" src="./assets/js/common.js"></script>
+<script type="text/javascript" src="./assets/js/sheet.js"></script>
+<script>
+    enableEnterKeyOnButtonId('next-button');
+</script>
+<script>
+    // Display consents
+    const triggerActiveState = () => {
+        const $containerHeaders = $('.container-input-header')
+        const $containers = $('.container-input-section')
+        const $consentCardsContainerDiv = $('.consent-card-slide-container')
+        const $nextButton = $('.next-button')
+
+        // Toggle active class
+        $containerHeaders.toggleClass('active');
+        $containers.toggleClass('active');
+        $consentCardsContainerDiv.toggleClass('active');
+        $nextButton.toggleClass('active')
+    }
+
+    // Trigger active state for online verification
+    const toggleOnlineVerification = () => {
+        triggerActiveState()
+        $('#online-verification-slide-in').toggleClass('active')
+        $('#online-verification-back-button').toggleClass('active')
+
+        if($('#online-verification-slide-in').hasClass('active')) {
+            sendPageOpenAnalyticsEvent("how-we-verify-your-id-online") 
+        }
+    }
+</script>
+<script>
+    let brand = 'default'
+
+    analyticsSectionName = 'scan-your-id'
+
+    // Fetch consents
+    let capturedConsents = {}
+    fetchConsentData = () => {
+        capturedConsents['consent_ELECTRONIC_IDV'] = 'Yes'
+        return capturedConsents
+    }
+
+    // Grey out checkbox if we arrive here the second time onwards usedDocumentList is not empty
+    // Also remove isOverEighteenContainer
+    processCallback = (sessionData, _) => {
+        brand = sessionData.idv.config?.brand ?? 'default';
+
+        if (!customisedBrands.includes(brand))
+            brand = 'default'
+
+        const totalAttempt = sessionData.idv.totalAttempt ?? 0
+
+        if (totalAttempt > 0) {
+            $('#isCreditHeaderConsented').attr('disabled', true)
+            $('#labelIsCreditHeaderConsented').css('opacity', '0.5')
+            $('#isOverEighteenContainer').css('display', 'none')
+
+            $('#explicitIdvConsent').css('opacity', '0.5')
+            $('md-radio[name=idVerifiedOnline]').attr('disabled', true)
+        }
+
+
+        const documentAttempt = sessionData.idv.documentAttempt;
+        const selectedDocType = sessionData.idv.selectedDocType
+
+        const navigatedFromDocSelection = sessionData.idv.navigatedFromDocSelection;
+
+        if (!navigatedFromDocSelection && sessionData.idv.documentAttemptMatrix && sessionData.idv.documentAttemptMatrix[selectedDocType].totalAttempts >= 2) {
+            let documentName;
+            if (selectedDocType === 'dl')
+                documentName = 'Australian driver license'
+            else if (selectedDocType === 'passport')
+                documentName = 'Australian passport'
+            else if (selectedDocType === 'foreignPassport')
+                documentName = 'Foreign passport'
+            else if (selectedDocType === 'medicare')
+                documentName = 'Medicare card'
+            else if (selectedDocType === 'birthCertificate')
+                documentName = 'Australian birth certificate'
+
+
+            try {
+                console.log('DS : doccapfld2a')
+                sendPageOpenAnalyticsEvent("confirm-id-details-2nd-attempt-failed", "eidv-decision", documentName, "09" )
+            } catch(error) {
+                console.log('Failed to send page open analytics event::: ' + error)
+            }
+
+
+            showSheet(
+                'Identification failed',
+                [
+                    'We are unable to process your ID Document. Please try again with a different ID document type'
+                ],
+                { label: 'Change ID document type', onclick: closeSheet },
+                undefined,
+                { name: 'error', theme: 'danger' },
+                documentName + ' can no longer be used as an identity document type.'
+            )
+        }
+        else if (!navigatedFromDocSelection && sessionData.idv.documentAttemptMatrix && sessionData.idv.documentAttemptMatrix[selectedDocType].totalAttempts > 1) {
+            
+            console.log('Inside PageDocumentSelection.html before callling Identification failed')
+            
+            //NB-709
+            try {
+                console.log('DS : doccapfld')
+                sendPageOpenAnalyticsEvent("document-capture-failed") //NB-709                
+            } catch(error) {
+                console.log('Failed to send page open analytics doccapfld event:' + error)
+            }
+            
+            showSheet(
+              'Identification Failed',
+              [
+                  'We are unable to process your ID document. Please review your captured ID details and try again. \
+                  Alternatively, you may use a different ID document type.'
+              ],
+              { label: 'Retry', onclick: closeSheet },
+              { label: 'Change ID document type', onclick: changeDocumentType },
+              { name: 'error', theme: 'danger' }
+            )
+        }
+        else if (totalAttempt > 1) {
+
+            let documentName;
+            if (selectedDocType === 'dl')
+                documentName = 'Australian driver license'
+            else if (selectedDocType === 'passport')
+                documentName = 'Australian passport'
+            else if (selectedDocType === 'foreignPassport')
+                documentName = 'Foreign passport'
+            else if (selectedDocType === 'medicare')
+                documentName = 'Medicare card'
+            else if (selectedDocType === 'birthCertificate')
+                documentName = 'Australian birth certificate'
+
+            sendPageOpenAnalyticsEvent("ID-Details-Outcome", "eidv-decision", documentName, "16" )
+            
+            showSheet(
+                'Additional identity document is required',
+                [
+                    'To help further verify your identity, we require an additional identification document to be used.',
+                    'Please select a different identity document type to verify with.'
+                ],
+                { label: 'Close', onclick: closeSheet },
+                undefined,
+                { name: 'info', theme: 'info' }
+            )
+        }
+    }
+</script>
+<script>
+    // Over 18 years radio handler
+    // If radio no is selected, enable type 2
+    const $under18RadioNoEl = $('md-radio[name=isOverEighteen][id=no]')
+    const $under18DocContainerEls = $('.document-type-under-18');
+    const $under18PanelContainerEl = $('#under-18-notification-panel');
+
+    const showUnder18DocType = () => {
+        $under18DocContainerEls.css('display', 'flex')
+        $under18PanelContainerEl.css('display', 'flex')
+    }
+
+    const hideUnder18DocType = () => {
+        $under18DocContainerEls.css('display', 'none')
+        $under18PanelContainerEl.css('display', 'none')
+    }
+
+    const uncheckRadio = (arraysOfRadioNames) => {
+        if (Array.isArray(arraysOfRadioNames)) {
+            arraysOfRadioNames.forEach(element => {
+                $(`md-radio[name=${element}]`).prop('checked', false)
+            });
+        }
+    }
+
+    const uncheckDocSelectionAndEIdvRadios = () => {
+        const radioNames = ['selectedDocumentType', 'idVerifiedOnline']
+        uncheckRadio(radioNames)
+    }
+
+    // Radio button selected listener - isOverEighteen
+    $('md-radio[name=isOverEighteen]').on('change', () => {
+        // NB-638 uncheck selectedDocType and idVerifiedOnline
+        uncheckDocSelectionAndEIdvRadios()
+
+        $('#isOverEighteenContainer').removeClass('input-radio-error')
+        $('#isOverEighteenError').css('display', 'none')
+        if ($under18RadioNoEl.prop('checked')) {
+            showUnder18DocType()
+        } else {
+            hideUnder18DocType()
+        }
+    });
+
+    // Radio button selected listener - selectedDocumentType
+    $('md-radio[name=selectedDocumentType]').on('change', () => {
+        $('#selectedDocumentTypeError').css('display', 'none')
+        $('#selectedDocumentType1Container').removeClass('input-radio-error')
+        $('#selectedDocumentType2Container').removeClass('input-radio-error')
+    });
+
+    // Radio button selected listener - idVerifiedOnline
+    $('md-radio[name=idVerifiedOnline]').on('change', () => {
+        $('#explicitIdvConsentError').css('display', 'none')
+        $('#explicitIdvConsent').removeClass('input-radio-error')
+    });
+</script>
+<script>
+    // On window load, we clear checked radio
+    $(document).ready(() => {
+        $('md-radio').removeAttr("checked");
+    });
+
+    // $('md-radio[name=selectedDocumentType]').on('change', () => {
+    //     $('#selectedDocumentType1Container').removeClass('input-radio-error')
+    //     $('#selectedDocumentType2Container').removeClass('input-radio-error')
+    // });
+
+    // Enable Go button - when one of the navigateToAdditional switches is selected
+    const navigateToAdditionalSwitchEls = document.getElementsByClassName('navigateToAdditional');
+    const goButtonElement = document.getElementById('go-button');
+    $('.navigateToAdditional').on('change', () => {
+        const atLeastOneSwitchSelected = Array.from(navigateToAdditionalSwitchEls).some(element => element.selected)
+        console.log('atLeastOneSwitchSelected: ', atLeastOneSwitchSelected)
+    });
+
+    const anyRadioChecked = (name) => {
+        return $(`md-radio[name=${name}]`).filter(function() {
+            return $(this).prop("checked");
+        }).length > 0
+    }
+
+    const validate = () => {
+        if (!anyRadioChecked('selectedDocumentType')) {
+            $('#selectedDocumentTypeError').css('display', 'flex')
+            $('#selectedDocumentType1Container').addClass('input-radio-error')
+            $('#selectedDocumentType2Container').addClass('input-radio-error')
+            console.error("validation failed - selectedDocType")
+        } else {
+            $('#selectedDocumentTypeError').css('display', 'none')
+            $('#selectedDocumentType1Container').removeClass('input-radio-error')
+            $('#selectedDocumentType2Container').removeClass('input-radio-error')
+        }
+
+        if (!anyRadioChecked('isOverEighteen')) {
+            $('#isOverEighteenError').css('display', 'flex')
+            $('#isOverEighteenContainer').addClass('input-radio-error')
+            console.error("validation failed - isOverEighteen")
+        } else {
+            $('#isOverEighteenError').css('display', 'none')
+            $('#isOverEighteenContainer').removeClass('input-radio-error')
+        }
+
+        if (brand == 'default' && !anyRadioChecked('idVerifiedOnline')) {
+            $('#explicitIdvConsentError').css('display', 'flex');
+            $('#explicitIdvConsent').addClass('input-radio-error')
+            console.error("validation failed - idVerifiedOnline")
+        } else {
+            $('#explicitIdvConsentError').css('display', 'none');
+            $('#explicitIdvConsent').removeClass('input-radio-error')
+        }
+
+
+        if (brand === 'wlkogan') {
+            return anyRadioChecked('selectedDocumentType') && anyRadioChecked('isOverEighteen')
+        }
+
+        return anyRadioChecked('selectedDocumentType') && anyRadioChecked('isOverEighteen') && anyRadioChecked('idVerifiedOnline')
+    }
+
+    let lastDocType = undefined
+
+    function validateAndDispatchData(additionalParams) {
+        const $idVerifiedOnlineRadioYesEl = $('md-radio[name=idVerifiedOnline][id=onlineYes]')
+        const $explicitIdvEl = $('#explicitIdvConsent')
+        const explicitIdvDisplayed = $explicitIdvEl.css('display') !== 'none'
+
+        if (additionalParams == undefined)
+            additionalParams = {};
+
+        additionalParams['consentIdVerifiedOnline'] = $idVerifiedOnlineRadioYesEl.prop('checked')
+        additionalParams['explicitIdvConsentCapture'] = explicitIdvDisplayed
+
+        if (validate()) {
+            if (lastDocType !== undefined)
+                sendUserInteractionAnalyticsEvent('eIDV Verify|' + lastDocType)
+
+            if ($idVerifiedOnlineRadioYesEl.prop('checked')) {
+                sendUserInteractionAnalyticsEvent('eIDV Verify Consent|Yes')
+            }else {
+                sendUserInteractionAnalyticsEvent('eIDV Verify Consent|No')
+            }            
+
+            dispatchData(additionalParams);
+        }
+    }
+
+    function notify18(option) {
+        sendUserInteractionAnalyticsEvent('eIDV 18 or older|' + option)
+    }
+
+    function selectDocument(doc) {
+        lastDocType = doc;
+    }
+
+</script>
+</body>
+
+</html>

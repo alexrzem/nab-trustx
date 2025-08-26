@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selfie Capture</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css" />
+  </head>
+  <body id="overlay" onload="subscribeToTrustX();">
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation" style="visibility: hidden;">
+          <md-text-button id="back-button" onclick="dispatchBack()">
+            <i class="material-icons">arrow_back</i>
+          </md-text-button>
+          <div id="navigation-parent" style="position: relative; visibility: hidden;">
+            <md-text-button id="progress-expand-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+          </div>
+        </div>
+        <div>
+          <h1>Capture document front side</h1>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <p>Please provide a clear capture of your document.</p>
+      </div>
+
+      <div class="container-bottom">
+        <div>
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script>
+      const nav = document.getElementById('nav');
+      const anchor = document.getElementById('progress-expand-anchor');
+      const overlay = document.getElementById('overlay');
+
+      anchor.addEventListener('click', () => {
+        anchor.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+
+      const closeBtn = document.getElementById('expanded-progress-close-btn');
+      closeBtn.addEventListener('click', () => {
+        anchor.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+    </script>
+  </body>
+</html>

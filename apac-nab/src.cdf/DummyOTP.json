@@ -1,0 +1,45 @@
+{
+    "title": {
+        "values": {
+            "en": "One-time Password (OTP)"
+        }
+    },
+    "subtitle": {
+        "values": {
+            "en": "Enter the OTP we've sent to you"
+        }
+    },
+    "components": [
+        {
+            "type": "text",
+            "id": "otp",
+            "label": {
+                "values": {
+                    "en": "OTP"
+                }
+            },
+            "default": "",
+            "validate": {
+                "required": true,
+                "minLength": 6,
+                "maxLength": 6,
+                "missingMessage": {
+                    "values": {
+                        "en": "Please enter the OTP"
+                    }
+                },
+                "invalidMessage": {
+                    "values": {
+                        "en": "Please enter a valid 6-digit OTP"
+                    }
+                },
+                "invalidLengthMessage": {
+                    "values": {
+                        "en": "OTP must be a 6-digit number"
+                    }
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

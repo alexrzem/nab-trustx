@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outcome - Success</title>
+    <!-- Importing Material Components Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import "@material/web/all.js";
+      import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <script type="text/javascript" src="./assets/js/moments.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+    <link rel="stylesheet" href="./assets/css/nonresponsive-progress-expand.css" />
+  </head>
+  <body id="overlay" onload="subscribeToTrustX();">
+    <div class="container">
+      <div class="container-top">
+        <div class="container-top-navigation" style="visibility: hidden;">
+          <md-text-button id="back-button" onclick="dispatchBack()">
+            <i class="material-icons">arrow_back</i>
+          </md-text-button>
+          <div id="navigation-parent" style="position: relative; visibility: hidden;">
+            <md-text-button id="progress-expand-anchor">
+              <i class="material-icons right">checklist_rtl</i>
+            </md-text-button>
+          </div>
+        </div>
+        <div>
+          <h1>Your identity verification is successful</h1>
+        </div>
+      </div>
+
+      <div class="container-content">
+        <div class="form-container">
+          <div class="outcome-panel outcome-panel-success">
+            <div class="outcome-panel-icon">
+              <i class="material-icons right" style="color: green; font-size: 2em;">check_circle</i>
+            </div>
+            <div class="outcome-panel-content">
+              <p style="margin-top: 0;">
+                Your identity verification is successful. You can continue onboarding. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-bottom">
+        <div>
+          <md-filled-button class="next-button" onclick="dispatchData()">Next</md-filled-button>
+        </div>
+      </div>
+    </div>
+
+    <div id="nav">
+      <div class="expanded-progress-header">
+        <h2>Your Progress</h2>
+        <md-icon-button id="expanded-progress-close-btn">
+          <md-icon>close</md-icon>
+        </md-icon-button>
+      </div>
+      <h4 style="margin-left: 16px; margin-right: 16px;">Application 50% complete</h4>
+      <div class="progress-container" style="margin-left: 16px; margin-right: 16px;" >
+        <div class="progress-bar" id="progress-bar" style="width: 50%;"></div>
+      </div>
+      <div class="card card-success" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">smartphone</i>
+          <h4>Set up your NAB Access</h4>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card card-success" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">badge</i>
+          <h4>ID Verification</h4>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">account_circle</i>
+          <div class="card-content-with-description">
+            <h4>Personal details</h4>
+            <p style="color: #aaa; font-weight: 600;">About you and your situation</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <i class="material-symbols-outlined">payments</i>
+          <div class="card-content-with-description">
+            <h4>Your finances</h4>
+            <p style="color: #aaa; font-weight: 600;">Income, expenses and debts</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+  
+      <div class="card" style="margin-left: 16px; margin-right: 16px;">
+        <div class="card-content">
+          <span class="material-icons">menu</span>
+          <div class="card-content-with-description">
+            <h4>Review your information</h4>
+            <p style="color: #aaa; font-weight: 600;">Ensure your details are correct</p>
+          </div>
+        </div>
+        <div class="application-card-icon">
+          <md-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          </md-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importing Material Components Web JS -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/trustx.js"></script>
+    <script>
+
+      const nav = document.getElementById('nav');
+      const anchor = document.getElementById('progress-expand-anchor');
+      const overlay = document.getElementById('overlay');
+
+      anchor.addEventListener('click', () => {
+        anchor.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+
+      const closeBtn = document.getElementById('expanded-progress-close-btn');
+      closeBtn.addEventListener('click', () => {
+        anchor.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+
+    </script>
+  </body>
+</html>

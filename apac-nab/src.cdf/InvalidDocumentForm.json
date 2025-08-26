@@ -1,0 +1,1 @@
+{"title":{"values":{"en":"Invalid Document Supplied"},"type":"title","isValid":true},"components":[{"type":"notification","id":"notification","values":{"en":"Scanned document type does not match the selected type. Please capture the document again."},"closeButton":true,"subtype":"error","setTimer":false,"isValid":true,"index":0,"subType":"error"}],"version":"1"}

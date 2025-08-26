@@ -1,0 +1,1 @@
+{"title":{"values":{"en":"PlaceHolder for Duplicate Customer"}},"subtitle":{"values":{"en":""}},"components":[{"type":"paragraph","id":"intro","values":{"en":"We are redirecting you to the existing customer flow."},"label":{"values":{"en":"redirectionToCustomerFlow"}}}],"version":"1"}

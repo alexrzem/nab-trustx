@@ -1,0 +1,57 @@
+{
+    "title": {
+        "values": {
+            "en": "Privacy notice and consent"
+        },
+        "isValid": true,
+        "type": "title"
+    },
+    "components": [
+        {
+            "isValid": true,
+            "type": "paragraph",
+            "id": "paragraph",
+            "label": {
+                "values": {
+                    "en": ""
+                }
+            },
+            "values": {
+                "en": "Our notification, consents and declaration are broken into simple sections below. Please read and agree to these before continuing."
+            },
+            "index": 1
+        },
+        {
+            "isValid": true,
+            "type": "image",
+            "id": "consentList",
+            "alt": "consent list",
+            "width": "400",
+            "src": "https://cdn.gum.trustx.com/customDataForms/tenants/nabsandbox/DummyConsentPicture/v4/images/consentList.png",
+            "index": 1,
+            "fileType": "data:image/png;base64,"
+        },
+        {
+            "isValid": true,
+            "type": "paragraph",
+            "id": "paragraph",
+            "label": {
+                "values": {
+                    "en": ""
+                }
+            },
+            "values": {
+                "en": "By clicking 'Next', you confirm you have reviewed and agree to the Privacy Notification, Electronic Communication Consent, Biometric Consent, and Declaration of Accurate Information."
+            },
+            "index": 2
+        }
+    ],
+    "submitButton": {
+        "isValid": true,
+        "type": "submitButton",
+        "values": {
+            "en": "Next"
+        }
+    },
+    "version": "1"
+}

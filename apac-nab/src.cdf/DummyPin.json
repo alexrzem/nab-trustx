@@ -1,0 +1,45 @@
+{
+    "title": {
+        "values": {
+            "en": "Enter your PIN"
+        }
+    },
+    "subtitle": {
+        "values": {
+            "en": ""
+        }
+    },
+    "components": [
+        {
+            "type": "text",
+            "id": "pin",
+            "label": {
+                "values": {
+                    "en": "PIN"
+                }
+            },
+            "default": "",
+            "validate": {
+                "required": true,
+                "minLength": 4,
+                "maxLength": 6,
+                "missingMessage": {
+                    "values": {
+                        "en": "Please enter your PIN"
+                    }
+                },
+                "invalidMessage": {
+                    "values": {
+                        "en": "Please enter a valid 4-6 digit PIN"
+                    }
+                },
+                "invalidLengthMessage": {
+                    "values": {
+                        "en": "PIN must be between 4 and 6 digits"
+                    }
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

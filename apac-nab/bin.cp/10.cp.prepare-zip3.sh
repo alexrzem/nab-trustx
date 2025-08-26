@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# check arguments
+if [ "$2" == "" ] ; then
+  echo "usage: $0 <index file> <target CP name>"
+  exit
+fi
+# assign variables
+INDEX_FILE=$1
+TARGET_NAME=$2
+
+# change dir
+CURRENT_DIR=`pwd`
+cd `dirname $0`
+
+# actual scripting
+echo -n "${INDEX_FILE} -> ${TARGET_NAME} - "
+
+rm -rf ../target.cp/${TARGET_NAME}
+rm -rf ../target.cp/${TARGET_NAME}.*
+
+mkdir -p ../target.cp/${TARGET_NAME}
+cp -r ../src/assets ../target.cp/${TARGET_NAME}/assets
+cp ../src/${INDEX_FILE} ../target.cp/${TARGET_NAME}/index.html
+cd ../target.cp/${TARGET_NAME}
+
+FILES=`find . -type f | sort`
+for file in ${FILES} ; do
+  MD5=`cat ${file} | python3 -c "import hashlib,sys;print(hashlib.md5(sys.stdin.buffer.read()).hexdigest(),end='')"`
+  echo -n "=${MD5}=${file}=" >> _.md5
+done
+MD5=`cat _.md5 | python3 -c "import hashlib,sys;print(hashlib.md5(sys.stdin.buffer.read()).hexdigest(),end='')"`
+echo -n "MD5=${MD5} - "
+echo -n "${MD5}" > ../${TARGET_NAME}.md5
+
+mkdir -p assets/md5
+mv _.md5 assets/md5/${MD5}.html # this one works!
+
+
+python3 -c "
+import json,os
+info={
+  'REPO': os.environ.get('REPO', 'undefined'),
+  'BRANCH': os.environ.get('BRANCH', 'undefined'),
+  'GITHUB_SHA': os.environ.get('GITHUB_SHA', 'undefined'),
+  'COMMIT_USER': os.environ.get('COMMIT_USER', 'undefined'),
+  'COMMIT_MESSAGE': os.environ.get('COMMIT_MESSAGE', 'undefined'),
+  'CURRENT_TIMESTAMP': os.environ.get('CURRENT_TIMESTAMP', 'undefined'),
+}
+print('githubInfo=' + json.dumps(info, indent=4) + ';')
+" > assets/githubInfo.js
+
+zip -r -9 ../${TARGET_NAME}.zip * >> ../${TARGET_NAME}.log
+#echo "DONE"
+
+# return to the initial directory
+cd ${CURRENT_DIR}

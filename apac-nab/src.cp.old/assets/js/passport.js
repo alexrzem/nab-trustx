@@ -1,0 +1,206 @@
+
+const levenshteinDistance = (s, t) => {
+    if (!s.length) return t.length;
+    if (!t.length) return s.length;
+    const arr = [];
+    for (let i = 0; i <= t.length; i++) {
+        arr[i] = [i];
+        for (let j = 1; j <= s.length; j++) {
+            arr[i][j] =
+                i === 0
+                    ? j
+                    : Math.min(
+                        arr[i - 1][j] + 1,
+                        arr[i][j - 1] + 1,
+                        arr[i - 1][j - 1] + (s[j - 1] === t[i - 1] ? 0 : 1)
+                    );
+        }
+    }
+    return arr[t.length][s.length];
+};
+
+var source = {};
+var alias = {  documentIssuingState : "documentAddressState" };
+var passportType = "au-passport";
+
+const AU_PASSPORT = "Australia Passport";
+const FOREIGN_PASSPORT = "Foreign Passport";
+
+var dispatchData = ()=> {
+    var variables = {
+    }
+    var textElements = document.getElementsByClassName("input-text");
+    for(docKey in textElements){
+        variables[textElements[docKey].id] = textElements[docKey].value;
+    }
+    var selectElements = document.getElementsByClassName("review-details-select");
+    for(docKey in selectElements){
+        variables[selectElements[docKey].id] = selectElements[docKey].value;
+    }
+    let docType = "Passport";
+    let levenshtein = {aggregate : 0,  fieldsAffected: 0 };
+    if(Object.keys(source).length > 0){
+        for(docKey in variables){
+            try{
+                if(source[docKey]){
+                    var lev = levenshteinDistance(source[docKey], variables[docKey]);
+                    if(lev > 0){
+                        levenshtein[docKey] = lev;
+                        levenshtein.fieldsAffected++;
+                        levenshtein.aggregate += lev;
+                    }
+                }else{
+                    // Handle variable is omitted at input
+                    var lev = variables[docKey].length;
+                    if(lev > 0) {
+                        levenshtein[docKey] = lev;
+                        levenshtein.fieldsAffected++;
+                        levenshtein.aggregate += lev;
+                    }
+                }
+            }catch(err){
+                console.log("lev calc err " + err);
+            }
+        }
+        variables.changeSummary = levenshtein;
+        variables.action = "CORRECT OCR";
+        // FORCE UPDATE IF REQUIRED
+        //variables.documentType = formSource["documentType"];
+        //variables.documentClassification = formSource["documentClassification"];
+    } else {
+        variables.action = "DATA ENTRY";
+        variables.documentClassification = "PASSPORT"
+        if(passportType == "au-passport"){
+            variables.documentType = AU_PASSPORT;
+        }else {
+            variables.documentType = FOREIGN_PASSPORT;
+        }
+    }
+    variables.message = "SUCCESS";
+    console.log ("postMessage " + JSON.stringify(variables));
+    window.parent.postMessage({event: 'SEND', variables: variables}, '*');
+}
+
+
+
+var subscribeTrustX = () =>  {
+    window.addEventListener("message", subscribe, false);
+    window.parent.postMessage({event: 'READY'}, '*');
+}
+
+var subscribe = (event) => {
+    // listen for a TrustX event with label "PROCESS"
+    var trustXData = event.data;
+    var formSource;
+    let isIDV = false;
+    let isIDDOC = false;
+    var assistedChannels = ["assisted"];
+    let dvsAttempt = 0;
+
+    if(Object.hasOwn(trustXData.variables, 'constants')){
+         if(trustXData.variables.constants.assistedChannels != undefined){
+            assistedChannels = trustXData.variables.constants.assistedChannels;
+        }
+    }
+    var channel = "";
+    if(trustXData.variables.sessionData.channel != undefined){
+        channel = trustXData.variables.sessionData.channel;
+    }
+    var isAssisted = false;
+    if(assistedChannels.includes(channel)){
+        isAssisted = true;
+    }
+    if(trustXData.variables.sessionData.parsedDocument != undefined){
+        isIDV = true;
+        formSource = trustXData.variables.sessionData.parsedDocument;
+    }
+    if(trustXData.variables.sessionData.idv != undefined){
+        isIDV = true;
+        formSource = trustXData.variables.sessionData.idv.doc;
+    }
+    if(trustXData.variables.sessionData._iddoc != undefined){
+        isIDDOC = true;
+        formSource = trustXData.variables.sessionData._iddoc;
+    }
+    if(trustXData.variables.sessionData.attempt != undefined){
+        if(trustXData.variables.sessionData.attempt == 1){
+            requireNoConfirm();
+        }
+    }else{
+        requireNoConfirm();
+    }
+    if(trustXData.variables.sessionData.passportType != undefined){
+        passportType = trustXData.variables.sessionData.passportType;
+    }
+    if(trustXData.variables.sessionData.dvsAttempt != undefined){
+        dvsAttempt = trustXData.variables.sessionData.dvsAttempt;
+    }
+
+    if (dvsAttempt > 1) {
+        renderElementsAfterFirstAttempt()
+    }
+
+    
+    var sourceData = formSource;
+    if (trustXData.command = 'PROCESS') {
+        console.log("event:" + JSON.stringify(trustXData));
+        console.log("variables:" + JSON.stringify(trustXData.variables));
+        console.log("sessionData:" + JSON.stringify(trustXData.variables.sessionData));
+        console.log("idv:" + JSON.stringify(sourceData));
+        if(isIDV){
+            populateFromIDV(formSource);
+        }
+        if(isIDDOC){
+            populateFromIDDOC(formSource);
+        }
+    }
+}
+
+const renderElementsAfterFirstAttempt = () => {
+    const confirmRadioElements = document.getElementsByClassName('radio-confirm');
+    const notificationPanelElement = document.getElementById('dvs-fail-panel');
+
+    notificationPanelElement.style.display = 'flex';
+
+    for (const el of confirmRadioElements) {
+        el.style.display = 'flex';
+    }
+}
+
+function populateFromIDV(formSource){
+    for(key in formSource){
+        if(document.getElementById(key) != undefined) {
+            if (formSource[key] == undefined) {
+                document.getElementById(key).value = "";
+
+            }else {
+                document.getElementById(key).value = formSource[key];
+                source[key] = formSource[key];
+            }
+        }else if(alias[key] != undefined && document.getElementById(alias[key]) != undefined){
+            document.getElementById(alias[key]).value = formSource[key];
+            source[alias[key]] = formSource[key];
+        }else if(key === "documentType" || key==="documentClassification"){
+            source[key] = formSource[key];
+        }
+    }
+}
+
+
+var requireNoConfirm = () => {
+    const docList = document.getElementsByClassName('require-confirm');
+    for(docKey in docList){
+        try{
+            docList[docKey].style.display = "none";
+        }catch(err){
+            try{
+            docList[docKey].style.visibility = "hidden";
+            }catch(err){}
+        }
+    }
+}
+function populateFromIDDOC(formSource){
+
+}
+
+window.onload = subscribeTrustX;

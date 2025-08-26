@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birth Certificate Form</title>
+  <!-- Importing Material Components Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet">
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+  <link rel="stylesheet" href="./assets/css/pikaday.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/sheet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-top">
+      <div class="container-top-navigation">
+<!--        <md-text-button id="back-button" onclick="dispatchBack()">-->
+<!--          <i class="material-icons">arrow_back</i>-->
+<!--        </md-text-button>-->
+        <div id="navigation-parent" style="position: relative; visibility: hidden">
+          <md-text-button id="navigation-anchor">
+            <i class="material-icons right">checklist_rtl</i>
+          </md-text-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <div class="container-body">
+        <div class="container-input-header">
+          <div>
+            <h1>Confirm your details</h1>
+            <div class="notification-panel notification-panel-info" style="margin-top: 24px;">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined">info</i>
+              </div>
+              <div class="notification-content">
+                Please confirm what we have captured matches your ID details, and add any information that is missing.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-input-section">
+
+          <!-- Conditional - only shown when an error object is passed into the page -->
+          <div class="notification-panel notification-panel-warning" id="dvs-fail-panel" style="margin-top: 24px;">
+            <div class="notification-icon">
+              <i class="material-symbols-outlined">warning</i>
+            </div>
+            <div class="notification-content">
+              <p style="margin-top: 0; font-weight: 800; font-size: 1.1em;">
+                Did we get everything right? 
+              </p>
+              <p>
+                We were unable to verify the identity details provided. Please confirm the information entered/captured is accurate. If we are unable verify this information, we will ask you provide an alternate identity document.
+              </p>
+            </div>
+          </div>
+
+          <div id="documentNameHeader">
+            <h3 class="review-details-section-header">Full legal name</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-name" name="confirm-name" value="confirm-name">
+            </md-radio>
+            <label class="confirm-label" for="confirm-name">Confirm</label>
+          </div>
+
+          <md-outlined-text-field id="documentFirstName" class="input-text" label="First name" type="text"
+            inputmode="text" style="margin-top: 20px;" onfocus="translateToName()">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentMiddleName" class="input-text" label="Middle name/s (if any)" type="text"
+            supporting-text="Please provide your full middle name"
+            inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentLastName" class="input-text" label="Surname" type="text"
+            inputmode="text">
+          </md-outlined-text-field>
+
+
+          <div id="documentDateOfBirthHeader">
+            <h3 class="review-details-section-header">Date of birth</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-dob" name="confirm-dob" value="confirm-dob">
+            </md-radio>
+            <label class="confirm-label" for="confirm-dob">Confirm</label>
+          </div>
+
+          <md-outlined-text-field class="input-text" id="documentDateOfBirth" label="Date of birth" type="text"
+            supporting-text="Enter or select a date or enter in the DD/MM/YYYY format." data-trustx-map-date="true"
+            inputmode="text" style="margin-top: 20px;">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button" id="btn-dob">event</md-icon>
+          </md-outlined-text-field>
+
+          <div id="documentDetailsHeader">
+            <h3 class="review-details-section-header">Birth certificate details</h3>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-doc-details" name="confirm-doc-details" value="confirm-doc-details">
+            </md-radio>
+            <label class="confirm-label" for="confirm-doc-details">Confirm</label>
+          </div>
+
+          <md-outlined-select class="input-select" id="documentIssuingState" class="review-details-select" label="State of issue"
+            style="margin-bottom: 20px; margin-top: 20px; width: 100%;">
+            <md-select-option value="ACT">
+              <div slot="headline">ACT</div>
+            </md-select-option>
+            <md-select-option value="NSW">
+              <div slot="headline">New South Wales</div>
+            </md-select-option>
+            <md-select-option value="VIC">
+              <div slot="headline">Victoria</div>
+            </md-select-option>
+            <md-select-option value="QLD">
+              <div slot="headline">Queensland</div>
+            </md-select-option>
+            <md-select-option value="WA">
+              <div slot="headline">Western Australia</div>
+            </md-select-option>
+            <md-select-option value="TAS">
+              <div slot="headline">Tasmania</div>
+            </md-select-option>
+            <md-select-option value="SA">
+              <div slot="headline">South Australia</div>
+            </md-select-option>
+            <md-select-option value="NT">
+              <div slot="headline">Northern Territory</div>
+            </md-select-option>
+          </md-outlined-select>
+          <md-outlined-text-field id="documentBirthRegistrationNo" class="input-text" label="Registration number"
+            type="text" inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field id="documentBirthCertificateNo" class="input-text" label="Certificate number"
+            type="text" inputmode="text">
+          </md-outlined-text-field>
+          <md-outlined-text-field class="input-text" id="documentRegistrationDate" label="Registration date"
+                                  supporting-text="Input format should be DD/MM/YYYY." data-trustx-map-date="true"
+                                  type="text" inputmode="text">
+            <md-icon class="material-icons btn-calendar" slot="trailing-icon" role="button"
+                     id="btn-registration-date">event</md-icon>
+          </md-outlined-text-field>
+
+
+          <div id="documentAddressHeader" style="margin-bottom: 20px">
+            <h3 class="review-details-section-header" style="margin-bottom: 10px">Address details</h3>
+            <div>
+              Enter your home address. We can't accept a PO Box.
+            </div>
+          </div>
+          <div class="radio-confirm">
+            <md-radio id="confirm-address" name="confirm-address" value="confirm-address" class="input-radio">
+            </md-radio>
+            <label class="confirm-label" for="confirm-address">Confirm</label>
+          </div>
+
+          <div id="addressAutocomplete" style="display: block; position: relative;">
+            <md-outlined-text-field
+                    id="addressSearchInput"
+                    class="input-text"
+                    label="Address"
+                    type="text"
+                    inputmode="text"
+                    aria-controls="addressSuggestions"
+                    aria-autocomplete="list"
+                    aria-expanded="false"
+                    role="combobox">
+
+              <md-icon slot="leading-icon"
+                       class="material-icons btn-search"
+                       role="button"
+                       id="search-icon">
+                search
+              </md-icon>
+
+              <md-icon
+                      id="addressClearButton"
+                      onclick="clearNabAddress()"
+                      style="display: none; cursor: pointer; pointer-events: auto"
+                      class="material-icons btn-close"
+                      slot="trailing-icon"
+                      role="button">
+                close
+              </md-icon>
+            </md-outlined-text-field>
+
+            <md-menu
+                    id="addressSuggestions"
+                    role="listbox"
+                    aria-label="Address Suggestions"
+                    style="min-width: 100%">
+            </md-menu>
+          </div>
+
+          <md-text-button class="button-get-another-code" onclick="toggleAddressSearch()" id="addressManualLink">
+            Enter address manually
+          </md-text-button>
+
+
+          <div id="addressForm" style="display: none">
+
+            <md-outlined-select id="documentAddressCountry" class="input-select review-details-select"
+                                label="Country" disabled="true" value="AU"
+                                style="margin-bottom: 24px; width: 100%;">
+              <md-select-option value="AU">
+                <div slot="headline">Australia</div>
+              </md-select-option>
+            </md-outlined-select>
+
+            <md-outlined-text-field id="documentAddressBuildingPropertyName" class="input-text"
+                                    label="Building name (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <!-- Not currently present in requirements or Figma's, but needed for validation and passthrough purposes -->
+            <md-outlined-text-field id="documentAddressLevelNumber" class="input-text"
+                                    label="Level number (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px; display: none;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressUnitNumber" class="input-text"
+                                    label="Flat / Unit number (optional)" type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressStreetNumber" class="input-text" label="Street number"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;"
+                                    error-text="Please enter your street number">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressStreetName" class="input-text" label="Street Name"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+
+            <md-outlined-select id="documentAddressStreetType" class="input-select review-details-select"
+                                label="Street type"
+                                style="margin-bottom: 24px; width: 100%;">
+            </md-outlined-select>
+
+
+            <md-outlined-text-field id="documentAddressPostalCode" class="input-text" label="Postcode/zip"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-text-field id="documentAddressSuburb" class="input-text" label="City/town"
+                                    type="text"
+                                    inputmode="text" style="margin-bottom: 24px;">
+            </md-outlined-text-field>
+
+            <md-outlined-select id="documentAddressState" class="input-select review-details-select" label="State" style="margin-bottom: 20px; width: 100%;">
+              <md-select-option value="ACT">
+                <div slot="headline">ACT</div>
+              </md-select-option>
+              <md-select-option value="NSW">
+                <div slot="headline">New South Wales</div>
+              </md-select-option>
+              <md-select-option value="NT">
+                <div slot="headline">North Territory</div>
+              </md-select-option>
+              <md-select-option value="QLD">
+                <div slot="headline">Queensland</div>
+              </md-select-option>
+              <md-select-option value="SA">
+                <div slot="headline">South Australia</div>
+              </md-select-option>
+              <md-select-option value="TAS">
+                <div slot="headline">Tasmania</div>
+              </md-select-option>
+              <md-select-option value="VIC">
+                <div slot="headline">Victoria</div>
+              </md-select-option>
+              <md-select-option value="WA">
+                <div slot="headline">Western Australia</div>
+              </md-select-option>
+            </md-outlined-select>
+
+            <div class="notification-panel notification-panel-error" style="margin-bottom: 24px; display: none;"
+                 id="postcodeError">
+              <div class="notification-icon">
+                <i class="material-symbols-outlined error">error</i>
+              </div>
+              <div class="notification-content">
+                <p style="margin-top: 0; margin-bottom: 0;">
+                  There is a mismatch between state, suburb and/or postcode. Please review and correct
+                  your details.
+                </p>
+              </div>
+            </div>
+
+            <md-text-button class="button-get-another-code" onclick="toggleAddressSearch()">
+              Enter address using quick search
+            </md-text-button>
+          </div>
+
+
+
+
+          <div class="container-bottom">
+            <div>
+              <!-- <md-outlined-button class="branded brand-wlkogan back-button" onclick="dispatchBack()">Back</md-outlined-button> -->
+              <md-text-button class="branded brand-default brand-wlkogan back-button-text" style="visibility: hidden;" onclick="dispatchBack()">Change ID document type</md-text-button>
+            </div>
+            <div>
+              <md-filled-button class="next-button" onclick="validateAndDispatchData()">Next</md-filled-button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+
+      <md-dialog id="ageVerificationDialog" quick>
+        <div slot="headline" style="flex-direction: column; align-items: flex-start;">
+          <i class="material-icons" style="font-size: 2em;">error</i>
+          <h1 style="margin: 0;">Age verification failed</h1>
+        </div>
+        <div slot="content" id="form-id" method="dialog">
+          <p>You must be 17 years or younger to use this ID document type. Please review your date of birth and try again.</p>
+          <p>If you are 18 years or older, please choose a different ID document type to use instead.</p>
+        </div>
+        <div slot="actions" style="justify-content: flex-start;">
+          <md-filled-button form="form-id" value="cancel" onclick="closeDialog()">Close</md-filled-button>
+          <md-text-button onclick="changeDocumentType()">Change ID document type</md-text-button>
+        </div>
+      </md-dialog>
+
+    </div>
+  </div>
+
+  <script>
+    const currentPage = 'PageBirthCertificateQas'
+  </script>
+  <!-- Importing Material Components Web JS -->
+  <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js"></script>
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="./assets/js/pikaday.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/error.js"></script>
+  <script type="text/javascript" src="./assets/js/validation.js"></script>
+  <script type="text/javascript" src="./assets/js/address-validation.js"></script>
+  <script type="text/javascript" src="./assets/js/address-validation-v2.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script type="text/javascript" src="./assets/js/trustx.js"></script>
+  <script type="text/javascript" src="./assets/js/sheet.js"></script>
+  <script>
+
+    analyticsSectionName = 'confirm-your-ID-details'
+    pageIdType = 'Birth Certificate'
+
+    const thisYear = new Date().getFullYear()
+
+    const dobPicker = new Pikaday({
+      field: document.getElementById("documentDateOfBirth"),
+      format: "DD/MM/YYYY",
+      yearRange: [1900, thisYear],
+      maxDate: new Date(),
+      theme: 'month-year-dropdown',
+      keyboardInput: false,
+    });
+
+    const doePicker = new Pikaday({
+      field: document.getElementById("documentRegistrationDate"),
+      format: "DD/MM/YYYY",
+      yearRange: [1900, thisYear],
+      theme: 'month-year-dropdown',
+      keyboardInput: false,
+    });
+
+    const closeDialog = () => {
+      $('#ageVerificationDialog').attr('open', false)
+    }
+  </script>
+  <script>
+
+    // Dynamic fields rendering
+    $('#documentIssuingState').on('change', (event) => {
+
+      let isShowingRegistrationNumber = false
+      let isShowingRegistrationDate = false
+      let isShowingCertificateNumber = false
+
+      // Birth Certificate Rules
+      // State    Registration Number   Registration Date   Certificate Number
+      // ACT      Y                     N                   Y
+      // NT       Y                     N                   Y
+      // NSW      Y                     N                   N
+      // VIC      Y                     N                   N
+      // SA       Y                     N                   N
+      // WA       Y                     N                   N
+      // QLD      N                     Y                   N
+      // TAS      N                     Y                   N
+      
+      const issuingState = event.target.value.trim().toUpperCase()
+      switch (issuingState) {
+        case 'TAS':
+        case 'QLD':
+          isShowingRegistrationNumber = true
+          isShowingCertificateNumber = true
+          isShowingRegistrationDate = true
+          break
+        case 'ACT':
+        case 'WA':
+        case 'NT':
+        case 'SA':
+          isShowingRegistrationNumber = true
+          isShowingCertificateNumber = true
+          break
+        case 'NSW':
+        case 'VIC': 
+          isShowingRegistrationNumber = true
+          break
+        default:
+          break
+      }
+
+      // Render the below elements only when the relevant flag is true
+      $('#documentBirthRegistrationNo').css('display', isShowingRegistrationNumber ? 'flex' : 'none')
+      $('#documentRegistrationDate').css('display', isShowingRegistrationDate ? 'flex' : 'none')
+      $('#documentBirthCertificateNo').css('display', isShowingCertificateNumber ? 'flex' : 'none')
+
+    })
+
+  </script>
+  <script>
+
+    // Validation
+
+    let bypassValidation = false
+    let isOverEighteenFlag = false
+
+    // If we get docAuthBypass from the process, then we always enable Next button
+    processCallback = (sessionData, constants) => {
+      this.sessionData = sessionData;
+
+      brand = sessionData.idv.config?.brand ?? 'default';
+      if (!customisedBrands.includes(brand))
+        brand = 'default'
+
+      const isUiValidationBypassedStr = sessionData.idv.config.uiValidationBypass ?? ''
+      isOverEighteenFlag = sessionData.isOverEighteen
+
+      console.log('isOverEighteenFlag: ', isOverEighteenFlag)
+      console.log('isUiValidationBypassedStr: ', isUiValidationBypassedStr)
+
+      if (isUiValidationBypassedStr !== '' && isUiValidationBypassedStr != '0') {
+        bypassValidation = true
+      }
+
+      const navigatedFromDocSelection = sessionData?.idv?.navigatedFromDocSelection ?? false
+      if(navigatedFromDocSelection) {
+        console.log('Navigated From DS') //TODO Remove Log, after diagnosis
+        attemptOcrAddressFind();
+      } else {
+        console.log('Not Navigated From DS') //TODO Remove Log, after diagnosis
+      }
+
+      //TODO Extract to method
+      const consistentDocumentActive = sessionData?.idv?.consistentDocumentActive ?? false       
+      if (consistentDocumentActive) {
+        try {
+        //This is when need to validate matrix has to get rid
+        //of 'addressSearchInput' as control flow to this block means its gonna be manual address
+        const newNeedToValidateMatrix = new Set(needToValidateMatrix)
+        console.log('Remove addressSearchInput from needToValidateMatrix')
+        newNeedToValidateMatrix.delete('addressSearchInput')
+        needToValidateMatrix = newNeedToValidateMatrix;
+        } catch (error) {
+            console.log('Error during delete addressSearchInput from needtovalidatematrix' + e)
+        }        
+      }      
+    }
+
+    // Field-level validation
+    const validateInputFields = (idToCheck) => {
+      // Name
+      if (idToCheck === undefined || idToCheck === 'documentFirstName')
+        validateFirstName($('#documentFirstName'), $('#documentMiddleName'), $('#documentLastName'))
+      if (idToCheck === undefined || idToCheck === 'documentMiddleName')
+        validateMiddleName($('#documentMiddleName'))
+      if (idToCheck === undefined || idToCheck === 'documentLastName')
+        validateLastName($('#documentLastName'), $('#documentMiddleName'), $('#documentFirstName'))
+
+      // Document
+      if (idToCheck === undefined || idToCheck === 'documentIssuingState')
+        validateDocumentIssuingState($('#documentIssuingState'))
+      if (idToCheck === undefined || idToCheck === 'documentBirthRegistrationNo')
+        validateBirthRegistrationNumber($('#documentBirthRegistrationNo'))
+      if (idToCheck === undefined || idToCheck === 'documentBirthCertificateNo')
+        validateBirthCertificateNumber($('#documentBirthCertificateNo'))
+
+      // Dates
+      if (idToCheck === undefined || idToCheck === 'documentDateOfBirth')
+        validateDOB($('#documentDateOfBirth'))
+      if (idToCheck === undefined || idToCheck === 'documentRegistrationDate')
+        validateBirthRegistrationDate($('#documentRegistrationDate'))
+
+      // Address validation is done separately for the individual fields to avoid duplicated logic
+      if (idToCheck === undefined)
+        validateAddressFields();
+
+      // Validate input matrix - only if docAuthBypass is not used or set to 0
+      if (!bypassValidation) {
+        return validateInputs()
+      }
+
+      return true
+    }
+
+    function validateAndDispatchData() {
+      if (!isOverEighteenFlag) {
+        const selectedDate = $('#documentDateOfBirth').val()
+        const dob = moment(selectedDate, 'DD/MM/YYYY').toDate()
+        const today = new Date()
+
+        if (dob < today && calculateAge(dob) >= 18) { // if age is 18 or above, we invoke the age verification failure modal
+          console.error("AGE VERIFICATION FAILED")
+          sendPageOpenAnalyticsEvent('birth-cert-age-verification-failed', 'eidv-decision', 'Birth Certificate', '08')
+          // sendPageOpenAnalyticsEvent("birth-cert-age-verification-failed?");
+          // $('#ageVerificationDialog').attr('open', true)
+
+          showSheet(
+                  'Age verification failed',
+                  [
+                          'You must be 17 years or younger to use this ID document type. Please review your date of birth and try again',
+                          'If you are 18 years or older, please choose a different ID document type to use instead.'
+                  ],
+                  { label: 'Close', onclick: closeSheet },
+                  { label: 'Change ID document type', onclick: changeDocumentType },
+                  { name: 'error', theme: 'danger' }
+          )
+          return
+        }
+      } 
+
+
+      if (validateInputFields())
+        dispatchData({documentAddressStreetAddress: getDataZooAddress()}); // NB-777 
+    }
+
+    // Also check general validity
+    $(".input-text, .input-select, md-radio").on("change input", (event) => {
+        validateInputFields(event.target.id)
+    })
+
+    handleFieldBlurAndRecordErrorForAnalytics(analyticsSectionName)
+
+    onFocusKeepElementsInView();
+
+    function changeDocumentType() {
+      sendUserInteractionAnalyticsEvent('eIDV|Change ID document type')
+      closeSheet()
+      dispatchBack()
+    }
+  </script>
+</body>
+
+</html>

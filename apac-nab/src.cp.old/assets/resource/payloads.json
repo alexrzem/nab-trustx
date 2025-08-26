@@ -1,0 +1,241 @@
+{
+  "payloads": [
+    {
+      "name": "assistedChannel-Banker",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "role": "banker"
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-self-serve",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "flowType": "banker"
+          }
+        }
+      }
+    },
+    {
+      "name": "koganChannel-selfServe",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": [
+              "assisted",
+              "change-of-name"
+            ],
+            "docTranslate": {
+              "PASSPORT": "passport",
+              "DRIVERS_LICENCE": "dl"
+            }
+          },
+          "sessionData": {
+            "channel": "kogan"
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-Client",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","change-of-name"],
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "flowType" : "client"
+          }
+        }
+      }
+    },
+    {
+      "name": "assistedChannel-ChangeOfName",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","change-of-name"],
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "channel": "assisted",
+            "flowType" : "demo-name-change-1"
+          }
+        }
+      }
+    },
+    {"name": "assistedChannel-ChangeOfName-withDoc",
+    "data":
+    {
+      "command": "PROCESS",
+      "variables": {
+        "constants": {
+          "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+          "language": "en",
+          "screenId": "custom-page",
+          "screens": [
+            "custom-page"
+          ],
+          "timeoutInSeconds": 270,
+          "assistedChannels": ["assisted","value"],
+          "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+        },
+        "sessionData": {
+          "channel": "assisted",
+          "flowType" : "demo-name-change-1",
+          "passportType": "foreign-passport",
+          "attempt" : "1",
+          "documentHistory": {
+            "DRIVERS_LICENSE": "AU Driver's License",
+            "PASSPORT": "AU Passport",
+            "ID_CARD": "AU Medicare",
+            "OTHER": "Foreign Passport"
+          },
+          "idv": {
+            "documentKey": "doc1",
+            "attemptNo": 2,
+            "availableDocumentTypes": {
+              "DRIVERS_LICENSE": "AU Driver's License",
+              "PASSPORT": "AU Passport",
+              "ID_CARD": "AU Medicare",
+              "OTHER": "Foreign Passport"
+            },
+            "doc": {
+              "documentNumber": "P123455677",
+              "documentFirstName": "Homer",
+              "documentMiddleName": "",
+              "documentLastName": "Simpson",
+              "documentDateOfBirth": "1956-05-12",
+              "documentIssuingState": "Australia",
+              "documentDateOfExpiry": "2025-01-12",
+              "documentAddressStreetAddress": "1 lonely lane",
+              "documentAddressStreetType": "",
+              "documentAddressSuburb": "Kingston",
+              "documentAddressPostalCode": "2905",
+              "documentCountry": "Australia",
+              "documentType": "PASSPORT",
+              "documentCardNumber": "CAC1234",
+              "documentClassification": "Australian Passport",
+              "documentType" : "Australian Passport"
+            }
+          }
+        }
+      }
+    }},
+    {
+     "name": "assistedChannel-ChangeOfName-with-parsed",
+      "data": {
+        "command": "PROCESS",
+        "variables": {
+          "constants": {
+            "baseUrl": "https://cdn.oak.trustx-preview.com/customPages/tenants/nabsandbox/Investigate/9787b77a-dfae-4fe2-8d7c-5efff348a44a",
+            "language": "en",
+            "screenId": "custom-page",
+            "screens": [
+              "custom-page"
+            ],
+            "timeoutInSeconds": 270,
+            "assistedChannels": ["assisted","value"],
+            "changeOfNameFlowTypes": "changeOfName",
+            "docTranslate":{"PASSPORT":"passport","DRIVERS_LICENCE":"dl"}
+          },
+          "sessionData": {
+            "flowType": "changeOfName1",
+            "channel": "assisted",
+            "documentHistory": {
+              "DRIVERS_LICENSE": "AU Driver's License",
+              "PASSPORT": "AU Passport",
+              "ID_CARD": "AU Medicare",
+              "OTHER": "Foreign Passport"
+            },
+            "parsedDocument": {
+              "documentNumber": "P123455677",
+              "documentFirstName": "Homer",
+              "documentMiddleName": "",
+              "documentLastName": "Simpson",
+              "documentDateOfBirth": "1956-05-12",
+              "documentIssuingState": "Australia",
+              "documentDateOfExpiry": "2025-01-12",
+              "documentAddressStreetAddress": "1 lonely lane",
+              "documentAddressStreetType": "",
+              "documentAddressSuburb": "Kingston",
+              "documentAddressPostalCode": "2905",
+              "documentCountry": "Australia",
+              "documentType": "PASSPORT",
+              "documentCardNumber": "CAC1234",
+              "documentClassification": "Australian Passport"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

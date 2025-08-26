@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module">
+    import "@material/web/all.js";
+    import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <script type="text/javascript" src="./assets/js/moments.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="./assets/css/nonresponsive-main.css" />
+  <script src="assets/js/payloadManager.js"></script>
+</head>
+
+<body onload="initialise()">
+  <div>
+    <form class="form-container">
+      <div>
+        <label>Select Page</label>
+        <select id="pageSelect" style="width:200px">
+        </select>
+      </div>
+
+      <div>
+        <label>Select Payload</label>
+        <select id="docSelect" style="width:200px">
+        </select>
+      </div>
+    </form>
+
+    <div style="display: flex; flex-direction: column;">
+      <div>
+        <md-text-button onclick="loadPage()">Load Page</md-text-button>
+        <md-text-button onclick="toggleLog()">Log</md-text-button>
+      </div>
+
+      <div>
+        <md-filled-button id="btnSendData" class="" onclick="sendSomeData()" disabled="true">Send
+          Data</md-filled-button>
+      </div>
+
+    </div>
+    </form>
+  </div>
+  <iframe id="iframe" src="http://localhost:5501/default.html" width="100%" height="860px"></iframe>
+  <div id="logger" style="display:none">Events:</div>
+</body>
