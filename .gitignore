@@ -1,1 +1,4 @@
 .venv
+bearer.txt
+processToken.txt
+__pycache__/

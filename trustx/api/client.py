@@ -32,7 +32,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Union
 from datetime import datetime
 from trustx.logger import log
-
+from faker import Faker
 
 class TrustXError(Exception):
     """Base exception for TrustX client errors."""
@@ -85,7 +85,7 @@ class TrustXClient:
         self.session = requests.Session()
 
         # Set default headers
-        self.session.headers.update({"Content-Type": "application/json", "Accept": "application/json", "User-Agent": "TrustX-Python-Client/1.0.0"})
+        self.session.headers.update({"Accept": "application/json", "User-Agent": "TrustX-Python-Client/1.0.0"})
 
     def _make_request(self, method: str, endpoint: str, use_bearer_auth: bool = True, data: Optional[Dict] = None, params: Optional[Dict] = None) -> Dict:
         """
@@ -106,12 +106,13 @@ class TrustXClient:
             TrustXAPIError: If API request fails
         """
         url = f"{self.base_url}{endpoint}"
+        log(f"url: {str(url)}")
 
         # Set authentication headers
         if use_bearer_auth:
             if not self.bearer_token:
                 raise TrustXAuthenticationError("Bearer token not available. Call get_bearer_token() first.")
-            
+
             self.session.headers.update({"Authorization": f"Bearer {self.bearer_token}"})
             # Remove X-Api-Key header if present
             self.session.headers.pop("X-Api-Key", None)
@@ -120,9 +121,9 @@ class TrustXClient:
             # Remove Authorization header if present
             self.session.headers.pop("Authorization", None)
 
-        try:
-            log(f"headers: {self.session.headers}")
+        self.session.headers.pop("Accept-Encoding", None)
 
+        try:
             response = self.session.request(method=method, url=url, json=data, params=params, timeout=self.timeout)
 
             # Handle different response status codes
@@ -171,7 +172,9 @@ class TrustXClient:
         if "token" in response:
             self.bearer_token = response["token"]
             log(f"Bearer token obtained, expires in {response.get('ttl', 'unknown')} seconds")
-            log(f"get_bearer_token: {self.bearer_token}")
+
+        with open("bearer.txt", "w") as f:
+            f.write(f"{self.bearer_token}")
 
         return response
 
@@ -296,8 +299,8 @@ class TrustXClient:
         processDefnName: Optional[str] = None,
         processDefnVersion: Optional[str] = None,
         maxCount: Optional[str] = "1",
-        #notAfterDtm: Optional[str] = None,
-        #notBeforeDtm: Optional[str] = None,
+        # notAfterDtm: Optional[str] = None,
+        # notBeforeDtm: Optional[str] = None,
         uiUrl: Optional[str] = None,
         email: Optional[str] = None,
         redirectUrl: Optional[str] = None,
@@ -353,12 +356,12 @@ class TrustXClient:
             notAfterDtm = instant + timedelta(hours=5)
             notBeforeDtm = instant - timedelta(hours=5)
 
-            data["notAfterDtm"] = notAfterDtm.strftime('%Y-%m-%dT%H:%M:%S.000Z') # "2023-12-07T15:45:25.000Z"
-            data["notBeforeDtm"] = notBeforeDtm.strftime('%Y-%m-%dT%H:%M:%S.000Z') # "2023-09-22T13:45:25.971Z"
+            data["notAfterDtm"] = notAfterDtm.strftime("%Y-%m-%dT%H:%M:%S.000Z")  # "2023-12-07T15:45:25.000Z"
+            data["notBeforeDtm"] = notBeforeDtm.strftime("%Y-%m-%dT%H:%M:%S.000Z")  # "2023-09-22T13:45:25.971Z"
         elif type == "UNLIMITED":
             pass
 
-        log(f"{data}")
+        self.session.headers.update({"Content-Type": "application/json"})
 
         response = self._make_request(method="POST", endpoint="/api/process-manager/processTokens", data=data)
 
@@ -431,6 +434,7 @@ def example_usage():
     Example usage of the TrustX client library.
     """
     # Initialize client
+    fake = Faker()
     client = TrustXClient(base_url="https://api.trustx.com", api_key="your-api-key-here")
 
     try:
@@ -456,6 +460,22 @@ def example_usage():
         updated_key = client.update_api_key(new_key["id"], {"description": "Updated by Python client"})
         log(f"Updated key description")
 
+        # Update the key
+        client.create_process_token(
+            name=fake.iban(),
+            status="ACTIVE",
+            type="MULTI_USE_TIME_LIMITED",
+            tenantId="deloittesandbox",
+            description=fake.sentence(nb_words=5),
+            processDefnName="TrustX_Registration_Rzemieniuk",
+            processDefnVersion="1",
+            uiUrl="https://deloittesandbox.gum.trustx.com/web/trustweb",
+            email=fake.email(),
+            redirectUrl="https://www.daon.com",
+        )
+
+        # updated_key = client.update_api_key(api_keys_response["content"][0]["id"], {"description": "Updated by Python client"})
+        log(f"create_process_token")
         # Delete the key (uncomment if you want to test deletion)
         # client.delete_api_key(new_key['id'])
         # print("API key deleted")
