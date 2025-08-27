@@ -4,13 +4,13 @@ Screen {
 
 #environment-box {
     height: 100%;
-    width: 2fr;
+    width: 1fr;
     border: solid #61afef;
 }
 
 #settings-box {
     height: 100%;
-    width: 1fr;
+    width: 2fr;
     border: solid #c678dd;
 }
 

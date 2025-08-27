@@ -1,0 +1,26 @@
+[
+    {
+        "id": "deloittesandbox",
+        "name": "Deloitte Sandbox",
+        "host": "https://deloittesandbox.gum.trustx.com",
+        "apikey": ""
+    },
+    {
+        "id": "nabsandbox",
+        "name": "NAB Sandbox",
+        "host": "https://nabsandbox.gum.trustx.com",
+        "apikey": ""
+    },
+    {
+        "id": "nabsit1",
+        "name": "NAB SIT 1",
+        "host": "https://nabsit1.gum.trustx.com",
+        "apikey": ""
+    },
+    {
+        "id": "nabnonprod",
+        "name": "NAB Non-Prod",
+        "host": "https://nabnonprod.gum.trustx.com",
+        "apikey": ""
+    }
+]
